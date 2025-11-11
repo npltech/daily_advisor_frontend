@@ -1,21 +1,17 @@
 import React from "react";
-import bgImage from "../assets/bg.png";
+
 import "../styles/style.css";
 
 
 const Navbar = () => {
   return (
-    <header className="Navbar"  style={{
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "top",
-        }}>
+    <header className="Navbar fixed top-0 z-2 w-full">
          <div className="container">
-            <div className="flex">
-        <div className="w-20 logo">DAILY ADVISOR AI</div>
+            <div className="flex p-[20px] justify-between w-full">
+        <div className="w-[20%] logo">DAILY ADVISOR AI</div>
 
-        <div className="w-60 menu">
-        <nav className="nav-links">
+        <div className="w-[60%] menu">
+        <nav className="nav-links  justify-center">
           <a href="#">ABOUT</a>
           <a href="#">FEATURES</a>
           <a href="#">HOW IT WORKS</a>
@@ -23,7 +19,9 @@ const Navbar = () => {
         </nav>
         </div>
 
-        <button className="w-20 contact-btn">CONTACT</button>
+          <div className="w-[20%] text-right">
+           <button className="contact-btn">CONTACT</button>
+          </div>
         </div>
       </div>
     </header>

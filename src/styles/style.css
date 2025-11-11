@@ -10,7 +10,6 @@ body {
 }
 
 .navbar {
-  background-color: #1d3b8e; /* Blue background */
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   padding: 10px 0;
@@ -24,22 +23,22 @@ body {
     align-items: center;
     justify-content: space-between;
 }
-.navbar, .flex {
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     text-align: center;
     width: 100%;
-    max-width: 1408px;
+    max-width: 1440px;
 }
 
 .logo {
     color: #fff;
     font-weight: 700;
-    letter-spacing: 0.5px;
     height: auto;
-    background: var(--primary-color);
-    border-radius: 30px 30px 0px 0px;
+    /* background: var(--primary-color); */
+    font-size: 24px;
+    line-height: 28px;
 }
 
 .nav-links {
@@ -82,7 +81,6 @@ body {
 .banner {
     position: relative; 
     width: 100%;
-    background: linear-gradient(180deg, rgba(30, 58, 138, 1) 0%, rgba(30, 58, 138, 1) 60%, rgba(255, 255, 255, 1) 60%);
 }
 
 .banner .banner-content {
@@ -94,7 +92,7 @@ body {
   text-align: center;
   max-width: 724px;
   margin: 0 auto;
-  padding-top: 100px;
+  
 }
 .banner-content h2 {
     font-size: 56px;
@@ -119,12 +117,12 @@ button.first {
     text-transform: uppercase;
     font-weight: 500;
     line-height: 18px;
-    margin-right: 8px;
+    margin-right: 15px;
 }
 button.second {
-    background: #1E3A8A;
+    background: #1A2C4E;
     color: #fff;
-    border: 1px solid #E4E4E4;
+    border: 1px solid #1A2C4E;
     padding: 11px 32px;
     border-radius: 8px;
     font-size: 16px;
@@ -148,6 +146,8 @@ section.about-us {
 .about-image-one {
     display: flex;
     gap: 24px;
+    width: 70%;
+    padding-left: 40px;
 }
 .about-us-content h3 {
     font-size: 32px;
@@ -187,8 +187,321 @@ span.flex.items-center.justify-center.w-5.h-5.rounded-full.bg-\[\#F8FAFC\] {
     width: 20px;
     height: 20px;
 }
-ul.about-list.space-y-5.mt-8 {
-    gap: 20px;
+ul.about-list {
     display: contents;
 }
+.abouticon {
+    background: #F2F2F2;
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 200px;
+    margin: 0 auto;
+}
+.abouticon h3 {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    color: #0A0A0A;
+}
+.abouticon p {
+    font-size: 10px;
+    line-height: 14px;
+    color: #4B5563;
+}
+.about-second {
+    margin-top: 20px;
+}
+.abouticon img {
+    background: #1E3A8A;
+    padding: 12px;
+    border-radius: 6px;
+}
 /* End Section About Us Styling */
+
+/* Start Section Features Styling */
+.features-bg-img.bg-\[url\(\'\/src\/assets\/features\.png\'\)\].bg-no-repeat.bg-cover.bg-top {
+    padding: 80px 0;
+    margin: 80px 20px;
+}
+.daily-check {
+    display: flex;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    gap: 20px;
+    padding-top: 40px;
+}
+.md\:col-span-2.bg-\[\#1E3A8AD9\].bg-\[url\(\'\/src\/assets\/shape\.jpg\'\)\].flex.text-white.p-6.rounded-2xl.relative {
+    width: 60%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+}
+.bg-white.p-6.rounded-2xl.shadow-md.flex.flex-col.justify-between {
+    width: 40%;
+}
+.features_content {
+    padding-left: 40px;
+    padding-top: 40px;
+}
+h3.text-xl.text-\[\#FFFFFF\].font-700.py-8 {
+    font-size: 32px;
+    line-height: 36px;
+}
+p.text-daily.text-\[\#FFFFFF\] {
+    font-size: 14px;
+    line-height: 18px;
+    color: #D1D5DC;
+    font-weight: 400;
+    max-width: 61%;
+    width: 100%;
+}
+.features_img {
+    padding: 40px 0;
+}
+.md\:col-span-2.bg-\[url\(\'\/src\/assets\/daily\.png\'\)\].bg-no-repeat.bg-cover.bg-top.flex.text-white.p-6.rounded-2xl.relative {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+}
+.bg-white.p-6.rounded-2xl.shadow-md.flex.flex-col.justify-between {
+    width: 40%;
+    background: #FFFFFF;
+    display: flex;
+    text-align: left;
+    padding: 24px;
+    border-radius: 24px;
+    padding-bottom: 0px;
+}
+.ai-guidence.bg-\[\#FEF3C7\].p-8.rounded-2xl.shadow-md.relative.overflow-hidden {
+    padding: 24px;
+}
+.progress-a.bg-white.p-6.rounded-2xl.shadow-md.flex.flex-col.justify-between {
+    width: 40%;
+    background: #FFFFFF;
+    display: flex;
+    text-align: left;
+    padding: 24px;
+    border-radius: 24px;
+    padding-bottom: 10px;
+}
+.progress-a img {
+    padding-top: 20px;
+}
+.daily-check2 {
+    display: flex;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    gap: 20px;
+    padding-top: 40px;
+    background: #FFF3D7;
+    border-radius: 24px;
+}
+.ai-guidence.bg-white.p-6.rounded-2xl.shadow-md.flex.flex-col {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 0 24px;
+}
+
+.ai-guidence-content {
+    padding-left: 30px;
+}
+.ai-guidence-content h3 {
+    text-align: left;
+}
+
+p.tip {
+    display: contents;
+    padding-left: 10px;
+    font-size: 12px;
+    color: #525252;
+    font-weight: 400;
+    line-height: 16px;
+}
+.Product img {
+    padding-top: -1px;
+    margin-bottom: -7px;
+    margin-right: 10px;
+}
+.bg-white.rounded-xl.p-4.shadow-lg {
+    background: #fff;
+    padding: 24px;
+    border-radius: 16px;
+    max-width: 270px;
+    box-shadow: 0px 8px 10px -6px #0000001A;
+}
+p.focus {
+    color: #262626;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    max-width: 250px;
+}
+.Growthone.w-37 {
+    text-align: left;
+}
+p.gro {
+    display: contents;
+    padding-left: 10px;
+    font-size: 12px;
+    color: #525252;
+    font-weight: 400;
+    line-height: 16px;
+}
+p.grow {
+    color: #262626;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+}
+.Growthone img {
+    padding-top: -1px;
+    margin-bottom: -7px;
+    margin-right: 10px;
+}
+p.sma {
+    display: contents;
+    padding-left: 10px;
+    font-size: 12px;
+    color: #ffffff;
+    font-weight: 400;
+    line-height: 16px;
+}
+p.smar {
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+}
+.Smart img {
+    padding-top: -1px;
+    margin-bottom: -7px;
+    margin-right: 10px;
+}
+.Growth.flex {
+    padding-bottom: 20px;
+}
+.growth-bottom.bg-white.rounded-xl.p-4.shadow-lg {
+    background: #fff;
+    padding: 24px;
+    border-radius: 16px;
+    max-width: 202px;
+    box-shadow: 0px 8px 10px -6px #0000001A;
+}
+.Smart .bg-white.rounded-xl.p-4.shadow-lg {
+    background: linear-gradient(180deg, rgba(26, 58, 132, 1) 0%, rgba(168, 213, 186, 1) 100%, rgba(255, 255, 255, 1) 0%);
+    text-align: left;
+   
+    max-width: 220px;
+    box-shadow: 0px 8px 10px -6px #0000001A;
+}
+/* End Section Features Styling */
+
+/* Start Section Get In Touch Styling */
+
+section.GET-In-Touch {
+    padding: 80px 0;
+}
+.top-heading {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.emailsection.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    align-items: self-end;
+}
+.left-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    grid-column: span 2;
+}
+.email {
+    display: flex;
+    justify-content: center;
+}
+.mail {
+    display: grid;
+    gap: 10px;
+}
+.email img {
+    border-radius: 50%;
+    padding: 14px;
+    background: #2B7FFF1A;
+}
+form.space-y-4 {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.contact-form input,
+.contact-form textarea {
+    border: none;
+    border-bottom: 1px solid #d1d5db;
+    background: transparent;
+    outline: none;
+    padding: 10px 0;
+    font-size: 14px;
+    transition: all 0.3s;
+    line-height: 18px;
+    font-weight: 400;
+    color: #4B5563;   
+}
+.contact-form button {
+  width: 100px;
+  background: #1E3A8A;
+  color: #fff;
+  border: none;
+  padding: 11px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  line-height: 18px;
+  box-shadow: 0px 8px 10px -6px #0000001A;
+}
+/* End Section Get In Touch  Styling */
+
+/* Start Section How It Works Styling */
+
+section.How-it-works {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+.How-it-works p {
+    max-width: 385px;
+}
+/* End Section How It Works Styling */
+
+
+/* Start Section Footer Styling */
+
+p.footer-text {
+    max-width: 275px;
+}
+ul.menu-item {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: -84px;
+    margin-left: 40px;
+}
+.social-img {
+    display: flex;
+    margin-top: -84px;
+}
+.bottom-footer{
+    max-width: 350px;
+    margin: 0 auto;
+}
+/* End Section Footer Styling */
