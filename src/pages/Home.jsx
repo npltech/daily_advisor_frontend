@@ -1,25 +1,25 @@
 import React from "react";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
-import component2 from "../assets/component2.png";
-import component3 from "../assets/component3.png";
-import component4 from "../assets/Mask.png";
-import dashboard from "../assets/dashboard.png";
+import component2 from "../assets/images/component2.png";
+import component3 from "../assets/images/component3.png";
+import component4 from "../assets/images/Mask.png";
+import dashboard from "../assets/images/dashboard.png";
 import { FaCheck } from "react-icons/fa";
-import browser from "../assets/browser.png";
+import browser from "../assets/images/browser.png";
 import { Container } from "postcss";
-import habit from "../assets/habit.png";
-import percent from "../assets/percent.png";
-import icon1 from "../assets/icon1.png";
+import habit from "../assets/images/habit.png";
+import percent from "../assets/images/percent.png";
+import icon1 from "../assets/images/icon1.png";
 import "../styles/style.css";
-import icon2 from "../assets/icon2.png";
-import icon from "../assets/icon.png";
-import email from "../assets/email.png";
-import message from "../assets/message.png";
-import Sociallinks from "../assets/Sociallinks.png";
-import bgImage from "../assets/banner.png";
-import abouticon from "../assets/abouticon.png";
-import bannertop from "../assets/bannertop.png";
+import icon2 from "../assets/images/icon2.png";
+import icon from "../assets/images/icon.png";
+import email from "../assets/images/email.png";
+import message from "../assets/images/message.png";
+import Sociallinks from "../assets/images/Sociallinks.png";
+import bgImage from "../assets/images/banner.png";
+import abouticon from "../assets/images/abouticon.png";
+import bannertop from "../assets/images/bannertop.png";
 
 const Home = () => {
   return (
@@ -28,14 +28,15 @@ const Home = () => {
       {/* Banner section */}
       <section className="banner z-1 bg-[length:100%_auto] bg-no-repeat bg-top-center"  style={{ backgroundImage: `url(${bgImage})` }}>
         <div className="banner-top-content pt-[200px]">
+          <div className="subheading-top">
           <img src={bannertop} alt="Banner Top" />
-          <h3 className="">Personalized AI Coach</h3>
-          <div className="banner-content pt-[200px]">
+          <h3 className="">Personalized AI Coach</h3></div></div>
+          <div className="banner-content">
           <h2>Your Daily AI Advisor for Life & Business</h2>
           <p>Beyond generic AI. Get structured onboarding, personalized coaching, and goal-driven insights tailored to your unique journey.</p>
           <button className="first">Get Started</button>
           <button className="second">REQUEST DEMO</button>
-          </div>
+          
           </div>
          <div className="banner-image">
           <img src={dashboard} alt="Banner Image" />
@@ -69,10 +70,12 @@ const Home = () => {
 </ul>
 </div>
          <div className="about-image-one">
+          <div className="graph">
           <img src={component3} alt="About us" />
+          </div>
           <div className="about-box">
             
-            <div class="abouticon">
+            <div className="abouticon">
               <img src={abouticon} alt="About-icon" />
               <h3 className="">Smart Insights</h3>
               <p className="">AI analyzes your patterns and provides actionable recommendations to optimize your day.</p>
@@ -87,7 +90,7 @@ const Home = () => {
       </section>
 
 <section className="Features py-[20px]">
-  <div className="features-bg-img bg-[url('/src/assets/features.png')] bg-no-repeat bg-cover bg-top py-[16px] px-6">
+  <div className="features-bg-img bg-[url('/src/assets/images/features.png')] bg-no-repeat bg-cover bg-top py-[16px] px-6">
     {/* Heading */}
     <div className="text-center mb-12">
       <h2 className="text-[32px] font-bold text-gray-700">FEATURES</h2>
@@ -99,7 +102,7 @@ const Home = () => {
     {/* Features Grid */}
     <div className="daily-check">
       {/* Daily Check-ins */}
-      <div className="md:col-span-2 bg-[url('/src/assets/daily.png')] bg-no-repeat bg-cover bg-top flex text-white p-6 rounded-2xl relative">
+      <div className="md:col-span-2 bg-[url('/src/assets/images/daily.png')] bg-no-repeat bg-cover bg-top flex text-white p-6 rounded-2xl relative">
         <div className="features_content">
         <h3 className="text-xl text-[#FFFFFF] font-700 py-8">Daily Check-ins</h3>
         <p className="text-daily text-[#FFFFFF]">
@@ -188,64 +191,55 @@ const Home = () => {
       </p>
     </div>
 
-    <div className="relative flex justify-between items-start border-t border-dotted border-blue-200 mt-[40px]">
-      <div className="relative w-1/4 text-center md:text-left">
-        <div
-          className="absolute -top-9 left-1/2 md:left-0 transform -translate-x-1/2 md:translate-x-0 bg-blue-100 text-blue-600 rounded-full w-8 h-8 flex items-center justify-center font-semibold"
-        >
+    <div className="flex min-w-max space-x-[20] px-[10] relative">
+
+    <div className="absolute top-[5] left-[0] right-[0] border-t border-dashed border-[blue]-200 z-[0]"></div>
+
+    <div className="relative flex flex-col items-start text-left min-w-[320px]">
+      <div className="z-[10] flex flex-col items-center mb-[4]">
+        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-[blue]-100 border border-[blue]-400 text-[blue]-700 font-[semibold] shadow-md">
           1
         </div>
-        <h3 className="text-lg font-semibold text-gray-900">Onboard</h3>
-        <p className="text-sm text-gray-500 mt-2 leading-relaxed">
-          Begin with a quick, guided setup where you share your goals,
-          challenges, and priorities. DailyAdvisorAI learns what matters most to
-          you, creating a strong foundation for tailored guidance.
-        </p>
       </div>
-
-      <div className="relative w-1/4 text-center md:text-left">
-        <div
-          className="absolute -top-9 left-1/2 md:left-0 transform -translate-x-1/2 md:translate-x-0 bg-blue-100 text-blue-600 rounded-full w-8 h-8 flex items-center justify-center font-semibold"
-        >
-          2
-        </div>
-        <h3 className="text-lg font-semibold text-gray-900">Get Personalized Plan</h3>
-        <p className="text-sm text-gray-500 mt-2 leading-relaxed">
-          Based on your inputs, your AI advisor builds a custom growth plan —
-          blending productivity, mindset, and strategy.
-        </p>
-      </div>
-
-      <div className="relative w-1/4 text-center md:text-left">
-        <div
-          className="absolute -top-9 left-1/2 md:left-0 transform -translate-x-1/2 md:translate-x-0 bg-blue-100 text-blue-600 rounded-full w-8 h-8 flex items-center justify-center font-semibold"
-        >
-          3
-        </div>
-        <h3 className="text-lg font-semibold text-gray-900">
-          Receive Daily Guidance
-        </h3>
-        <p className="text-sm text-gray-500 mt-2 leading-relaxed">
-          Each day, get personalized prompts, smart reminders, and insights that
-          keep you progressing toward your goals.
-        </p>
-      </div>
-
-      <div className="relative w-1/4 text-center md:text-left">
-        <div
-          className="absolute -top-9 left-1/2 md:left-0 transform -translate-x-1/2 md:translate-x-0 bg-blue-100 text-blue-600 rounded-full w-8 h-8 flex items-center justify-center font-semibold"
-        >
-          4
-        </div>
-        <h3 className="text-lg font-semibold text-gray-900">
-          Track Progress & Improve
-        </h3>
-        <p className="text-sm text-gray-500 mt-2 leading-relaxed">
-          Review achievements, insights, and next steps. Keep refining your
-          habits and strategy for long-term success.
+      <div className="scroll-animate">
+        <h3 className="text-[lg] font-[semibold] text-[gray]-900">Onboard</h3>
+        <p className="text-[sm] text-[gray]-600 mt-[2] leading-relaxed">
+          Begin with a quick, guided setup where you share your goals, challenges, and priorities.
+          DailyAdvisor learns what matters most to you, creating a strong foundation for tailored guidance.
         </p>
       </div>
     </div>
+
+    <div className="relative flex flex-col items-start text-left min-w-[320px]">
+      <div className="z-10 flex flex-col items-center mb-[4]">
+        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-[blue]-100 border border-[blue]-400 text-[blue]-700 font-[semibold] shadow-md">
+          2
+        </div>
+      </div>
+      <div className="scroll-animate">
+        <h3 className="text-[lg] font-[semibold] text-[gray]-900">Get Personalized Plan</h3>
+        <p className="text-[sm] text-[gray]-600 mt-[2] leading-relaxed">
+          Based on your inputs, your AI advisor builds a custom growth plan – blending productivity, mindset, and strategy.
+          You’ll receive focused goals, progress checkpoints, and actionable next steps designed just for you.
+        </p>
+      </div>
+    </div>
+
+    <div className="relative flex flex-col items-start text-left min-w-[320px]">
+      <div className="z-10 flex flex-col items-center mb-[4]">
+        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-[blue]-100 border border-[blue]-400 text-[blue]-700 font-[semibold] shadow-md">
+          3
+        </div>
+      </div>
+      <div className="scroll-animate">
+        <h3 className="text-[lg] font-[semibold] text-[gray]-900">Receive Daily Guidance</h3>
+        <p className="text-[sm] text-[gray]-600 mt-[2] leading-relaxed">
+          Each day, get personalized reminders, motivation, and nudges that keep you on track.
+          Track progress and celebrate small wins that lead to lasting success.
+        </p>
+      </div>
+    </div>
+  </div>
   </div>
 </section>
 
