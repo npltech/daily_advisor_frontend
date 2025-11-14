@@ -734,3 +734,50 @@ button.next-btn {
     border: 1px solid #1E3A8A;
 }
 /* End Onboarding page Syling */
+
+
+/* Step2 Onboarding page Syling */
+
+.checkbox-card.goal label {
+    border: 2px solid #E5F2FF;
+    border-radius: 16px;
+    background-color: #F8FAFC;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    min-height: 60px;
+}
+
+.checkbox-card.goal {
+    width: calc(25% - 12px);
+}
+button.back-btn {
+    border: 1px solid #E4E4E4;
+}
+img.arrowsty {
+    margin-bottom: -7px;
+    margin-right: 6px;
+}
+textarea.text-areas {
+    resize: none;
+}
+
+/* End Step2 Onboarding page Syling */
+
+/* Step3 Onboarding page Syling */
+
+.checkbox-card.goal.notification {
+    width: calc(33% - 8px);
+}
+.checkbox-card.goal.notification label p {
+    font-size: 11px;
+    color: #4B5563;
+    margin: 0;
+    line-height: 16px;
+    font-weight: 400;
+}
+.checkbox-card.goal.Communication {
+      width: calc(100% - 0px);
+}
+
+/* End Step3 Onboarding page Syling */
