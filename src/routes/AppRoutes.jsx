@@ -6,6 +6,8 @@ import Signup from '../pages/Signup.jsx';
 import Welcome from '../pages/Welcome.jsx';
 import Onboarding from '../pages/Onboarding.jsx';
 import Chatbot from '../pages/Chatbot.jsx';
+import Dashboard from '../pages/Dashboard.jsx';
+import Userlayout from '../pages/Userlayout.jsx';
 
 const AppRoutes = () => {
   return (
@@ -16,6 +18,12 @@ const AppRoutes = () => {
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/onboarding" element={<Onboarding />} />
       <Route path="/chatbot" element={<Chatbot />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/user" element={<Userlayout />}>
+        <Route path="" element={<Dashboard />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="chatbot" element={<Chatbot />} />
+      </Route>
     </Routes>
   )
 }

@@ -779,5 +779,38 @@ textarea.text-areas {
 .checkbox-card.goal.Communication {
       width: calc(100% - 0px);
 }
-
 /* End Step3 Onboarding page Syling */
+
+
+/* Chatbot page Syling */
+
+button.btn.btn-submit {
+    margin-right: 5px;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+/* End Chatbot page Syling */
+
+
+/* Deshboard page Syling */
+
+.daily-score svg {
+    stroke: #00A63E;
+    margin: 0 4px;
+}
+.insight-btn svg {
+    stroke: #1E3A8A;
+}
+button.insight-btn {
+    border: none;
+    background: transparent;
+}
+button.week-btn {
+    border: none;
+}
+button.month-btn {
+    border: none;
+}
+
+/* End Deshboard page Syling */
