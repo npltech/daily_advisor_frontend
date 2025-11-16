@@ -15,12 +15,10 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/welcome" element={<Welcome />} />
-      <Route path="/onboarding" element={<Onboarding />} />
-      <Route path="/chatbot" element={<Chatbot />} />
-      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/user" element={<Userlayout />}>
         <Route path="" element={<Dashboard />} />
+        <Route path="welcome" element={<Welcome />} />
+        <Route path="onboarding" element={<Onboarding />} />        
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="chatbot" element={<Chatbot />} />
       </Route>

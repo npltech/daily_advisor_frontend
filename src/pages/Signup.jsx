@@ -8,14 +8,29 @@ import form1 from "../assets/images/form1.png";
 import form2 from "../assets/images/form2.png";
 import form3 from "../assets/images/form3.png";
 import { Link } from "react-router-dom";
+import { registerUser } from "../apis/userApi";
 
 const Signup = () => {
+    const [name, setName] = useState("");  
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log("Email:", email, "Password:", password);
+      console.log("Email:", email, "Password:", password, name);
+      const postdata = {
+        first_name: name,
+        user_email: email,
+        user_password: password
+      }
+
+      await registerUser(postdata)
+      .then(res=>{
+        console.log(res);
+      })
+      .catch(err=>{
+
+      })
     };
   
     return (
@@ -80,7 +95,7 @@ const Signup = () => {
                 <input
                   type="name"
                   value={name}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setName(e.target.value)}
                   placeholder="Nancy"
                   className="border-sty mt-1 w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#0b2b74]"
                   required
@@ -125,7 +140,7 @@ const Signup = () => {
               <button
                 type="submit"
                 className="login-sty w-full bg-[#1E3A8A] text-[12px] leading-[16px] font-[400] text-[#ffffff] py-[12px] mt-[10px] rounded-[8px] hover:bg-[#1E3A8A] transition">
-                Login
+                Sign up
               </button>
             </form>
   

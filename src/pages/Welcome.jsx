@@ -4,6 +4,7 @@ import welcome3 from "../assets/images/welcome3.png";
 import welcome2 from "../assets/images/welcome2.png";
 import welcome1 from "../assets/images/welcome1.png";
 import wel from "../assets/images/wel.png";
+import { Link } from "react-router-dom";
 
 const Welcome = () => {
   return (
@@ -69,7 +70,7 @@ const Welcome = () => {
               Let's Get Started
               <img src={wel} alt="Wel Icon" className="w-auto" />
             </button>
-            <Link to="/onboarding" className="btnwel">Onboarding</Link>     
+            <Link to="/user/onboarding" className="btnwel">Onboarding</Link>     
           </div>
           </div>
  

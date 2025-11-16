@@ -8,16 +8,36 @@ import form1 from "../assets/images/form1.png";
 import form2 from "../assets/images/form2.png";
 import form3 from "../assets/images/form3.png";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { loginApi } from "../apis/userApi";
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Email:", email, "Password:", password);
-    navigate("/welcome");
+    
+    const postdata = {
+      username: email,
+      password: password
+    }
+
+    await loginApi(postdata)
+    .then(res=>{
+      navigate("/user/welcome");
+    })
+    .catch(err=>{
+      console.log(err);
+      Swal.fire({
+                icon: "error",
+                title: "Login failed",
+                text: err?.response?.data?.message || err?.message || 'Something went wrong!!',
+                confirmButtonColor: "#3085d6",
+            });
+    })
   };
 
   return (
@@ -74,20 +94,6 @@ function Login() {
           </p> </div>
 
           <form onSubmit={handleSubmit} className="formsubmit space-y-4">
-            {/* <div>
-              <label className="block text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
-                <img src={form1} alt="Welcome Icon" />
-                Name
-              </label>
-              <input
-                type="name"
-                value={name}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Nancy"
-                className="border-sty mt-1 w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#0b2b74]"
-                required
-              />
-            </div> */}
             <div>
               <label className="block text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
                 <img src={form2} alt="Welcome Icon" />
