@@ -72,7 +72,7 @@ const Chatbot1 = () => {
             <div key={`message_${i}`}>{val.message}</div>
           ))}
         </div>
-        <section className="w-full bg-[#ffffff] py-10 px-4 flex justify-center mt-[40px] overflow-y-[auto]">
+        <section className="message-box1 w-full bg-[#ffffff] py-10 px-4 flex justify-center mt-[40px] overflow-y-[auto]">
           <div className="max-w-3xl w-full space-y-8">
             <div className="flex items-start gap-[8px]">
                 <img src={chatbotmessage} alt="Chatmessage Icon" className="w-4 h-4" />
