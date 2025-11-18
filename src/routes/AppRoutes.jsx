@@ -8,6 +8,8 @@ import Onboarding from '../pages/Onboarding.jsx';
 import Chatbot from '../pages/Chatbot.jsx';
 import Dashboard from '../pages/Dashboard.jsx';
 import Userlayout from '../pages/Userlayout.jsx';
+import CreateGoal from '../pages/CreateGoal.jsx';
+import AiQuestion from '../pages/AiQuestion.jsx';
 
 const AppRoutes = () => {
   return (
@@ -21,6 +23,8 @@ const AppRoutes = () => {
         <Route path="onboarding" element={<Onboarding />} />        
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="chatbot" element={<Chatbot />} />
+        <Route path="creategoal" element={<CreateGoal />} />
+        <Route path="aiquestion" element={<AiQuestion />} />
       </Route>
     </Routes>
   )

@@ -790,6 +790,18 @@ button.btn.btn-submit {
     box-shadow: none;
     background: transparent;
 }
+.message-box {
+    border-radius: 4px 20px 20px 20px;
+}
+.user-content {
+    background: RGBA(250, 245, 255, 1);
+    background: linear-gradient(167deg,rgba(250, 245, 255, 1) 0%, rgba(250, 245, 255, 1) 52%, rgba(250, 245, 255, 1) 53%, rgba(250, 245, 255, 1) 58%, rgba(236, 254, 255, 1) 100%);
+    padding: 16px;
+    border-radius: 20px 4px 20px 20px;
+}
+.message-box1 section {
+    overflow-y: auto;
+}
 /* End Chatbot page Syling */
 
 
@@ -814,3 +826,47 @@ button.month-btn {
 }
 
 /* End Deshboard page Syling */
+
+/* Start Sidebar Syling */
+
+.sidebar-style ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 20px;
+}
+.sidebar-border {
+    border-top: 1px solid #E4E4E4;
+}
+.bottom-border-sty {
+    border-bottom: 1px solid #E4E4E4;
+    padding-top: 16px;
+}
+
+/* End Sidebar Syling */
+
+/* Start CreateGoal Syling */
+.design-create {
+    box-shadow: 0 25px 100px 0 #E6C26B40;
+    border: 1px solid #E5E5E5;
+    border-radius: 16px;
+    background: #fff;
+}
+.goal-button svg {
+    background: #1E3A8A;
+    width: 34px;
+    height: 34px;
+    color: #fff;
+    border-radius: 10px;
+    padding: 8px;
+}
+.icon-styleone {
+    display: inline-flex;
+    padding: 10px;
+    border-radius: 14px;
+    color: #fff;
+}
+.border-style-goal {
+    box-shadow: 0 25px 100px 0 #E6C26B40;
+}
+/* End CreateGoal Syling */

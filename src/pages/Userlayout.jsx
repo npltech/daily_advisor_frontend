@@ -5,11 +5,11 @@ import { Outlet } from 'react-router-dom'
 
 const Userlayout = () => {
   return (
-    <div className='flex'>
-        <div className='w-[10%]'>
+    <div className='flex w-full'>
+        <div className='w-[15%]'>
             <Sidebar />
         </div>        
-        <div className='w-full'>
+        <div className='w-[85%]'>
             <Navbar1 />
             <Outlet />
         </div>
