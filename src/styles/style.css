@@ -870,3 +870,12 @@ button.month-btn {
     box-shadow: 0 25px 100px 0 #E6C26B40;
 }
 /* End CreateGoal Syling */
+
+/* Start AiQuestion Syling */
+
+.ai-border-sty {
+    box-shadow: 0 25px 100px 0 #E6C26B40;
+    border: 1px solid transparent;
+}
+
+/* End AiQuestion Syling */
