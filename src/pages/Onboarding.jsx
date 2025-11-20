@@ -314,7 +314,7 @@ const Onboarding = () => {
                       className="w-4 h-4"
                     />
                     <div className="icon_content">
-                      <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                         Increase Productivity
                       </h4>
                       <p>Get more done in less time</p>
@@ -332,7 +332,7 @@ const Onboarding = () => {
                   <label htmlFor="personal" className="block">
                     <img src={build} alt="Build Icon" className="w-4 h-4" />
                     <div className="icon_content">
-                      <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                         Build Better Habits
                       </h4>
                       <p>Create sustainable routines</p>
@@ -350,7 +350,7 @@ const Onboarding = () => {
                   <label htmlFor="health" className="block">
                     <img src={achieve} alt="Achieve Icon" className="w-4 h-4" />
                     <div className="icon_content">
-                      <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                         Achieve Career Goals
                       </h4>
                       <p>Advance your professional path</p>
@@ -368,7 +368,7 @@ const Onboarding = () => {
                   <label htmlFor="career" className="block">
                     <img src={improve} alt="Improve Icon" className="w-4 h-4" />
                     <div className="icon_content">
-                      <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                         Improve Wellbeing
                       </h4>
                       <p>Mental and physical health</p>
@@ -390,7 +390,7 @@ const Onboarding = () => {
                       className="w-4 h-4"
                     />
                     <div className="icon_content">
-                      <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                         Financial Growth
                       </h4>
                       <p>Build wealth and security</p>
@@ -408,7 +408,7 @@ const Onboarding = () => {
                   <label htmlFor="finance" className="block">
                     <img src={learn} alt="Learn Icon" className="w-4 h-4" />
                     <div className="icon_content">
-                      <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                         Learn New Skills
                       </h4>
                       <p>Continuous education</p>
@@ -425,7 +425,7 @@ const Onboarding = () => {
                   <label htmlFor="finance" className="block">
                     <img src={work} alt="Work Icon" className="w-4 h-4" />
                     <div className="icon_content">
-                      <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                         Work-Life Balance
                       </h4>
                       <p>Harmony and fulfillment</p>
@@ -442,7 +442,7 @@ const Onboarding = () => {
                   <label htmlFor="finance" className="block">
                     <img src={start} alt="Start Icon" className="w-4 h-4" />
                     <div className="icon_content">
-                      <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                         Start a Business
                       </h4>
                       <p>Entrepreneurial journey</p>
@@ -517,7 +517,7 @@ const Onboarding = () => {
                 />
                 <label htmlFor="growth" className="block">
                   <div className="icon_content">
-                    <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                       Daily check-in reminders
                     </h4>
                     <p>Get notified at your preferred time</p>
@@ -534,7 +534,7 @@ const Onboarding = () => {
                 />
                 <label htmlFor="personal" className="block">
                   <div className="icon_content">
-                    <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                       Weekly progress summaries
                     </h4>
                     <p>Receive insights every Sunday</p>
@@ -551,7 +551,7 @@ const Onboarding = () => {
                 />
                 <label htmlFor="health" className="block">
                   <div className="icon_content">
-                    <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                       AI-powered insights
                     </h4>
                     <p>Get notified when AI discovers patterns</p>
@@ -579,7 +579,7 @@ const Onboarding = () => {
                 />
                 <label htmlFor="growth" className="block">
                   <div className="icon_content">
-                    <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                       Friendly
                     </h4>
                     <p>Warm, encouraging, and supportive tone</p>
@@ -596,7 +596,7 @@ const Onboarding = () => {
                 />
                 <label htmlFor="personal" className="block">
                   <div className="icon_content">
-                    <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                       Professional
                     </h4>
                     <p>Direct, concise, and business-focused</p>
@@ -613,7 +613,7 @@ const Onboarding = () => {
                 />
                 <label htmlFor="health" className="block">
                   <div className="icon_content">
-                    <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                       Motivational
                     </h4>
                     <p>High-energy, inspiring, and ambitious</p>
@@ -637,7 +637,7 @@ const Onboarding = () => {
                 />
                 <label htmlFor="growth" className="block">
                   <div className="icon_content">
-                    <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                       Every Day
                     </h4>
                     <p>Best for building consistency</p>
@@ -654,7 +654,7 @@ const Onboarding = () => {
                 />
                 <label htmlFor="personal" className="block">
                   <div className="icon_content">
-                    <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                       Weekdays Only
                     </h4>
                     <p>Mon-Fri focus</p>
@@ -671,7 +671,7 @@ const Onboarding = () => {
                 />
                 <label htmlFor="health" className="block">
                   <div className="icon_content">
-                    <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
+                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
                       Custom Schedule
                     </h4>
                     <p>Pick specific days</p>

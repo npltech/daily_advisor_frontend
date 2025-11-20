@@ -9,7 +9,7 @@ import { FaArrowTrendUp } from 'react-icons/fa6';
 
 const CreateGoal = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen py-[0px]">
+    <div className="flex items-center justify-center py-[40px]">
       <div className="w-[900px] shadow-sm">
 
         {/* Icon */}

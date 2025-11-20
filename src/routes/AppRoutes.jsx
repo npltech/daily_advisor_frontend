@@ -10,6 +10,8 @@ import Dashboard from '../pages/Dashboard.jsx';
 import Userlayout from '../pages/Userlayout.jsx';
 import CreateGoal from '../pages/CreateGoal.jsx';
 import AiQuestion from '../pages/AiQuestion.jsx';
+import Goals from '../pages/Goals.jsx';
+
 
 const AppRoutes = () => {
   return (
@@ -25,6 +27,7 @@ const AppRoutes = () => {
         <Route path="chatbot" element={<Chatbot />} />
         <Route path="creategoal" element={<CreateGoal />} />
         <Route path="aiquestion" element={<AiQuestion />} />
+        <Route path="goals" element={<Goals />} />
       </Route>
     </Routes>
   )

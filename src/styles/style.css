@@ -824,6 +824,9 @@ button.week-btn {
 button.month-btn {
     border: none;
 }
+.progress-bar-style2 {
+    box-shadow: 0 1px 3px 0 #0000001A;
+}
 
 /* End Deshboard page Syling */
 
@@ -877,5 +880,24 @@ button.month-btn {
     box-shadow: 0 25px 100px 0 #E6C26B40;
     border: 1px solid transparent;
 }
+textarea.text-border-sty {
+    border: none;
+}
 
 /* End AiQuestion Syling */
+
+/* Start Goals Syling */
+
+
+.Goal-bor {
+    box-shadow: 0 1px 3px 0 #0000001A;
+}
+.personal-icon {
+    background: #FFF8E6;
+    display: inline-flex;
+}
+
+
+
+
+/* End Goals Syling */

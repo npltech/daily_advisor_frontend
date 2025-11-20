@@ -5,22 +5,27 @@ import insight from "../assets/images/insight.png";
 import todayscore from "../assets/images/todayscore.png";
 import scorestar from "../assets/images/scorestar.png";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area } from "recharts";
+import { BiMessageRoundedDots } from "react-icons/bi";
+import { AiFillApi, AiOutlineApi } from "react-icons/ai";
 
-const ProgressItem = ({ title, percent, color }) => {
+
+  
+  const ProgressItem = ({ title, percent, color }) => {
   return (
     <div className="mb-[16px]">
-      <div className="flex justify-between text-[13px] mb-[4px]">
+      <div className="flex justify-between text-[14px] leading-[20px] font-[500] mb-[4px] text-[#0A0A0A]">
         <span>{title}</span>
         <span>{percent}%</span>
       </div>
 
-      <div className="w-full h-[6px] bg-gray-200 rounded-full">
+      <div className="w-full h-[8px] bg-[#F5F5F5] rounded-[16px]">
         <div
-          className="h-full rounded-full transition-all duration-700"
+          className="h-full rounded-full transition-all duration-[700]"
           style={{
             width: `${percent}%`,
             background: color,
-          }}></div>
+          }}
+        ></div>
       </div>
     </div>
   );
@@ -28,13 +33,15 @@ const ProgressItem = ({ title, percent, color }) => {
 
 const ActivityItem = ({ title, time }) => {
   return (
-    <div className="flex justify-between items-center py-[12px] border-b border-gray-200">
+    <div className="flex justify-between items-center py-[12px] border-b border-[#E4E4E4]">
       <div className="flex items-start gap-3">
-        <div className="w-[8px] h-[8px] bg-blue-600 rounded-full mt-[6px]"></div>
+        <div className="rounded-[6px] p-[5px] bg-[#EBF1FF] mr-[10px]  ">
+          <AiOutlineApi />
+        </div>
 
         <div>
-          <p className="text-[13px] font-[500]">{title}</p>
-          <span className="text-[11px] text-gray-500">{time}</span>
+          <p className="text-[12px] leading -[16px] font-[400] text-[#0A0A0A]">{title}</p>
+          <span className="text-[10px] text-[#4B5563] font-[400] leading-[14px]">{time}</span>
         </div>
       </div>
     </div>
@@ -183,7 +190,7 @@ const Deshboard = () => {
     {/* Card 1 — AI Insight */}
     <div className="flex flex-col justify-between w-[85%]">
       <div>
-        <h3 className="text-[14px] leading-[18px] font-[500] text-[#0A0A0A]">
+        <h3 className="text-[14px] leading-[18px] font-[700] text-[#0A0A0A]">
           AI Insight of the Day
         </h3>
         <p className="text-[#4B5563] text-[12px] mt-[5px] leading-[16px] font-[400]">
@@ -262,6 +269,7 @@ const Deshboard = () => {
         <h2 className="text-[46px] font-[700] leading-[51px] text-[#F2F2F2]">{value}</h2>
         <p className="text-[14px] leading-[18px] font-[500] text-[#F2F2F2]">Excellent!</p>
       </div>
+
     </div>
 </div>
 </div>
@@ -278,7 +286,7 @@ const Deshboard = () => {
     {/* Header */}
     <div className="flex justify-between items-start mb-[40px]">
       <div>
-        <h2 className="text-[14px] leadind-[18px] font-[500]">Weekly Progress</h2>
+        <h2 className="text-[14px] leadind-[18px] font-[700]">Weekly Progress</h2>
         <p className="text-[12px] leading-[16px] text-[#4B5563]-font-[400]">
           Your performance over the last 7 days
         </p>
@@ -336,7 +344,7 @@ const Deshboard = () => {
     {/* Header */}
      <div className="flex justify-between items-start mb-[40px]">
       <div>
-        <h2 className="text-[14px] leadind-[18px] font-[500]">Habit Tracking</h2>
+        <h2 className="text-[14px] leadind-[18px] font-[700]">Habit Tracking</h2>
         <p className="text-[12px] leading-[16px] text-[#4B5563]-font-[400]">
           Track your daily habits
         </p>
@@ -391,41 +399,41 @@ const Deshboard = () => {
       </div>
   </div>
         {/* GOAL PROGRESS + RECENT ACTIVITY SECTION */}
-<div className="flex w-full gap-[20px] mt-[30px]">
+<div className="flex w-full gap-[16px] mt-[30px]">
 
   {/* LEFT — GOAL PROGRESS */}
-  <div className="w-[40%] bg-white p-[20px] rounded-2xl shadow-sm border border-[#E4E4E4]">
+  <div className="progress-bar-style2 w-[35%] bg-[#FFFFFF] p-[16px] rounded-[16px] shadow-sm border border-[#E4E4E4]">
 
-    <h3 className="text-[14px] font-[500]">Goal Progress</h3>
-    <p className="text-[12px] text-gray-500 mb-[20px]">Track your key objectives</p>
+  <h3 className="text-[14px] leading-[18px] font-[700] text-[#0A0A0A] mb-[5px]">
+    Goal Progress
+  </h3>
 
-    {/* Progress Item */}
-    <ProgressItem title="Career" percent={85} color="#4C63E6" />
-    <ProgressItem title="Health" percent={72} color="#0E9F6E" />
-    <ProgressItem title="Personal" percent={68} color="#F2C94C" />
-    <ProgressItem title="Finance" percent={91} color="#2748B3" />
+  <p className="text-[12px] leading-[16px] text-[#4B5563] font-[400] mb-[20px]">
+    Track your key objectives
+  </p>
 
-    <p className="text-center text-[13px] text-gray-600 mt-[12px] cursor-pointer">
-      View all
-    </p>
-  </div>
+  <ProgressItem title="Career" percent={85} color="#6366F1" />
+  <ProgressItem title="Health" percent={72} color="#097153" />
+  <ProgressItem title="Personal" percent={68} color="#E6C26B" />
+  <ProgressItem title="Finance" percent={91} color="#1E3A8A" />
+
+  <p className="text-center text-[12px] text-[#404040] font-400 mt-[12px] cursor-pointer border-t-[1px] border-[#E5E5E5] pt-[12px] pb-[4px]">
+    View all
+  </p>
+
+</div>
 
   {/* RIGHT — RECENT ACTIVITY */}
-  <div className="w-[60%] bg-white p-[20px] rounded-2xl shadow-sm border border-[#E4E4E4]">
+  <div className="w-[65%] bg-[#FFFFFF] p-[16px] rounded-[16px] shadow-sm border border-[#E4E4E4]">
 
     <div className="flex justify-between items-center mb-[10px]">
       <div>
-        <h3 className="text-[14px] font-[500]">Recent Activity</h3>
-        <p className="text-[12px] text-gray-500">Your latest achievements</p>
+        <h3 className="text-[14px] leading-[18px] font-[700] text-[#0A0A0A] mb-[5px]">Recent Activity</h3>
+        <p className="text-[12px] leading-[16px] text-[#4B5563] font-[400] mb-[px]">Your latest achievements</p>
       </div>
 
       {/* Ask AI Button */}
-      <button className="px-4 py-2 bg-[#1E3A8A] text-white rounded-full shadow-sm flex items-center gap-2">
-        <svg width="16" height="16" fill="white" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="10" />
-        </svg>
-        Ask AI
-      </button>
+      
     </div>
 
     {/* List */}
@@ -436,9 +444,16 @@ const Deshboard = () => {
       <ActivityItem title="Goal milestone reached" time="2:45 PM" />
       <ActivityItem title="Meditation session" time="4:00 PM" />
     </div>
+    
   </div>
+  
 
 </div>
+<button className="px-4 py-2 bg-[#1E3A8A] text-[#FFFFFF] rounded-[70px] shadow-sm flex items-center gap-[4px]
+ p-[12px] text-[14px] leading-[16px] font-[500] border-[1px] border-[1E3A8A] fixed right-[65px] bottom-[122px]">
+       <BiMessageRoundedDots />
+        Ask AI
+      </button>
   </div>
 
 
