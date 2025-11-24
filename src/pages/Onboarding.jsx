@@ -26,17 +26,17 @@ import { updateUser } from "../apis/userApi";
 import { useNavigate } from "react-router-dom";
 
 const userFormState = {
-  name: '',
-  profession: '',
+  name: "",
+  profession: "",
   focusAreas: [],
-  timezone: '',
+  timezone: "",
   goals: [],
-  userGoal: '',
-  checkinTime: '',
-  notificationPreference: '',
-  commStyle: '',
-  checkinFreq: ''
-}
+  userGoal: "",
+  checkinTime: "",
+  notificationPreference: "",
+  commStyle: "",
+  checkinFreq: "",
+};
 
 const Onboarding = () => {
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ const Onboarding = () => {
   const [role, setRole] = useState("");
   const [userForm, setUserForm] = useState(userFormState);
 
-  const submitUpdateUser = async ()=>{
+  const submitUpdateUser = async () => {
     console.log(userForm);
 
     const postdata = {
@@ -56,39 +56,35 @@ const Onboarding = () => {
       checkin_frequency: userForm.checkinFreq,
       notification_frequency: userForm.notificationPreference,
       communication_style: userForm.commStyle,
-    }
+    };
 
     await updateUser(postdata)
-    .then(res=>{
-      navigate("/user/chatbot");
-    })
-    .catch(err=>{
+      .then((res) => {
+        navigate("/user/chatbot");
+      })
+      .catch((err) => {})
+      .finally(() => {});
+  };
 
-    })
-    .finally(()=>{
-
-    })
-  }
-
-  const updateUserForm = (e)=>{
+  const updateUserForm = (e) => {
     const { name, value, type, checked } = e.target;
 
     // handle checkbox inputs (e.g., arrays of selected options)
-    if (type === 'checkbox') {
-      setUserForm(prev => {
+    if (type === "checkbox") {
+      setUserForm((prev) => {
         const prevValue = Array.isArray(prev[name]) ? prev[name] : [];
         if (checked) {
           return { ...prev, [name]: [...prevValue, value] };
         } else {
-          return { ...prev, [name]: prevValue.filter(v => v !== value) };
+          return { ...prev, [name]: prevValue.filter((v) => v !== value) };
         }
       });
       return;
     }
-    setUserForm(prev => ({ ...prev, [name]: value }));
+    setUserForm((prev) => ({ ...prev, [name]: value }));
 
-    console.log(userForm)
-  }
+    console.log(userForm);
+  };
 
   return (
     <div className="flex items-center justify-center bg-[#ffffff] my-[80px]">
@@ -107,10 +103,10 @@ const Onboarding = () => {
         {/* Form */}
         <form className="space-y-6">
           {/* Step 2 */}
-          {step===1 && (
+          {step === 1 && (
             <div>
               {/* Title */}
-              <h2 className="text-[24px] leading-[28px] font-[700] text-[#0A0A0A] mb-[10px]">
+              <h2 className="text-[20px] sm:text-[24px] leading-[28px] font-[700] text-[#0A0A0A] mb-[10px]">
                 Tell us about yourself
               </h2>
               <p className="text-[#4B5563] font-[400] text-[14px] leading-[18px] mb-[20px]">
@@ -119,8 +115,8 @@ const Onboarding = () => {
               </p>
 
               {/* Name & Role */}
-              <div className="flex flex-row gap-[20px]">
-                <div className="form-group w-[50%]">
+              <div className="w-full flex flex-col lg:flex-row gap-[20px]">
+                <div className="form-group w-[100%] lg:w-[50%]">
                   <label className="text-[12px] font-[400] text-[#4B5563] mb-[8px] flex items-center gap-2">
                     <img src={form1} alt="UserName Icon" className="w-4 h-4" />
                     Name
@@ -135,7 +131,7 @@ const Onboarding = () => {
                   />
                 </div>
 
-                <div className="form-group w-[50%]">
+                <div className="form-group w-[100%] lg:w-[50%]">
                   <label className="text-[12px] font-[400] text-[#4B5563] mb-[5px] flex items-center gap-2">
                     <img src={ind} alt="Industry Icon" className="w-4 h-4" />
                     Professional Role / Industry
@@ -166,7 +162,10 @@ const Onboarding = () => {
                     value={userForm.focusAreas}
                     onChange={updateUserForm}
                   />
-                  <label htmlFor="growth" className="flex gap-[20px] items-center">
+                  <label
+                    htmlFor="growth"
+                    className="flex gap-[20px] items-center"
+                  >
                     <img src={area1} alt="Business Icon" className="w-4 h-4" />
                     <div className="icon_content">
                       <h4 className="text-[14px] leadind-[500] text-[#0A0A0A]">
@@ -203,7 +202,10 @@ const Onboarding = () => {
                     value={userForm.focusAreas}
                     onChange={updateUserForm}
                   />
-                  <label htmlFor="health" className="flex gap-[20px] items-center">
+                  <label
+                    htmlFor="health"
+                    className="flex gap-[20px] items-center"
+                  >
                     <img src={area3} alt="Health Icon" className="w-4 h-4" />
                     <div className="icon_content">
                       <h4>Health & Wellness</h4>
@@ -219,7 +221,10 @@ const Onboarding = () => {
                     value={userForm.focusAreas}
                     onChange={updateUserForm}
                   />
-                  <label htmlFor="career" className="flex gap-[20px] items-center">
+                  <label
+                    htmlFor="career"
+                    className="flex gap-[20px] items-center"
+                  >
                     <img src={area4} alt="Career Icon" className="w-4 h-4" />
                     <div className="icon_content">
                       <h4>Career Development</h4>
@@ -235,7 +240,10 @@ const Onboarding = () => {
                     value={userForm.focusAreas}
                     onChange={updateUserForm}
                   />
-                  <label htmlFor="balance" className="flex gap-[20px] items-center">
+                  <label
+                    htmlFor="balance"
+                    className="flex gap-[20px] items-center"
+                  >
                     <img src={area5} alt="Life Icon" className="w-4 h-4" />
                     <div className="icon_content">
                       <h4>Life Balance</h4>
@@ -251,7 +259,10 @@ const Onboarding = () => {
                     value={userForm.focusAreas}
                     onChange={updateUserForm}
                   />
-                  <label htmlFor="finance" className="flex gap-[20px] items-center">
+                  <label
+                    htmlFor="finance"
+                    className="flex gap-[20px] items-center"
+                  >
                     <img src={area6} alt="Goals Icon" className="w-4 h-4" />
                     <div className="icon_content">
                       <h4>Financial Goals</h4>
@@ -262,29 +273,30 @@ const Onboarding = () => {
               </div>
               {/* Timezone */}
               <div>
-                <label className="text-[12px] leading-[16px] font-[400] text-[#4B5563] block mt-[30px]">
+                <label className="flex text-[12px] leading-[16px] font-[400] text-[#4B5563] block mt-[30px]">
                   <img src={time} alt="Time Icon" className="w-4 h-4" />
                   Timezone
                 </label>
-                <select className="w-full h-[40px] border-[1px] border-[#DBDBDB] rounded-[8px] px-3 py-2 text-[12px] leading-[16px] font-[400] text-[#181818]"
+                <select
+                  className="w-full h-[40px] border-[1px] border-[#DBDBDB] rounded-[8px] px-3 py-2 text-[12px] leading-[16px] font-[400] text-[#181818]"
                   name="timezone"
                   value={userForm.timezone}
                   onChange={updateUserForm}
                 >
-                  <option value={'IST'}>India (IST)</option>
-                  <option value={'EST'}>US (EST)</option>
-                  <option value={'GMT'}>UK (GMT)</option>
-                  <option value={'AEST'}>Australia (AEST)</option>
+                  <option value={"IST"}>India (IST)</option>
+                  <option value={"EST"}>US (EST)</option>
+                  <option value={"GMT"}>UK (GMT)</option>
+                  <option value={"AEST"}>Australia (AEST)</option>
                 </select>
               </div>
             </div>
           )}
 
           {/* Step 2 */}
-          {step===2 && (
+          {step === 2 && (
             <div>
               {/* Title */}
-              <h2 className="text-[24px] leading-[28px] font-[700] text-[#0A0A0A] mb-[10px]">
+              <h2 className="text-[20px] sm:text-[24px] leading-[28px] font-[700] text-[#0A0A0A] mb-[10px]">
                 What are your goals
               </h2>
               <p className="text-[#4B5563] font-[400] text-[14px] leading-[18px] mb-[20px]">
@@ -456,7 +468,8 @@ const Onboarding = () => {
                   Describe your top goal in your own words (optional)
                 </label>
                 <div className="flex items-start">
-                  <textarea className=" text-areas w-full h-[116px] border border-[#E5F2FF] text-[#0A0A0A80] rounded-[12px] p-[16px] text-[12px] leading-[16px] font-[400]  ..."
+                  <textarea
+                    className=" text-areas w-full h-[116px] border border-[#E5F2FF] text-[#0A0A0A80] rounded-[12px] p-[16px] text-[12px] leading-[16px] font-[400]  ..."
                     name="userGoal"
                     value={userForm.userGoal}
                     onChange={updateUserForm}
@@ -470,263 +483,269 @@ const Onboarding = () => {
           )}
 
           {/* Step 3 */}
-          {step===3 && <div>
-            {/* Title */}
-            <h2 className="text-[24px] leading-[28px] font-[700] text-[#0A0A0A] mb-[10px]">
-              Customize your experience
-            </h2>
-            <p className="text-[#4B5563] font-[400] text-[14px] leading-[18px] mb-[20px]">
-              Set your preferences so we can adapt to your schedule and style.
-            </p>
-
-            <div className="flex flex-row gap-[20px]">
-              <div className="form-group w-[100%]">
-                <label className="text-[12px] font-[400] text-[#4B5563] mb-[8px] flex items-center gap-2">
-                  <img src={time} alt="time Icon" className="w-4 h-4" />
-                  Preferred Daily Check-in Time
-                </label>
-                <input
-                  type="time"
-                  name="checkinTime"
-                  value={userForm.checkinTime}
-                  onChange={updateUserForm}
-                  placeholder="8:00 AM"
-                  className="w-full h-[52px] bg-[#F8FAFC] outline-none text-[14px] font-[500] placeholder:text-[#0A0A0A]-400 p-[16px] rounded-[12px] border-[#E5F2FF] border-[2px]"
-                />
-              </div>
-            </div>
-
-            {/* Primary focus area */}
+          {step === 3 && (
             <div>
-              <label className="focus-area text-[12px] font-[400] leading-[16px] text-[#4B5563] block mb-[10px] mt-[20px] flex items-center gap-2">
-                <img
-                  src={notification}
-                  alt="Notification Icon"
-                  className="w-4 h-4"
-                />
-                Notification Preferences
-              </label>
+              {/* Title */}
+              <h2 className="text-[20px] sm:text-[24px] leading-[28px] font-[700] text-[#0A0A0A] mb-[10px]">
+                Customize your experience
+              </h2>
+              <p className="text-[#4B5563] font-[400] text-[14px] leading-[18px] mb-[20px]">
+                Set your preferences so we can adapt to your schedule and style.
+              </p>
+
+              <div className="flex flex-row gap-[20px]">
+                <div className="form-group w-[100%]">
+                  <label className="text-[12px] font-[400] text-[#4B5563] mb-[8px] flex items-center gap-2">
+                    <img src={time} alt="time Icon" className="w-4 h-4" />
+                    Preferred Daily Check-in Time
+                  </label>
+                  <input
+                    type="time"
+                    name="checkinTime"
+                    value={userForm.checkinTime}
+                    onChange={updateUserForm}
+                    placeholder="8:00 AM"
+                    className="w-full h-[52px] bg-[#F8FAFC] outline-none text-[14px] font-[500] placeholder:text-[#0A0A0A]-400 p-[16px] rounded-[12px] border-[#E5F2FF] border-[2px]"
+                  />
+                </div>
+              </div>
+
+              {/* Primary focus area */}
+              <div>
+                <label className="focus-area text-[12px] font-[400] leading-[16px] text-[#4B5563] block mb-[10px] mt-[20px] flex items-center gap-2">
+                  <img
+                    src={notification}
+                    alt="Notification Icon"
+                    className="w-4 h-4"
+                  />
+                  Notification Preferences
+                </label>
+              </div>
+              <div className="checkbox-grid  flex gap-[15px] flex-wrap">
+                <div className="checkbox-card goal notification">
+                  <input
+                    type="checkbox"
+                    name="checkinTime"
+                    value={userForm.checkinTime}
+                    onChange={updateUserForm}
+                  />
+                  <label htmlFor="growth" className="block">
+                    <div className="icon_content">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
+                        Daily check-in reminders
+                      </h4>
+                      <p>Get notified at your preferred time</p>
+                    </div>
+                  </label>
+                </div>
+
+                <div className="checkbox-card goal notification">
+                  <input
+                    type="checkbox"
+                    name="notificationPreference"
+                    value={userForm.notificationPreference}
+                    onChange={updateUserForm}
+                  />
+                  <label htmlFor="personal" className="block">
+                    <div className="icon_content">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
+                        Weekly progress summaries
+                      </h4>
+                      <p>Receive insights every Sunday</p>
+                    </div>
+                  </label>
+                </div>
+
+                <div className="checkbox-card goal notification">
+                  <input
+                    type="checkbox"
+                    name="notificationPreference"
+                    value={userForm.notificationPreference}
+                    onChange={updateUserForm}
+                  />
+                  <label htmlFor="health" className="block">
+                    <div className="icon_content">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
+                        AI-powered insights
+                      </h4>
+                      <p>Get notified when AI discovers patterns</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label className="focus-area text-[12px] font-[400] leading-[16px] text-[#4B5563] block mb-[10px] mt-[20px] flex items-center gap-2">
+                  <img
+                    src={notification}
+                    alt="Notification Icon"
+                    className="w-4 h-4"
+                  />
+                  Communication Style
+                </label>
+              </div>
+              <div className="checkbox-grid  flex gap-[8px] flex-wrap">
+                <div className="checkbox-card goal Communication">
+                  <input
+                    type="checkbox"
+                    name="commStyle"
+                    value={userForm.commStyle}
+                    onChange={updateUserForm}
+                  />
+                  <label htmlFor="growth" className="block">
+                    <div className="icon_content">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
+                        Friendly
+                      </h4>
+                      <p>Warm, encouraging, and supportive tone</p>
+                    </div>
+                  </label>
+                </div>
+
+                <div className="checkbox-card goal Communication">
+                  <input
+                    type="checkbox"
+                    name="commStyle"
+                    value={userForm.commStyle}
+                    onChange={updateUserForm}
+                  />
+                  <label htmlFor="personal" className="block">
+                    <div className="icon_content">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
+                        Professional
+                      </h4>
+                      <p>Direct, concise, and business-focused</p>
+                    </div>
+                  </label>
+                </div>
+
+                <div className="checkbox-card goal Communication">
+                  <input
+                    type="checkbox"
+                    name="commStyle"
+                    value={userForm.commStyle}
+                    onChange={updateUserForm}
+                  />
+                  <label htmlFor="health" className="block">
+                    <div className="icon_content">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
+                        Motivational
+                      </h4>
+                      <p>High-energy, inspiring, and ambitious</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label className="focus-area text-[12px] font-[400] leading-[16px] text-[#4B5563] block mb-[10px] mt-[20px] flex items-center gap-2">
+                  <img src={check} alt="Check Icon" className="w-4 h-4" />
+                  Check-in Frequency
+                </label>
+              </div>
+              <div className="checkbox-grid  flex gap-[15px] flex-wrap">
+                <div className="checkbox-card goal notification">
+                  <input
+                    type="checkbox"
+                    name="checkinFreq"
+                    value={userForm.checkinFreq}
+                    onChange={updateUserForm}
+                  />
+                  <label htmlFor="growth" className="block">
+                    <div className="icon_content">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
+                        Every Day
+                      </h4>
+                      <p>Best for building consistency</p>
+                    </div>
+                  </label>
+                </div>
+
+                <div className="checkbox-card goal notification">
+                  <input
+                    type="checkbox"
+                    name="checkinFreq"
+                    value={userForm.checkinFreq}
+                    onChange={updateUserForm}
+                  />
+                  <label htmlFor="personal" className="block">
+                    <div className="icon_content">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
+                        Weekdays Only
+                      </h4>
+                      <p>Mon-Fri focus</p>
+                    </div>
+                  </label>
+                </div>
+
+                <div className="checkbox-card goal notification">
+                  <input
+                    type="checkbox"
+                    name="checkinFreq"
+                    value={userForm.checkinFreq}
+                    onChange={updateUserForm}
+                  />
+                  <label htmlFor="health" className="block">
+                    <div className="icon_content">
+                      <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
+                        Custom Schedule
+                      </h4>
+                      <p>Pick specific days</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
             </div>
-            <div className="checkbox-grid  flex gap-[15px] flex-wrap">
-              <div className="checkbox-card goal notification">
-                <input
-                  type="checkbox"
-                  name="checkinTime"
-                  value={userForm.checkinTime}
-                  onChange={updateUserForm}
-                />
-                <label htmlFor="growth" className="block">
-                  <div className="icon_content">
-                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
-                      Daily check-in reminders
-                    </h4>
-                    <p>Get notified at your preferred time</p>
-                  </div>
-                </label>
-              </div>
+          )}
 
-              <div className="checkbox-card goal notification">
-                <input
-                  type="checkbox"
-                  name="notificationPreference"
-                  value={userForm.notificationPreference}
-                  onChange={updateUserForm}
-                />
-                <label htmlFor="personal" className="block">
-                  <div className="icon_content">
-                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
-                      Weekly progress summaries
-                    </h4>
-                    <p>Receive insights every Sunday</p>
-                  </div>
-                </label>
-              </div>
-
-              <div className="checkbox-card goal notification">
-                <input
-                  type="checkbox"
-                  name="notificationPreference"
-                  value={userForm.notificationPreference}
-                  onChange={updateUserForm}
-                />
-                <label htmlFor="health" className="block">
-                  <div className="icon_content">
-                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
-                      AI-powered insights
-                    </h4>
-                    <p>Get notified when AI discovers patterns</p>
-                  </div>
-                </label>
-              </div>
-            </div>
-            <div>
-              <label className="focus-area text-[12px] font-[400] leading-[16px] text-[#4B5563] block mb-[10px] mt-[20px] flex items-center gap-2">
-                <img
-                  src={notification}
-                  alt="Notification Icon"
-                  className="w-4 h-4"
-                />
-                Communication Style
-              </label>
-            </div>
-            <div className="checkbox-grid  flex gap-[8px] flex-wrap">
-              <div className="checkbox-card goal Communication">
-                <input
-                  type="checkbox"
-                  name="commStyle"
-                  value={userForm.commStyle}
-                  onChange={updateUserForm}
-                />
-                <label htmlFor="growth" className="block">
-                  <div className="icon_content">
-                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
-                      Friendly
-                    </h4>
-                    <p>Warm, encouraging, and supportive tone</p>
-                  </div>
-                </label>
-              </div>
-
-              <div className="checkbox-card goal Communication">
-                <input
-                  type="checkbox"
-                  name="commStyle"
-                  value={userForm.commStyle}
-                  onChange={updateUserForm}
-                />
-                <label htmlFor="personal" className="block">
-                  <div className="icon_content">
-                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
-                      Professional
-                    </h4>
-                    <p>Direct, concise, and business-focused</p>
-                  </div>
-                </label>
-              </div>
-
-              <div className="checkbox-card goal Communication">
-                <input
-                  type="checkbox"
-                  name="commStyle"
-                  value={userForm.commStyle}
-                  onChange={updateUserForm}
-                />
-                <label htmlFor="health" className="block">
-                  <div className="icon_content">
-                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
-                      Motivational
-                    </h4>
-                    <p>High-energy, inspiring, and ambitious</p>
-                  </div>
-                </label>
-              </div>
-            </div>
-            <div>
-              <label className="focus-area text-[12px] font-[400] leading-[16px] text-[#4B5563] block mb-[10px] mt-[20px] flex items-center gap-2">
-                <img src={check} alt="Check Icon" className="w-4 h-4" />
-                Check-in Frequency
-              </label>
-            </div>
-            <div className="checkbox-grid  flex gap-[15px] flex-wrap">
-              <div className="checkbox-card goal notification">
-                <input
-                  type="checkbox"
-                  name="checkinFreq"
-                  value={userForm.checkinFreq}
-                  onChange={updateUserForm}
-                />
-                <label htmlFor="growth" className="block">
-                  <div className="icon_content">
-                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
-                      Every Day
-                    </h4>
-                    <p>Best for building consistency</p>
-                  </div>
-                </label>
-              </div>
-
-              <div className="checkbox-card goal notification">
-                <input
-                  type="checkbox"
-                  name="checkinFreq"
-                  value={userForm.checkinFreq}
-                  onChange={updateUserForm}
-                />
-                <label htmlFor="personal" className="block">
-                  <div className="icon_content">
-                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
-                      Weekdays Only
-                    </h4>
-                    <p>Mon-Fri focus</p>
-                  </div>
-                </label>
-              </div>
-
-              <div className="checkbox-card goal notification">
-                <input
-                  type="checkbox"
-                  name="checkinFreq"
-                  value={userForm.checkinFreq}
-                  onChange={updateUserForm}
-                />
-                <label htmlFor="health" className="block">
-                  <div className="icon_content">
-                    <h4 className="text-[14px] font-[500] text-[#0A0A0A]">
-                      Custom Schedule
-                    </h4>
-                    <p>Pick specific days</p>
-                  </div>
-                </label>
-              </div>
-            </div>
-          </div>}
-
-          <div className="flex justify-between items-center mt-[40px]">
+          <div className="flex justify-between items-center mt-[40px] gap-[10px]">
             <button
               type="button"
-              className="back-btn bg-[#FFFFFF] border-[1px] h-[48px] text-[#1E3A8A] font-[400] text-[14px] leading-[18px] hover:text-[#1E3A8A] transition p-[12px] rounded-[8px]"
-              disabled={step===1}
-              onClick={()=>setStep(step-1)}
+              className="back-btn bg-[#FFFFFF] border-[1px] h-[48px] text-[#1E3A8A] font-[400] text-[14px] leading-[18px] hover:text-[#1E3A8A] transition p-[12px] rounded-[8px] flex"
+              disabled={step === 1}
+              onClick={() => setStep(step - 1)}
             >
               <img
                 src={arrowleft}
                 alt="Left Icon"
-                className=" arrowsty w-4 h-4 mb-[-2px] ml-[6px]"                
+                className=" arrowsty w-4 h-4 mb-[-2px] ml-[6px]"
               />
               Back
             </button>
-            {step<3 && <button
-              type="button"
-              className="next-btn bg-[#1E3A8A] border-[1px] h-[48px] text-[#ffffff] font-[400] text-[14px] leading-[18px] hover:text-[#ffffff] transition p-[12px] rounded-[8px]"
-              disabled={step===3}
-              onClick={()=>setStep(step+1)}
-            >
-              Get Started
-              <img
-                src={next}
-                alt="Next Icon"
-                className="w-4 h-4 mb-[-2px] ml-[6px]"
-              />
-            </button>}
-            {step===3 && <button
-              type="button"
-              className="next-btn bg-[#1E3A8A] border-[1px] h-[48px] text-[#ffffff] font-[400] text-[14px] leading-[18px] hover:text-[#ffffff] transition p-[12px] rounded-[8px]"
-              onClick={submitUpdateUser}
-            >
-              Submit
-              <img
-                src={next}
-                alt="Next Icon"
-                className="w-4 h-4 mb-[-2px] ml-[6px]"
-              />
-            </button>}
+            {step < 3 && (
+              <button
+                type="button"
+                className="next-btn bg-[#1E3A8A] border-[1px] h-[48px] text-[#ffffff] font-[400] text-[14px] leading-[18px] hover:text-[#ffffff] transition p-[12px] rounded-[8px] flex"
+                disabled={step === 3}
+                onClick={() => setStep(step + 1)}
+              >
+                Get Started
+                <img
+                  src={next}
+                  alt="Next Icon"
+                  className="w-4 h-4 mb-[-2px] ml-[6px]"
+                />
+              </button>
+            )}
+            {step === 3 && (
+              <button
+                type="button"
+                className="next-btn bg-[#1E3A8A] border-[1px] h-[48px] text-[#ffffff] font-[400] text-[14px] leading-[18px] hover:text-[#ffffff] transition p-[12px] rounded-[8px]"
+                onClick={submitUpdateUser}
+              >
+                Submit
+                <img
+                  src={next}
+                  alt="Next Icon"
+                  className="w-4 h-4 mb-[-2px] ml-[6px]"
+                />
+              </button>
+            )}
           </div>
         </form>
 
         <div className="flex justify-center items-center mt-[40px]">
           <button
             type="button"
-            className="text-[#737373] font-[400] text-[14px] leading-[20px]hover:text-blue-700 transition border-none bg-[#ffffff]"
+            className="text-[#737373] font-[400] text-[14px] leading-[20px]hover:text-blue-700 transition border-none bg-[#ffffff] flex"
           >
             Skip for now →
           </button>

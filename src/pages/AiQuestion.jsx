@@ -32,9 +32,8 @@ const AiQuestion = () => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-white my-[80px]">
-      <div className="ai-border-sty w-[900px] bg-white border border-[#ffffff]-200 rounded-[24px] shadow-sm p-[40px]">
-
+    <div className="flex items-center justify-center bg-white my-[10px] sm:my-[16px] md:my-[20px] px-[16px]">
+      <div className="ai-border-sty ax-w-[900px] bg-white border border-[#ffffff]-200 rounded-[24px] shadow-sm p-[40px] p-[20px] sm:p-[32px] md:p-[40px]">
         {/* Header */}
         <div className="flex justify-between text-[14px] font-medium text-[#4B5563] mb-[20px]">
           <span>Getting to know you</span>
@@ -55,10 +54,12 @@ const AiQuestion = () => {
                 alt="Create Icon"
                 className="w-[28px] h-[28px]"
               />
-              <p className="text-[14px] text-[#4B5563] ml-[8px]">Your request:</p>
+              <p className="text-[14px] text-[#4B5563] ml-[8px]">
+                Your request:
+              </p>
             </div>
 
-            <h2 className="text-[16px] font-[600] text-[#0A0A0A] ml-[30px] mt-[6px]">
+            <h2 className="text-[12px] sm:text-[16px] font-[600] text-[#0A0A0A] ml-[30px] mt-[6px]">
               How can I improve my business strategy for the next quarter?
             </h2>
           </div>
@@ -66,17 +67,17 @@ const AiQuestion = () => {
 
         {/* Title Section */}
         <div>
-          <h2 className="text-[24px] font-[700] text-[#0A0A0A] mb-[10px]">
+          <h2 className="text-[18px] sm:text-[24px] font-[700] text-[#0A0A0A] mb-[10px]">
             What is your Current Situation
           </h2>
           <p className="text-[#4B5563] text-[14px] mb-[20px]">
-            Select all that apply. Your AI coach will tailor daily insights around these goals.
+            Select all that apply. Your AI coach will tailor daily insights
+            around these goals.
           </p>
         </div>
 
         {/* Inputs */}
         <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg">
-
           {/* Challenges */}
           <div className="mb-[20px]">
             <label className="block text-[12px] font-[500] text-[#4B5563]">
@@ -88,7 +89,7 @@ const AiQuestion = () => {
               value={formData.challenges}
               onChange={handleChange}
               placeholder="Real Estate Business"
-              className="mt-2 w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px]"
+              className="mt-2 w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px]"
             />
           </div>
 
@@ -103,7 +104,7 @@ const AiQuestion = () => {
               value={formData.opportunities}
               onChange={handleChange}
               placeholder="Real Estate Business"
-              className="mt-2 w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px]"
+              className="mt-2 w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px]"
             />
           </div>
 
@@ -113,12 +114,15 @@ const AiQuestion = () => {
           </label>
 
           <div className="flex gap-[15px] flex-wrap">
-
             {/* CARD - Social Media */}
             <div
               onClick={() => handleMarketingCard("socialMedia")}
               className={`checkbox-card cursor-pointer border rounded-[8px] p-[16px] w-[250px] 
-              ${formData.marketingChannels.socialMedia ? "border-[#E4E4E4] bg-[#EEF4FF]" : "border-[#DBDBDB]"}
+              ${
+                formData.marketingChannels.socialMedia
+                  ? "border-[#E4E4E4] bg-[#EEF4FF]"
+                  : "border-[#DBDBDB]"
+              }
               `}
             >
               <div className="flex gap-[20px] items-center">
@@ -128,17 +132,52 @@ const AiQuestion = () => {
                   readOnly
                 />
                 <div>
-                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">Social Media</h4>
-                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">Promoting on social platforms</p>
+                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">
+                    Social Media
+                  </h4>
+                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">
+                    Promoting on social platforms
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* CARD - Email Marketing */}
+            {/* CARD - Paid ads */}
+            <div
+              onClick={() => handleMarketingCard("paidAds")}
+              className={`checkbox-card cursor-pointer border rounded-[12px] p-[16px] w-[250px] 
+              ${
+                formData.marketingChannels.paidAds
+                  ? "border-[#1E3A8A] bg-[#EEF4FF]"
+                  : "border-[#DBDBDB]"
+              }
+              `}
+            >
+              <div className="flex gap-[20px] items-center">
+                <input
+                  type="checkbox"
+                  checked={formData.marketingChannels.paidAds}
+                  readOnly
+                />
+                <div>
+                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">
+                    Paid ads
+                  </h4>
+                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">
+                    Running paid online ads
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <div
               onClick={() => handleMarketingCard("emailMarketing")}
               className={`checkbox-card cursor-pointer border rounded-[12px] p-[16px] w-[250px] 
-              ${formData.marketingChannels.emailMarketing ? "border-[#1E3A8A] bg-[#EEF4FF]" : "border-[#DBDBDB]"}
+              ${
+                formData.marketingChannels.emailMarketing
+                  ? "border-[#1E3A8A] bg-[#EEF4FF]"
+                  : "border-[#DBDBDB]"
+              }
               `}
             >
               <div className="flex gap-[20px] items-center">
@@ -148,115 +187,123 @@ const AiQuestion = () => {
                   readOnly
                 />
                 <div>
-                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">Paid ads</h4>
-                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">Running paid online ads</p>
+                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">
+                    Email Marketing
+                  </h4>
+                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">
+                    Sending marketing emails
+                  </p>
                 </div>
               </div>
             </div>
-
-           <div
-              onClick={() => handleMarketingCard("emailMarketing")}
+            <div
+              onClick={() => handleMarketingCard("seoWebsite")}
               className={`checkbox-card cursor-pointer border rounded-[12px] p-[16px] w-[250px] 
-              ${formData.marketingChannels.emailMarketing ? "border-[#1E3A8A] bg-[#EEF4FF]" : "border-[#DBDBDB]"}
+              ${
+                formData.marketingChannels.seoWebsite
+                  ? "border-[#1E3A8A] bg-[#EEF4FF]"
+                  : "border-[#DBDBDB]"
+              }
               `}
             >
               <div className="flex gap-[20px] items-center">
                 <input
                   type="checkbox"
-                  checked={formData.marketingChannels.emailMarketing}
+                  checked={formData.marketingChannels.seoWebsite}
                   readOnly
                 />
                 <div>
-                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">Email Marketing</h4>
-                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">Sending marketing emails</p>
+                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">
+                    SEO & website
+                  </h4>
+                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">
+                    Improving website traffic
+                  </p>
                 </div>
-                </div>
-                </div>
-                 <div
-              onClick={() => handleMarketingCard("emailMarketing")}
+              </div>
+            </div>
+            <div
+              onClick={() => handleMarketingCard("offlineMarketing")}
               className={`checkbox-card cursor-pointer border rounded-[12px] p-[16px] w-[250px] 
-              ${formData.marketingChannels.emailMarketing ? "border-[#1E3A8A] bg-[#EEF4FF]" : "border-[#DBDBDB]"}
+              ${
+                formData.marketingChannels.offlineMarketing
+                  ? "border-[#1E3A8A] bg-[#EEF4FF]"
+                  : "border-[#DBDBDB]"
+              }
               `}
             >
               <div className="flex gap-[20px] items-center">
                 <input
                   type="checkbox"
-                  checked={formData.marketingChannels.emailMarketing}
+                  checked={formData.marketingChannels.offlineMarketing}
                   readOnly
                 />
                 <div>
-                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">SEO & website</h4>
-                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">Improving website traffic</p>
+                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">
+                    Offline marketing
+                  </h4>
+                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">
+                    Marketing done locally
+                  </p>
                 </div>
-                </div>
-                </div>
-                   <div
-              onClick={() => handleMarketingCard("emailMarketing")}
+              </div>
+            </div>
+            <div
+              onClick={() => handleMarketingCard("nonenotSure")}
               className={`checkbox-card cursor-pointer border rounded-[12px] p-[16px] w-[250px] 
-              ${formData.marketingChannels.emailMarketing ? "border-[#1E3A8A] bg-[#EEF4FF]" : "border-[#DBDBDB]"}
+              ${
+                formData.marketingChannels.nonenotSure
+                  ? "border-[#1E3A8A] bg-[#EEF4FF]"
+                  : "border-[#DBDBDB]"
+              }
               `}
             >
               <div className="flex gap-[20px] items-center">
                 <input
                   type="checkbox"
-                  checked={formData.marketingChannels.emailMarketing}
+                  checked={formData.marketingChannels.nonenotSure}
                   readOnly
                 />
                 <div>
-                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">Offline marketing</h4>
-                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">Marketing done locally</p>
+                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">
+                    None/Not sure
+                  </h4>
+                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">
+                    No channels used yet
+                  </p>
                 </div>
-                </div>
-                </div>
-                   <div
-              onClick={() => handleMarketingCard("emailMarketing")}
-              className={`checkbox-card cursor-pointer border rounded-[12px] p-[16px] w-[250px] 
-              ${formData.marketingChannels.emailMarketing ? "border-[#1E3A8A] bg-[#EEF4FF]" : "border-[#DBDBDB]"}
-              `}
-            >
-              <div className="flex gap-[20px] items-center">
-                <input
-                  type="checkbox"
-                  checked={formData.marketingChannels.emailMarketing}
-                  readOnly
-                />
-                <div>
-                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">None/Not sure</h4>
-                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">No channels used yet</p>
-                </div>
-                </div>
-                </div>
-                 <section className="w-full max-w-4xl mx-auto mt-10">
-      {/* Label + Divider */}
-      <div className="flex items-center gap-2 mb-[12px]">
-        <span className="text-[12px] leading-[16px] font-[500] text-[#4B5563]">
-          Describe your business situation in your own words (optional)</span>
-      </div>
+              </div>
+            </div>
+            <section className="w-full max-w-4xl mx-auto mt-2 sm:mt-10 ">
+              {/* Label + Divider */}
+              <div className="flex items-center gap-2 mb-[12px]">
+                <span className="text-[12px] leading-[16px] font-[500] text-[#4B5563]">
+                  Describe your business situation in your own words (optional)
+                </span>
+              </div>
 
-      {/* Textarea Box */}
-      <div className="bg-[#F8FAFC] border-[2px] border-[#E5F2FF] rounded-[16px] p-[16px]">
-        <textarea
-          className="text-border-sty w-full bg-transparent outline-none resize-none text-[#0A0A0A80] font-400 placeholder:text-[12px] leading-[16px] no-border font-[400]"
-          rows={3}
-          placeholder="e.g., I want to launch my first product by Q2 and build a sustainable morning routine..."
-        ></textarea>
-      </div>
-    </section>
-     <div className="w-full flex items-center justify-between mt-10">
-      
-      {/* Back Button */}
-      <button className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#FFFFFF] text-[#1E3A8A] text-[14px] hover:bg-gray-50 transition">
-        <FaArrowLeftLong />
-        Back
-      </button>
+              {/* Textarea Box */}
+              <div className="bg-[#F8FAFC] border-[2px] border-[#E5F2FF] rounded-[16px] p-[16px]">
+                <textarea
+                  className="text-border-sty w-full bg-transparent outline-none resize-none text-[#0A0A0A80] font-400 placeholder:text-[12px] leading-[16px] no-border font-[400]"
+                  rows={3}
+                  placeholder="e.g., I want to launch my first product by Q2 and build a sustainable morning routine..."
+                ></textarea>
+              </div>
+            </section>
+            <div className="w-full flex items-center justify-between mt-10 gap-[5px]">
+              {/* Back Button */}
+              <button className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#FFFFFF] text-[#1E3A8A] text-[14px] hover:bg-gray-50 transition">
+                <FaArrowLeftLong />
+                Back
+              </button>
 
-      {/* Next Button */}
-      <button className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#1E3A8A] text-[#FFFFFF] text-[14px] hover:bg-gray-50 transition">
-        Next
-        <FaArrowRightLong />
-      </button>
-
-    </div>
+              {/* Next Button */}
+              <button className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#1E3A8A] text-[#FFFFFF] text-[14px] hover:bg-gray-50 transition">
+                Next
+                <FaArrowRightLong />
+              </button>
+            </div>
           </div>
         </div>
       </div>

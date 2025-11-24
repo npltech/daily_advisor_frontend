@@ -854,6 +854,7 @@ button.month-btn {
     border: 1px solid #E5E5E5;
     border-radius: 16px;
     background: #fff;
+    overflow: auto;
 }
 .goal-button svg {
     background: #1E3A8A;
@@ -896,8 +897,30 @@ textarea.text-border-sty {
     background: #FFF8E6;
     display: inline-flex;
 }
-
+.toggle-icon svg {
+    width: 20px;
+    height: 20px;
+}
 
 
 
 /* End Goals Syling */
+
+/* Start Responsive design */
+
+
+@media screen and (max-width: 768px) {
+  .checkbox-card {
+    width: 100%;
+}
+h1.welcome-heading {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+}
+.login-left {
+    min-height: 500px;
+    padding: 20px;
+    
+}
+}

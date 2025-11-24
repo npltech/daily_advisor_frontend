@@ -41,14 +41,14 @@ function Login() {
   };
 
   return (
-    <div className="w-full min-h-screen p-[40px] bg-[#FFFFFF] flex items-center justify-center">
-      <div className="w-full flex min-h-screen  items-center bg-gray-50 login_main">
-      <div className="box-style flex w-full rounded-[30px] shadow-lg bg-white">
+    <div className="w-full min-h-screen p-[20px] md:p-[40px] bg-[#FFFFFF] flex items-center justify-center">
+      <div className="w-full flex min-h-screen items-center bg-gray-50 login_main">
+      <div className="box-style flex w-full flex-wrap rounded-[30px] shadow-lg bg-white">
         {/* Left Section */}
-        <div className="shape-one w-1/2 bg-[url('/src/assets/images/shape.png')] bg-no-repeat bg-auto bg-top-right bg-[#1E3A8A] text-[#DBEAFE]  flex flex-col justify-center  login-left gap-[10px] text-[14px] leading-[18px]">
+        <div className="shape-one w-full md:w-1/2  bg-[url('/src/assets/images/shape.png')] bg-no-repeat bg-auto bg-right-top bg-[#1E3A8A] text-[#DBEAFE]  flex flex-col justify-center  login-left gap-[10px] text-[14px] leading-[18px]">
         <div className="star-icon">
             <img src={login} alt="Login Icon" className="w-auto" /></div>
-            <h1 className="welcome-heading text-2xl font-semibold mb-2">
+            <h1 className="welcome-heading text-[20px] sm:text-[24px] font-semibold mb-2">
               Welcome to Daily Advisor AI
             </h1>
             <p className="wel-para text-[14px] font-[400] text-[#DBEAFE]-200 mb-6">
@@ -77,7 +77,7 @@ function Login() {
         </div>
 
         {/* Right Section */}
-        <div className="right-section w-1/2 p-10 flex flex-col justify-center login_right bg-[#fff] pl-[36px] pr-[36px]">
+        <div className="right-section w-full md:w-1/2 p-[20px] md:p-[40px] flex flex-col justify-center login_right bg-[#fff]">
           <div className="btn-login  flex mb-8 space-x-2 border-[1px] pb-2">
             <button className="btnone">
               Login
@@ -95,7 +95,7 @@ function Login() {
 
           <form onSubmit={handleSubmit} className="formsubmit space-y-4">
             <div>
-              <label className="block text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
+              <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
                 <img src={form2} alt="Welcome Icon" />
                 Email
               </label>
@@ -110,7 +110,7 @@ function Login() {
             </div>
 
             <div>
-              <label className="block text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
+              <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
                 <img src={form3} alt="Welcome Icon" />
                 Password
               </label>

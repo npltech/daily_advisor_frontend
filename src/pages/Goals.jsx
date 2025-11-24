@@ -11,7 +11,7 @@ const Goals = () => {
   return (
     <div className="Goals-section-one mt-[40px] ml-[20px]">
               {/* Title */}
-              <h2 className="text-[24px] leading-[28px] font-[800] text-[#0A0A0A] mb-[5px]">
+              <h2 className="text-[20px] sm:text-[24px] leading-[28px] font-[800] text-[#0A0A0A] mb-[5px]">
                 Goal Review
               </h2>
               <p className="text-[#4B5563] font-[400] text-[14px] leading-[18px] mb-[20px]">

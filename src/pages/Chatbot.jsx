@@ -58,10 +58,10 @@ const Chatbot1 = () => {
             </div>
           </div>
   
-          <h1 className="text-[24px] font-[700] text-[#0A0A0A] leading-[28px] py-[10px]">
+          <h1 className="text-[20px] lg:text-[24px] font-[700] text-[#0A0A0A] leading-[24px] lg:leading-[28px] py-[10px]">
             Hi Nancy!
           </h1>
-          <p className="text-[#4B5563] font-[400] mt-2 text-[14px] leading-[18px] w-2/3 mx-auto">
+          <p className="text-[#4B5563] font-[400] mt-2 text-[14px] leading-[18px] w-full lg:w-2/3 mx-auto">
             I'm your Daily Advisor AI. Based on what you've shared, I'm here to
             help you track progress, stay motivated, and achieve your goals. What
             would you like to work on today?
