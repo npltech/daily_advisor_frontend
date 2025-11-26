@@ -123,7 +123,7 @@ const Deshboard = () => {
       </p>
 
       {/* Top Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-[20px] md:gap-[40px] mt-[10px] md:mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-[20px] lg:gap-[40px] mt-[10px] md:mt-6">
         {/* Daily Score */}
         <div className="daily-score bg-[#ffffff] p-[16px] rounded-[12px] shadow-sm border-[2px] border-[#E5F2FF] flex justify-between align-center  mt-[10px] md:mb-[40px] h-[84px]">
           {/* Top Section */}
@@ -198,7 +198,7 @@ const Deshboard = () => {
           </div>
 
           {/* Right Icon Box */}
-          <div className="">
+          <div className="w-[64px]">
             <img
               src={goaldeshboard}
               alt="Goaldeshboard Icon"
@@ -245,11 +245,11 @@ const Deshboard = () => {
       </div>
 
       {/* Parent Wrapper → REQUIRED for 50/50 layout */}
-      <div className="flex w-full gap-[12px] mt-6">
+      <div className="flex  flex-col lg:flex-row w-full gap-[12px] mt-6">
         {/* LEFT 50% */}
-        <div className="flex gap-[56px] w-full md:w-[65%] p-[16px] rounded-[12px] shadow-sm border-[1px] border-[#E4E4E4] bg-[#FFFFFF]">
+        <div className="flex flex-col md:flex-row gap-[10px] lg:gap-[25px] xl:gap-[56px] w-full  lg:w-[65%] p-[16px] rounded-[12px] shadow-sm border-[1px] border-[#E4E4E4] bg-[#FFFFFF]">
           {/* Card 1 — AI Insight */}
-          <div className="flex flex-col justify-between w-full md:w-[85%]">
+          <div className="flex flex-col justify-between w-full md:[w-60%] lg:w-[85%]">
             <div>
               <h3 className="text-[14px] leading-[18px] font-[700] text-[#0A0A0A]">
                 AI Insight of the Day
@@ -281,13 +281,13 @@ const Deshboard = () => {
           </div>
 
           {/* Icon Card */}
-          <div className="w-full flex items-center justify-end">
-            <img src={insight} alt="Insight Icon" className="w-[70%] h-auto" />
+          <div className="w-full md:[w-40%]  lg:[w-15%] flex items-center justify-end">
+            <img src={insight} alt="Insight Icon" className=" w-full lg:w-[100%] xl:w-[70%] h-auto" />
           </div>
         </div>
 
         {/* RIGHT 50% — Blue Score Card */}
-        <div className="w-[35%] p-[16px] bg-[url('/src/assets/images/todayscore.png')] bg-no-repeat bg-[length:100%_100%] text-[#ffffff] flex justify-between items-top shadow-sm">
+        <div className="w-full lg:w-[35%] p-[16px] bg-[url('/src/assets/images/todayscore.png')] bg-no-repeat bg-[length:100%_100%] text-[#ffffff] flex justify-between items-top shadow-sm">
           {/* Text Section */}
           <div className="left_part_score w-[60%] p-[16px]">
             <div className="flex pt-[16px]">
@@ -302,7 +302,7 @@ const Deshboard = () => {
           </div>
 
           <div className="w-40 h-40 flex items-center justify-center relative">
-            <svg className="w-full h-full -rotate-90">
+            <svg className="w-full h-full -rotate-90 overflow-visible">
               <circle
                 cx="50%"
                 cy="50%"
@@ -341,9 +341,9 @@ const Deshboard = () => {
       </div>
 
       {/* Charts Row Container */}
-      <div className="flex w-full gap-[10px] mt-[40px]">
+      <div className="flex flex-col lg:flex-row w-full  gap-[10px] mt-[40px]">
         {/* LEFT CARD — WEEKLY PROGRESS */}
-        <div className="w-[65%] bg-[#ffffff] p-[24px] rounded-[16px] shadow-sm border-[1px] border-[#E4E4E4]">
+        <div className="w-full lg:w-[65%] bg-[#ffffff] p-[24px] rounded-[16px] shadow-sm border-[1px] border-[#E4E4E4]">
           {/* Header */}
           <div className="flex justify-between items-start mb-[40px]">
             <div>
@@ -355,7 +355,7 @@ const Deshboard = () => {
               </p>
             </div>
 
-            {/* Buttons */}
+       
             <div className="flex gap-[10px]">
               <button className="week-btn px-[10px] py-[5px] text-[12px] leading-[16px] font-[500] rounded-[10px] bg-[#F1F4FF] text-[#1E3A8A]">
                 Week
@@ -366,7 +366,7 @@ const Deshboard = () => {
             </div>
           </div>
 
-          {/* Chart */}
+       
           <div className="w-full h-[260px]">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data}>
@@ -401,9 +401,9 @@ const Deshboard = () => {
             </ResponsiveContainer>
           </div>
         </div>
-        <div className="flex w-[35%]">
+        <div className="flex w-full lg:w-[35%]">
           <div className="w-full bg-[#ffffff] p-[24px] rounded-[16px] shadow-sm border-[1px] border-[#E4E4E4]">
-            {/* Header */}
+      
             <div className="flex justify-between items-start mb-[40px]">
               <div>
                 <h2 className="text-[14px] leadind-[18px] font-[700]">
@@ -462,10 +462,10 @@ const Deshboard = () => {
           </div>
         </div>
       </div>
-      {/* GOAL PROGRESS + RECENT ACTIVITY SECTION */}
-      <div className="flex w-full gap-[16px] mt-[30px]">
-        {/* LEFT — GOAL PROGRESS */}
-        <div className="progress-bar-style2 w-[35%] bg-[#FFFFFF] p-[16px] rounded-[16px] shadow-sm border border-[#E4E4E4]">
+      
+      <div className="flex flex-col lg:flex-row w-full gap-[16px] mt-[30px]">
+      
+        <div className="progress-bar-style2 w-full lg:w-[35%] bg-[#FFFFFF] p-[16px] rounded-[16px] shadow-sm border border-[#E4E4E4]">
           <h3 className="text-[14px] leading-[18px] font-[700] text-[#0A0A0A] mb-[5px]">
             Goal Progress
           </h3>
@@ -485,7 +485,7 @@ const Deshboard = () => {
         </div>
 
         {/* RIGHT — RECENT ACTIVITY */}
-        <div className="w-[65%] bg-[#FFFFFF] p-[16px] rounded-[16px] shadow-sm border border-[#E4E4E4]">
+        <div className="w-full lg:w-[65%] bg-[#FFFFFF] p-[16px] rounded-[16px] shadow-sm border border-[#E4E4E4]">
           <div className="flex justify-between items-center mb-[10px]">
             <div>
               <h3 className="text-[14px] leading-[18px] font-[700] text-[#0A0A0A] mb-[5px]">

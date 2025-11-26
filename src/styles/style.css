@@ -604,9 +604,9 @@ input.border-sty {
     margin-bottom: -3px;
     margin-right: 2px;
 }
-label.block {
+/* label.block {
     margin-bottom: 10px;
-}
+} */
 span.border-t {
     border-color: #E4E4E4;
 }

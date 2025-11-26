@@ -96,15 +96,14 @@ const Signup = () => {
             </div>
 
             <div className="left-cont">
-              <h2 className="text-[16px] leading-[20px] font-[500] mb-[8px] text-[#0A0A0A]-500">
-                Create your account
-              </h2>
-              <p className="text-[12px] leading-[16px] font-[400] text-[#4B5563]-500 mb-[20px]">
-                Start your personalized AI coaching journey
-              </p>{" "}
-            </div>
-
-            <form onSubmit={handleSubmit} className="formsubmit space-y-4">
+             <h2 className="text-[16px] leading-[20px] font-[500] mb-[8px] text-[#0A0A0A]-500">
+             Create your account
+            </h2>
+            <p className="text-[12px] leading-[16px] font-[400] text-[#4B5563]-500 mb-[20px]">
+              Start your personalized AI coaching journey
+            </p> </div>
+  
+            <form onSubmit={handleSubmit} className="formsubmit space-y-3">
               <div>
                 <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
                   <img src={form1} alt="Welcome Icon" />
@@ -156,8 +155,8 @@ const Signup = () => {
                 Sign up
               </button>
             </form>
-
-            <div className="continue my-[20px] flex items-center justify-center text-[#E4E4E4]-500 text-sm">
+  
+            {/* <div className="continue my-[20px] flex items-center justify-center text-[#E4E4E4]-500 text-sm">
               <span className="border-t border-[#E4E4E4]-100 w-1/3"></span>
               <span className="mx-2 text-[10px] font-[400] leading-[14px]">
                 or continue with
@@ -174,7 +173,7 @@ const Signup = () => {
                 <img src={apple} alt="Apple Icon" />
                 Apple
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

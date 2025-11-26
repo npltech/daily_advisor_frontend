@@ -97,7 +97,7 @@ function Login() {
             Enter your credentials to get started
           </p> </div>
 
-          <form onSubmit={handleSubmit} className="formsubmit space-y-4">
+          <form onSubmit={handleSubmit} className="formsubmit space-y-3">
             <div>
               <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
                 <img src={form2} alt="Welcome Icon" />
@@ -113,7 +113,7 @@ function Login() {
               />
             </div>
 
-            <div>
+            <div className="mt-0">
               <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
                 <img src={form3} alt="Welcome Icon" />
                 Password
@@ -141,13 +141,13 @@ function Login() {
             </button>
           </form>
 
-          <div className="continue my-[20px] flex items-center justify-center text-[#E4E4E4]-500 text-sm">
+          {/* <div className="continue my-[20px] flex items-center justify-center text-[#E4E4E4]-500 text-sm">
             <span className="border-t border-[#E4E4E4]-100 w-1/3"></span>
             <span className="mx-2 text-[10px] font-[400] leading-[14px]">or continue with</span>
             <span className="border-t border-[#E4E4E4]-100 w-1/3"></span>
-          </div>
+          </div> */}
 
-          <div className="bottom-social flex space-x-3">
+          {/* <div className="bottom-social flex space-x-3">
             <button className="social-btn w-1/2 border rounded-[12px] py-2 flex items-center justify-center gap-[10px] text-[12px] text-[#0A0A0A]">
               <img src={google} alt="Google Icon" />
               Google
@@ -156,7 +156,7 @@ function Login() {
               <img src={apple} alt="Apple Icon" />
               Apple
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

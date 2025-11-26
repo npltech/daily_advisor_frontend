@@ -35,18 +35,18 @@ const AiQuestion = () => {
     <div className="flex items-center justify-center bg-white my-[10px] sm:my-[16px] md:my-[20px] px-[16px]">
       <div className="ai-border-sty ax-w-[900px] bg-white border border-[#ffffff]-200 rounded-[24px] shadow-sm p-[40px] p-[20px] sm:p-[32px] md:p-[40px]">
         {/* Header */}
-        <div className="flex justify-between text-[14px] font-medium text-[#4B5563] mb-[20px]">
+        <div className="flex justify-between text-[14px] font-medium text-[#4B5563] mb-[8px]">
           <span>Getting to know you</span>
           <span className="font-medium text-[#1E3A8A]">Step 2 of 3</span>
         </div>
 
         {/* Progress bar */}
-        <div className="w-full h-[12px] bg-[#E4E4E4] rounded-full mb-[20px]">
+        <div className="w-full h-[12px] bg-[#E4E4E4] rounded-full mb-[8px]">
           <div className="w-2/3 h-full bg-[#1E3A8A] rounded-full"></div>
         </div>
 
         {/* AI Request box */}
-        <div className="w-full max-w-3xl mt-10 mx-auto mb-[20px]">
+        <div className="w-full max-w-3xl mt-[16px] mx-auto mb-[8px]">
           <div className="bg-gradient-to-r from-[#FAF5FF] to-[#ECFEFF] border border-[#E9D4FF] rounded-[16px] px-[16px] py-[24px]">
             <div className="flex items-center">
               <img
@@ -67,20 +67,20 @@ const AiQuestion = () => {
 
         {/* Title Section */}
         <div>
-          <h2 className="text-[18px] sm:text-[24px] font-[700] text-[#0A0A0A] mb-[10px]">
+          <h2 className="text-[12px] sm:text-[24px] font-[700] text-[#0A0A0A] mb-[4px]">
             What is your Current Situation
           </h2>
-          <p className="text-[#4B5563] text-[14px] mb-[20px]">
+          <p className="text-[#4B5563] text-[12px] mb-[12px]">
             Select all that apply. Your AI coach will tailor daily insights
             around these goals.
           </p>
         </div>
 
         {/* Inputs */}
-        <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg">
+        <div className="max-w-3xl mx-auto  bg-white rounded-lg">
           {/* Challenges */}
-          <div className="mb-[20px]">
-            <label className="block text-[12px] font-[500] text-[#4B5563]">
+          <div className="mb-[12px]">
+            <label className="block text-[12px] font-[400] text-[#4B5563]">
               What challenges are you facing right now?
             </label>
             <input
@@ -89,27 +89,36 @@ const AiQuestion = () => {
               value={formData.challenges}
               onChange={handleChange}
               placeholder="Real Estate Business"
-              className="mt-2 w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px]"
+              className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
             />
           </div>
 
           {/* Opportunities */}
           <div className="mb-6">
-            <label className="block text-[12px] font-[500] text-[#4B5563]">
-              What opportunities do you see this quarter?
-            </label>
-            <input
-              type="text"
-              name="opportunities"
-              value={formData.opportunities}
-              onChange={handleChange}
-              placeholder="Real Estate Business"
-              className="mt-2 w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px]"
-            />
-          </div>
+  <label className="block text-[12px] font-[400] text-[#4B5563]">
+    What opportunities do you see this quarter?
+  </label>
+
+  <select
+    name="opportunities"
+    value={formData.opportunities}
+    onChange={handleChange}
+    className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] font-[500] text-[#181818] bg-white"
+  >
+    <option value="" disabled>
+      2–10 employees
+    </option>
+    <option value="1-2">1–2 employees</option>
+    <option value="2-10">2–10 employees</option>
+    <option value="10-20">10–20 employees</option>
+    <option value="20-50">20–50 employees</option>
+    <option value="50+">50+ employees</option>
+  </select>
+</div>
+
 
           {/* Marketing Channels */}
-          <label className="text-[12px] text-[#4B5563] block mb-[10px] mt-[20px]">
+          <label className="text-[12px] text-[#4B5563] block mb-[10px] mt-[12px]">
             Which marketing channels are you currently using?
           </label>
 
@@ -132,12 +141,10 @@ const AiQuestion = () => {
                   readOnly
                 />
                 <div>
-                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">
+                  <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
                     Social Media
                   </h4>
-                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">
-                    Promoting on social platforms
-                  </p>
+                 
                 </div>
               </div>
             </div>
@@ -160,12 +167,9 @@ const AiQuestion = () => {
                   readOnly
                 />
                 <div>
-                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">
+                  <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
                     Paid ads
                   </h4>
-                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">
-                    Running paid online ads
-                  </p>
                 </div>
               </div>
             </div>
@@ -187,12 +191,10 @@ const AiQuestion = () => {
                   readOnly
                 />
                 <div>
-                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">
+                  <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
                     Email Marketing
                   </h4>
-                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">
-                    Sending marketing emails
-                  </p>
+                  
                 </div>
               </div>
             </div>
@@ -213,12 +215,10 @@ const AiQuestion = () => {
                   readOnly
                 />
                 <div>
-                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">
+                  <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
                     SEO & website
                   </h4>
-                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">
-                    Improving website traffic
-                  </p>
+                 
                 </div>
               </div>
             </div>
@@ -239,12 +239,10 @@ const AiQuestion = () => {
                   readOnly
                 />
                 <div>
-                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">
+                  <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
                     Offline marketing
                   </h4>
-                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">
-                    Marketing done locally
-                  </p>
+                  
                 </div>
               </div>
             </div>
@@ -265,19 +263,17 @@ const AiQuestion = () => {
                   readOnly
                 />
                 <div>
-                  <h4 className="text-[14px] font-[700] text-[#0A0A0A] mb-[4px]">
+                  <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
                     None/Not sure
                   </h4>
-                  <p className="text-[12px] font-[400] leading-[16px] text-[#4B5563]">
-                    No channels used yet
-                  </p>
+                 
                 </div>
               </div>
             </div>
-            <section className="w-full max-w-4xl mx-auto mt-2 sm:mt-10 ">
+            <section className="w-full max-w-4xl mx-auto mt-2 sm:mt-[12px] ">
               {/* Label + Divider */}
               <div className="flex items-center gap-2 mb-[12px]">
-                <span className="text-[12px] leading-[16px] font-[500] text-[#4B5563]">
+                <span className="text-[12px] leading-[16px] font-[400] text-[#4B5563]">
                   Describe your business situation in your own words (optional)
                 </span>
               </div>
@@ -285,7 +281,7 @@ const AiQuestion = () => {
               {/* Textarea Box */}
               <div className="bg-[#F8FAFC] border-[2px] border-[#E5F2FF] rounded-[16px] p-[16px]">
                 <textarea
-                  className="text-border-sty w-full bg-transparent outline-none resize-none text-[#0A0A0A80] font-400 placeholder:text-[12px] leading-[16px] no-border font-[400]"
+                  className="text-border-sty w-full bg-transparent outline-none resize-none text-[#D1D5DC] font-400 placeholder:text-[12px] leading-[16px] no-border font-[400]"
                   rows={3}
                   placeholder="e.g., I want to launch my first product by Q2 and build a sustainable morning routine..."
                 ></textarea>

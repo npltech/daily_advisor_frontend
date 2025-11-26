@@ -31,21 +31,21 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-full flex flex-col justify-between h-screen w-[280px] border-r bg-white p-[20px] gap-[20px]">
+    <div className="w-full flex flex-col justify-between h-auto xl:h-screen xl:w-[280px] border-r bg-white gap-[20px]">
       {/* ------------------- TOP SECTION ------------------- */}
       <div>
         {/* Logo / Title */}
-        <h1 className="text-[20px] leading-[24px] font-[500] text-[#1E3A8A] mb-[20px] align-center">
+        <h1 className="text-[20px] leading-[24px] font-[500] text-[#1E3A8A] m-[30px] align-center">
           Daily Advisor AI
         </h1>
 
         {/* Quick Actions */}
-        <h2 className="text-[16px] font-[700] text-[#4B5563] leading-[20px] mb-[10px]">
+        <h2 className="text-[16px] font-[700] text-[#4B5563] leading-[20px] mb-[10px] ml-[10px]">
           Quick Actions
         </h2>
 
-        <ul className="sidebar-style space-y-3 ml-[10px]">
-          <li className="flex items-center gap-[10px] text-[14px] font-[500] leading-[18px] text-[#252F40] cursor-pointer hover:text-[#1E3A8A] active:text-[#252F40] py-[10px]">
+        <ul className="sidebar-style space-y-1 ml-[15px]">
+          <li className="flex items-center gap-[10px] text-[14px] font-[500] leading-[18px] text-[#252F40] cursor-pointer hover:text-[#1E3A8A] active:text-[#252F40] py-[4px]">
             <div className="w-[10%] rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ const Sidebar = () => {
             Daily Check-in
           </li>
 
-          <li className="flex items-center gap-[10px] text-[14px] leading-[20px] font-[500] text-[#252F40] cursor-pointer hover:text-[#1E3A8A] active:text-[#252F40] py-[10px]">
+          <li className="flex items-center gap-[10px] text-[14px] leading-[20px] font-[500] text-[#252F40] cursor-pointer hover:text-[#1E3A8A] active:text-[#252F40] py-[4px]">
             <div className="w-[10%] rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +135,7 @@ const Sidebar = () => {
         <div className=" sidebar-border border-t pt-[16px] mt-[16px]" />
 
         {/* AI Conversation */}
-        <div className="flex justify-between items-center mb-3">
+        <div className="flex justify-between items-center mb-[10px] ml-[10px]">
           <h2 className="text-[16px] font-[700] text-[#4B5563] leading-[20px] mb-[10px] ">
             AI Conversation
           </h2>
@@ -143,11 +143,11 @@ const Sidebar = () => {
         </div>
 
         {/* Conversation Items */}
-        <ul className="sidebar-style space-y-3 ml-[10px]">
+        <ul className="sidebar-style space-y-1 ml-[12px]">
           {[1, 2, 3, 4, 5].map((i) => (
             <li
               key={i}
-              className="flex items-center py-[10px] gap-[10px] text-[14px] leading-[20px] font-[500] text-[#252F40] cursor-pointer hover:text-[#1E3A8A] active:text-[#252F40]"
+              className="flex items-center py-[4px] gap-[10px] text-[14px] leading-[20px] font-[500] text-[#252F40] cursor-pointer hover:text-[#1E3A8A] active:text-[#252F40]"
             >
               <div className="w-[10%] rounded-full">
                 <svg
