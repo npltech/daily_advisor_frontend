@@ -18,7 +18,6 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Email:", email, "Password:", password);
     
     const postdata = {
       username: email,
@@ -27,7 +26,12 @@ function Login() {
 
     await loginApi(postdata)
     .then(res=>{
-      navigate("/user/welcome");
+      console.log(res);
+      if(res.data.conversation_intiated){
+        navigate("/user/welcome");
+      }else{
+        navigate("/goal/creategoal");
+      }      
     })
     .catch(err=>{
       console.log(err);

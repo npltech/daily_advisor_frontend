@@ -7,11 +7,11 @@ import Welcome from '../pages/Welcome.jsx';
 import Onboarding from '../pages/Onboarding.jsx';
 import Chatbot from '../pages/Chatbot.jsx';
 import Dashboard from '../pages/Dashboard.jsx';
-import Userlayout from '../pages/Userlayout.jsx';
+import Userlayout from '../layouts/Userlayout.jsx';
 import CreateGoal from '../pages/CreateGoal.jsx';
 import AiQuestion from '../pages/AiQuestion.jsx';
 import Goals from '../pages/Goals.jsx';
-
+import GoalLayout from '../layouts/GoalLayout.jsx';
 
 const AppRoutes = () => {
   return (
@@ -19,6 +19,9 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/goal" element={<GoalLayout />}>
+        <Route path="creategoal" element={<CreateGoal />} />
+      </Route>
       <Route path="/user" element={<Userlayout />}>
         <Route path="" element={<Dashboard />} />
         <Route path="welcome" element={<Welcome />} />

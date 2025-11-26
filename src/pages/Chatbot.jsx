@@ -114,7 +114,7 @@ const Chatbot1 = () => {
                     <ul className="list-disc pl-5 text-[#0A0A0A] font-400 text-[14px] leading-[18px]">
                       <li>Optimize Paid Performance: Lower CAC and increase ROAS by improving targeting and creatives.</li>
                       <li>Conversion Rate Optimization (CRO): Improve product pages, checkout flow, and top-10 SKU funnels.</li>
-                      <li>Retention & Repeat Purchases: Launch simple email flows and one-post-purchase offer to boost LTV. </li>
+                      <li>Retention & Repeat Purchases: Launch simple email flows and one-post-purchase offer to boost LTV.</li>
                     </ul>
                   </div>
                 </div>
