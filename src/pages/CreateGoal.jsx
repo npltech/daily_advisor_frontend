@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import creategoal from "../assets/images/creategoal.png";
 import Button from "../assets/images/Button.png";
 import { LuSend } from "react-icons/lu";
@@ -6,8 +6,33 @@ import { CiCalendar } from "react-icons/ci";
 import { IoCalendarClearOutline } from "react-icons/io5";
 import { CgMediaLive } from "react-icons/cg";
 import { FaArrowTrendUp } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import { showLoader, hideLoader } from "../store/slices/loaderSlice";
+import { createConversation } from "../apis/conversationApi";
+import { useNavigate } from "react-router-dom";
 
 const CreateGoal = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+
+  const sendQuery = async ()=>{
+    console.log(query);
+    dispatch(showLoader());
+    const postdata = {
+      query
+    }
+
+    await createConversation(postdata)
+    .then((res)=>{
+      console.log(res);
+      navigate("/goal/aiquestion");
+    })
+    .catch((err)=>{
+      dispatch(hideLoader());
+    })    
+  }
+
   return (
     <div className="flex items-center justify-center py-[40px]">
       <div className="w-full lg:w-[900px] shadow-sm px-[20px]">
@@ -44,8 +69,10 @@ const CreateGoal = () => {
               <textarea
                 placeholder="Ask AI a question or make a request:"
                 className="w-full outline-none resize-none text-[12px] lg:text-[16px] border-none mt-[20px]"
+                value={query}
+                onChange={(e)=> setQuery(e.target.value)}
               ></textarea>
-              <LuSend />
+              <LuSend className="cursor-pointer" onClick={sendQuery} />
             </div>
           </div>
         </div>

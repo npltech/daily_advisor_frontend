@@ -21,6 +21,7 @@ const AppRoutes = () => {
       <Route path="/signup" element={<Signup />} />
       <Route path="/goal" element={<GoalLayout />}>
         <Route path="creategoal" element={<CreateGoal />} />
+        <Route path="aiquestion" element={<AiQuestion />} />
       </Route>
       <Route path="/user" element={<Userlayout />}>
         <Route path="" element={<Dashboard />} />

@@ -1,7 +1,7 @@
 import apiClient from "./apiClient";
 
-export const createConversation = async (credentials) => {
-  const res = await apiClient.post("/api/conversation/create", credentials);
+export const createConversation = async (data) => {
+  const res = await apiClient.post("/api/conversation/create", data);
   return res.data;
 };
 

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import creategoal from "../assets/images/creategoal.png";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import { showLoader, hideLoader } from "../store/slices/loaderSlice";
 
 const AiQuestion = () => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     challenges: "",
     opportunities: "",
@@ -15,6 +18,10 @@ const AiQuestion = () => {
     },
     businessDescription: "",
   });
+
+  useEffect(()=>{
+    dispatch(hideLoader());
+  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
