@@ -49,8 +49,8 @@ const Chatbot1 = () => {
 
   return (
     <>
-      <div className="bg-[#ffffff] p-[40px] m-[40px] h-dvh flex flex-col justify-between">
-        <div className="chatbot w-[900px] bg-white p-10 text-center mx-auto">
+      <div className="bg-[#ffffff] p-[10px] xl:p-[40px] my-[10px] xl:my-[40px] h-dvh flex flex-col justify-between">
+        <div className="chatbot w-full xl:w-[900px] bg-white text-center mx-auto">
           
           <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-900 text-yellow-300 rounded-lg mb-4">
             <div className="star-icon">
@@ -73,12 +73,12 @@ const Chatbot1 = () => {
           ))}
         </div>
         <section className="message-box1 w-full bg-[#ffffff] py-10 px-4 flex justify-center mt-[40px] overflow-y-[auto]">
-          <div className="max-w-3xl w-full space-y-8">
-            <div className="flex items-start gap-[8px]">
+          <div className=" w-full space-y-8">
+            <div className="flex w-full items-start gap-[8px]">
                 <img src={chatbotmessage} alt="Chatmessage Icon" className="w-4 h-4" />
     
               
-              <div className="w-[70%] message-box bg-[#ffffff] border-[2px] border-[#E4E4E4] p-[24px] shadow-sm max-w-xl">
+              <div className="w-full lg:w-[80%] message-box bg-[#ffffff] border-[2px] border-[#E4E4E4] p-[24px] shadow-sm max-w-xl">
                 <p className="text-[#0A0A0A] font-400 text-[14px] leading-[18px]">
                   Thanks — I’ve got enough to build a clear, actionable plan. I’ll propose a 90-day objective, strategic pillars, weekly actions, KPIs, quick wins, and recommended experiments. Ready?
                 </p>
@@ -98,7 +98,7 @@ const Chatbot1 = () => {
 
             <div className="flex items-start gap-[8px] my-[60px]">
               <img src={chatbotmessage} alt="Chatmessage Icon" className="w-4 h-4" />
-              <div className="message-box bg-white border-[2px] border-[#E4E4E4] p-[24px] shadow-md max-w-2xl">
+              <div className="message-box w-full lg:w-[80%] bg-white border-[2px] border-[#E4E4E4] p-[24px] shadow-md max-w-xl">
                 <p className="text-[#0A0A0A] font-[400] text-[14px] leading-[18px]mb-3">Here’s a focused plan to increase sales over the next 90 days, given your resources (small marketing team, limited budget).</p>
                 <div className="space-y-4 text-gray-700 text-sm leading-relaxed">
                   <div>
@@ -122,8 +122,8 @@ const Chatbot1 = () => {
             </div>
           </div>
         </section>
-        <form className="w-[900px] mx-auto h-[56px] ">
-          <div className="form-group flex items-center gap-2 w-2/3 mx-auto border-[2px] border-[#E5F2FF] p-3 rounded-[16px] w-full h-[56px] text-[14px] leading-[18px] font-[500]">
+        <form className="w-full xl:w-[900px] mx-auto">
+          <div className="form-group flex items-center gap-2 w-2/3 mx-auto border-[2px] border-[#E5F2FF] p-3 rounded-[16px] w-full h-[56px] text-[14px] leading-[18px] font-[500] mb-[20px]">
             <input
               type="text"
               placeholder="What would you like to work on...?"

@@ -86,7 +86,7 @@ const Signup = () => {
               Start your personalized AI coaching journey
             </p> </div>
   
-            <form onSubmit={handleSubmit} className="formsubmit space-y-4">
+            <form onSubmit={handleSubmit} className="formsubmit space-y-3">
               <div>
                 <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
                   <img src={form1} alt="Welcome Icon" />
@@ -144,7 +144,7 @@ const Signup = () => {
               </button>
             </form>
   
-            <div className="continue my-[20px] flex items-center justify-center text-[#E4E4E4]-500 text-sm">
+            {/* <div className="continue my-[20px] flex items-center justify-center text-[#E4E4E4]-500 text-sm">
               <span className="border-t border-[#E4E4E4]-100 w-1/3"></span>
               <span className="mx-2 text-[10px] font-[400] leading-[14px]">or continue with</span>
               <span className="border-t border-[#E4E4E4]-100 w-1/3"></span>
@@ -159,7 +159,7 @@ const Signup = () => {
                 <img src={apple} alt="Apple Icon" />
                 Apple
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

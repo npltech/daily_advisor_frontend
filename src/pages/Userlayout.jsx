@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom'
 const Userlayout = () => {
   return (
     <div className='flex w-full flex-wrap'>
-        <div className='w-[100%] sm:w-[35%] lg:w-[25%] p-[20px] lg:p-[40px]'>
+        <div className='w-[100%] sm:w-[35%] lg:w-[25%] p-[20px] lg:p-[0px]'>
             <Sidebar />
         </div>        
         <div className='w-[100%] sm:w-[65%]  lg:w-[75%] '>

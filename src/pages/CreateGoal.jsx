@@ -10,14 +10,14 @@ import { FaArrowTrendUp } from "react-icons/fa6";
 const CreateGoal = () => {
   return (
     <div className="flex items-center justify-center py-[40px]">
-      <div className="w-full sm:w-[900px] shadow-sm px-[20px]">
+      <div className="w-full lg:w-[900px] shadow-sm px-[20px]">
         {/* Icon */}
         <div className="mt-10 mb-[10px] flex justify-center">
           <img src={creategoal} alt="Create Icon" className="w-8 h-8" />
         </div>
 
         {/* Heading */}
-        <h1 className="text-[28px] sm:text-[40px] leading-[32px] sm:leading-[44px] font-[500] text-[#0A0A0A] text-center mb-[12px]">
+        <h1 className="text-[28px] lg:text-[40px] leading-[32px] sm:leading-[44px] font-[500] text-[#0A0A0A] text-center mb-[12px]">
           Welcome to{" "}
           <span className="bg-[linear-gradient(#F553DA,#CB59FF,#6541F2,#3385FF)] bg-clip-text text-transparent font-[700] ">
             Daily Advisor AI
@@ -33,7 +33,7 @@ const CreateGoal = () => {
 
         {/* Chat Box */}
         <div className="design-create w-full max-w-3xl mt-10 mx-auto mb-[20px]">
-          <div className="bg-white px-[12px] py-[12px] sm:px-[24px] sm:py-[24px]">
+          <div className="bg-white px-[12px] py-[12px] lg:px-[24px] lg:py-[24px]">
             {/* Input */}
             <div className="goal-button flex items-center justify-center iconwithtext pl-[16px] gap-[5px]">
               <img
@@ -43,7 +43,7 @@ const CreateGoal = () => {
               />
               <textarea
                 placeholder="Ask AI a question or make a request:"
-                className="w-full outline-none resize-none text-[12px] sm:text-[16px] border-none mt-[20px]"
+                className="w-full outline-none resize-none text-[12px] lg:text-[16px] border-none mt-[20px]"
               ></textarea>
               <LuSend />
             </div>
