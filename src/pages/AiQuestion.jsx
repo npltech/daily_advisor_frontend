@@ -4,6 +4,7 @@ import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { showLoader, hideLoader } from "../store/slices/loaderSlice";
+import { lastConversation } from "../apis/conversationApi";
 
 const AiQuestion = () => {
   const dispatch = useDispatch();
@@ -20,8 +21,22 @@ const AiQuestion = () => {
   });
 
   useEffect(()=>{
-    dispatch(hideLoader());
+    const getQuestions = ()=>{
+      fetchLastConversation();
+    }
+    getQuestions();
   }, [])
+
+  const fetchLastConversation = async ()=>{
+    await lastConversation()
+    .then((res)=>{
+      console.log(res);
+      dispatch(hideLoader());
+    })
+    .catch(()=>{
+
+    })
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;

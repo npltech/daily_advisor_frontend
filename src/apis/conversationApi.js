@@ -5,6 +5,11 @@ export const createConversation = async (data) => {
   return res.data;
 };
 
+export const lastConversation = async () => {
+  const res = await apiClient.get("/api/conversation/last");
+  return res.data;
+};
+
 export const getConversationList = async () => {
   const res = await apiClient.get("/api/conversation/get");
   return res.data;
