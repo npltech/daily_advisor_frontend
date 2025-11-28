@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import creategoal from "../assets/images/creategoal.png";
 import Button from "../assets/images/Button.png";
 import { LuSend } from "react-icons/lu";
@@ -16,8 +16,11 @@ const CreateGoal = () => {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
 
+  useEffect(()=>{
+    dispatch(hideLoader());
+  }, [])
+
   const sendQuery = async ()=>{
-    console.log(query);
     dispatch(showLoader());
     const postdata = {
       query
@@ -26,7 +29,7 @@ const CreateGoal = () => {
     await createConversation(postdata)
     .then((res)=>{
       console.log(res);
-      navigate("/goal/aiquestion");
+      navigate("/goal/questions");
     })
     .catch((err)=>{
       dispatch(hideLoader());

@@ -1,5 +1,5 @@
 // src/components/Login.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import login from "../assets/images/login.png";
 import google from "../assets/images/google.png";
 import apple from "../assets/images/apple.png";
@@ -10,48 +10,69 @@ import form3 from "../assets/images/form3.png";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { loginApi } from "../apis/userApi";
+import { useDispatch } from "react-redux";
+import { hideLoader, showLoader } from "../store/slices/loaderSlice";
+import { jwtDecode } from "jwt-decode";
+import { loginUser } from "../store/slices/authSlice";
 
 function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    dispatch(hideLoader());
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    dispatch(showLoader());
+
     const postdata = {
       username: email,
-      password: password
-    }
+      password: password,
+    };
 
     await loginApi(postdata)
-    .then(res=>{
-      console.log(res);
-      if(res.data.conversation_intiated){
-        navigate("/user/welcome");
-      }else{
-        navigate("/goal/creategoal");
-      }      
-    })
-    .catch(err=>{
-      console.log(err);
-      Swal.fire({
-                icon: "error",
-                title: "Login failed",
-                text: err?.response?.data?.message || err?.message || 'Something went wrong!!',
-                confirmButtonColor: "#3085d6",
-            });
-    })
-  };
+      .then((res) => {
+        if (res?.accessToken) {
+          dispatch(loginUser(res.accessToken));
+          // const decoded = jwtDecode(res.accessToken);
+          // console.log("Decoded Token:", decoded);
+          // if(!decoded?.conversation_intiated){
+          //   navigate("/goal/create");
+          // }else if(decoded?.conversation_intiated && !decoded?.setup_completed){
+          //   navigate("/goal/question");
+          // }else{
+          //   navigate("/user/chatbot");
+          // }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(hideLoader());
+        Swal.fire({
+          icon: "error",
+          title: "Login failed",
+          text:
+            err?.response?.data?.message ||
+            err?.message ||
+            "Something went wrong!!",
+          confirmButtonColor: "#3085d6",
+        });
+      });
+  };  
 
   return (
     <div className="w-full min-h-screen p-[20px] md:p-[40px] bg-[#FFFFFF] flex items-center justify-center">
       <div className="w-full flex min-h-screen items-center bg-gray-50 login_main">
-      <div className="box-style flex w-full flex-wrap rounded-[30px] shadow-lg bg-white">
-        {/* Left Section */}
-        <div className="shape-one w-full md:w-1/2  bg-[url('/src/assets/images/shape.png')] bg-no-repeat bg-auto bg-right-top bg-[#1E3A8A] text-[#DBEAFE]  flex flex-col justify-center  login-left gap-[10px] text-[14px] leading-[18px]">
-        <div className="star-icon">
-            <img src={login} alt="Login Icon" className="w-auto" /></div>
+        <div className="box-style flex w-full flex-wrap rounded-[30px] shadow-lg bg-white">
+          {/* Left Section */}
+          <div className="shape-one w-full md:w-1/2  bg-[url('/src/assets/images/shape.png')] bg-no-repeat bg-auto bg-right-top bg-[#1E3A8A] text-[#DBEAFE]  flex flex-col justify-center  login-left gap-[10px] text-[14px] leading-[18px]">
+            <div className="star-icon">
+              <img src={login} alt="Login Icon" className="w-auto" />
+            </div>
             <h1 className="welcome-heading text-[20px] sm:text-[24px] font-semibold mb-2">
               Welcome to Daily Advisor AI
             </h1>
@@ -63,91 +84,95 @@ function Login() {
             <ul className="text-sm space-y-3">
               <li className="flex items-center gap-2">
                 <div className="listicon">
-                <img src={withbg} alt="Welcome Icon" /></div>
+                  <img src={withbg} alt="Welcome Icon" />
+                </div>
                 Structured onboarding tailored to you
               </li>
               <li className="flex items-center gap-2">
                 <div className="listicon">
-                <img src={withbg} alt="Welcome Icon" /></div>
+                  <img src={withbg} alt="Welcome Icon" />
+                </div>
                 Goal-driven daily insights
               </li>
               <li className="flex items-center gap-2">
                 <div className="listicon">
-                <img src={withbg} alt="Welcome Icon" /></div>
+                  <img src={withbg} alt="Welcome Icon" />
+                </div>
                 Continuous learning and adaptation
               </li>
             </ul>
-          
-        </div>
-
-        {/* Right Section */}
-        <div className="right-section w-full md:w-1/2 p-[20px] md:p-[40px] flex flex-col justify-center login_right bg-[#fff]">
-          <div className="btn-login  flex mb-8 space-x-2 border-[1px] pb-2">
-            <button className="btnone">
-              Login
-            </button>
-            <Link to="/signup" className="btnone">Sign Up</Link>
           </div>
 
-          <div className="left-cont">
-           <h2 className="text-[16px] leading-[20px] font-[500] mb-[8px] text-[#0A0A0A]-500">
-           Welcome back
-          </h2>
-          <p className="text-[12px] leading-[16px] font-[400] text-[#4B5563]-500 mb-[20px]">
-            Enter your credentials to get started
-          </p> </div>
-
-          <form onSubmit={handleSubmit} className="formsubmit space-y-3">
-            <div>
-              <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
-                <img src={form2} alt="Welcome Icon" />
-                Email
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Nancy@email.com"
-                className="border-sty mt-1 w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#0b2b74]"
-                required
-              />
+          {/* Right Section */}
+          <div className="right-section w-full md:w-1/2 p-[20px] md:p-[40px] flex flex-col justify-center login_right bg-[#fff]">
+            <div className="btn-login  flex mb-8 space-x-2 border-[1px] pb-2">
+              <button className="btnone">Login</button>
+              <Link to="/signup" className="btnone">
+                Sign Up
+              </Link>
             </div>
 
-            <div className="mt-0">
-              <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
-                <img src={form3} alt="Welcome Icon" />
-                Password
-              </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className="border-sty mt-1 w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#0b2b74]"
-                required
-              />
-              <a
-                href="#"
-                className="text-[12px] leading-[16px] font-[400] text-[#E70303] no-underline mt-1 block text-left"
+            <div className="left-cont">
+              <h2 className="text-[16px] leading-[20px] font-[500] mb-[8px] text-[#0A0A0A]-500">
+                Welcome back
+              </h2>
+              <p className="text-[12px] leading-[16px] font-[400] text-[#4B5563]-500 mb-[20px]">
+                Enter your credentials to get started
+              </p>{" "}
+            </div>
+
+            <form onSubmit={handleSubmit} className="formsubmit space-y-3">
+              <div>
+                <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
+                  <img src={form2} alt="Welcome Icon" />
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Nancy@email.com"
+                  className="border-sty mt-1 w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#0b2b74]"
+                  required
+                />
+              </div>
+
+              <div className="mt-0">
+                <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
+                  <img src={form3} alt="Welcome Icon" />
+                  Password
+                </label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="border-sty mt-1 w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#0b2b74]"
+                  required
+                />
+                <a
+                  href="#"
+                  className="text-[12px] leading-[16px] font-[400] text-[#E70303] no-underline mt-1 block text-left"
+                >
+                  Forgot password?
+                </a>
+              </div>
+
+              <button
+                type="submit"
+                className="login-sty w-full bg-[#1E3A8A] text-[12px] leading-[16px] font-[400] text-[#ffffff] py-[12px] mt-[10px] rounded-[8px] hover:bg-[#1E3A8A] transition"
               >
-                Forgot password?
-              </a>
-            </div>
+                Login
+              </button>
+            </form>
 
-            <button
-              type="submit"
-              className="login-sty w-full bg-[#1E3A8A] text-[12px] leading-[16px] font-[400] text-[#ffffff] py-[12px] mt-[10px] rounded-[8px] hover:bg-[#1E3A8A] transition">
-              Login
-            </button>
-          </form>
-
-          {/* <div className="continue my-[20px] flex items-center justify-center text-[#E4E4E4]-500 text-sm">
+            {/* <div className="continue my-[20px] flex items-center justify-center text-[#E4E4E4]-500 text-sm">
             <span className="border-t border-[#E4E4E4]-100 w-1/3"></span>
             <span className="mx-2 text-[10px] font-[400] leading-[14px]">or continue with</span>
             <span className="border-t border-[#E4E4E4]-100 w-1/3"></span>
           </div> */}
 
-          {/* <div className="bottom-social flex space-x-3">
+            {/* <div className="bottom-social flex space-x-3">
             <button className="social-btn w-1/2 border rounded-[12px] py-2 flex items-center justify-center gap-[10px] text-[12px] text-[#0A0A0A]">
               <img src={google} alt="Google Icon" />
               Google
@@ -157,10 +182,10 @@ function Login() {
               Apple
             </button>
           </div> */}
+          </div>
         </div>
       </div>
     </div>
-    </div>    
   );
 }
 

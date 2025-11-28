@@ -15,6 +15,33 @@ const AiQuestion = () => {
     },
     businessDescription: "",
   });
+  const [conversation, setConversation] = useState(null);
+
+  useEffect(() => {
+    dispatch(showLoader());
+    const getQuestions = () => {
+      fetchLastConversation();
+    };
+    getQuestions();
+  }, []);
+
+  const fetchLastConversation = async () => {
+    await lastConversation()
+      .then((res) => {
+        setConversation(res);
+        dispatch(hideLoader());
+      })
+      .catch(() => {
+
+      })
+      .finally(()=>{
+        dispatch(hideLoader());
+      });
+  };
+
+  useEffect(()=>{
+    console.log(conversation);
+  }, [conversation])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
