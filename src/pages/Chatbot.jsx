@@ -6,13 +6,12 @@ import { useSearchParams } from "react-router-dom";
 import chatbotmessage from "../assets/images/chatbotmessage.png";
 import user from "../assets/images/user.png";
 
-const Chatbot1 = () => {
+const Chatbot = () => {
     const [query, setQuery] = useState("");
       const [messages, setMessages] = useState([]);
       const [searchParams] = useSearchParams();
       const chatid = searchParams.get("chatid");
-      console.log(chatid)
-    
+      
       useEffect(()=>{
         const fecthChats = async ()=>{
           if(chatid){
@@ -141,4 +140,4 @@ const Chatbot1 = () => {
   )
 }
 
-export default Chatbot1
+export default Chatbot

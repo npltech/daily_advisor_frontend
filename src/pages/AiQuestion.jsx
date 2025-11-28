@@ -19,24 +19,33 @@ const AiQuestion = () => {
     },
     businessDescription: "",
   });
+  const [conversation, setConversation] = useState(null);
+
+  useEffect(() => {
+    dispatch(showLoader());
+    const getQuestions = () => {
+      fetchLastConversation();
+    };
+    getQuestions();
+  }, []);
+
+  const fetchLastConversation = async () => {
+    await lastConversation()
+      .then((res) => {
+        setConversation(res);
+        dispatch(hideLoader());
+      })
+      .catch(() => {
+
+      })
+      .finally(()=>{
+        dispatch(hideLoader());
+      });
+  };
 
   useEffect(()=>{
-    const getQuestions = ()=>{
-      fetchLastConversation();
-    }
-    getQuestions();
-  }, [])
-
-  const fetchLastConversation = async ()=>{
-    await lastConversation()
-    .then((res)=>{
-      console.log(res);
-      dispatch(hideLoader());
-    })
-    .catch(()=>{
-
-    })
-  }
+    console.log(conversation);
+  }, [conversation])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -117,27 +126,26 @@ const AiQuestion = () => {
 
           {/* Opportunities */}
           <div className="mb-6">
-  <label className="block text-[12px] font-[400] text-[#4B5563]">
-    What opportunities do you see this quarter?
-  </label>
+            <label className="block text-[12px] font-[400] text-[#4B5563]">
+              What opportunities do you see this quarter?
+            </label>
 
-  <select
-    name="opportunities"
-    value={formData.opportunities}
-    onChange={handleChange}
-    className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] font-[500] text-[#181818] bg-white"
-  >
-    <option value="" disabled>
-      2–10 employees
-    </option>
-    <option value="1-2">1–2 employees</option>
-    <option value="2-10">2–10 employees</option>
-    <option value="10-20">10–20 employees</option>
-    <option value="20-50">20–50 employees</option>
-    <option value="50+">50+ employees</option>
-  </select>
-</div>
-
+            <select
+              name="opportunities"
+              value={formData.opportunities}
+              onChange={handleChange}
+              className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] font-[500] text-[#181818] bg-white"
+            >
+              <option value="" disabled>
+                2–10 employees
+              </option>
+              <option value="1-2">1–2 employees</option>
+              <option value="2-10">2–10 employees</option>
+              <option value="10-20">10–20 employees</option>
+              <option value="20-50">20–50 employees</option>
+              <option value="50+">50+ employees</option>
+            </select>
+          </div>
 
           {/* Marketing Channels */}
           <label className="text-[12px] text-[#4B5563] block mb-[10px] mt-[12px]">
@@ -166,7 +174,6 @@ const AiQuestion = () => {
                   <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
                     Social Media
                   </h4>
-                 
                 </div>
               </div>
             </div>
@@ -216,7 +223,6 @@ const AiQuestion = () => {
                   <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
                     Email Marketing
                   </h4>
-                  
                 </div>
               </div>
             </div>
@@ -240,7 +246,6 @@ const AiQuestion = () => {
                   <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
                     SEO & website
                   </h4>
-                 
                 </div>
               </div>
             </div>
@@ -264,7 +269,6 @@ const AiQuestion = () => {
                   <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
                     Offline marketing
                   </h4>
-                  
                 </div>
               </div>
             </div>
@@ -288,7 +292,6 @@ const AiQuestion = () => {
                   <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
                     None/Not sure
                   </h4>
-                 
                 </div>
               </div>
             </div>

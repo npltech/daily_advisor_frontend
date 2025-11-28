@@ -18,7 +18,6 @@ const Sidebar = () => {
   const getConversations = async () => {
     await getConversationList()
       .then((res) => {
-        console.log(res);
         if (res.isArray()) {
           setConversation(res);
         }
