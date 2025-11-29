@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import creategoal from "../assets/images/creategoal.png";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
@@ -8,7 +8,6 @@ import { lastConversation } from "../apis/conversationApi";
 import { updateMultipleQuestions } from "../apis/questionApi";
 
 const AiQuestion = () => {
-  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     challenges: "",
     opportunities: "",
