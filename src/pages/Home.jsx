@@ -102,7 +102,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="Features py-[20px] bg-[url('/src/assets/images/features.png')] bg-no-repeat bg-cover bg-top py-[16px] px-6">
+      <section className="Features lg:py-[20px] bg-[url('/src/assets/images/features1.png')] bg-no-repeat bg-cover bg-top py-[16px] px-6">
         <div class="container">
           <div className="features-bg-img ">
             {/* Heading */}
