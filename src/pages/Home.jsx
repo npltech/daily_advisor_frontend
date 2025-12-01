@@ -4,7 +4,7 @@ import Footer from "../components/Footer.jsx";
 import component2 from "../assets/images/Component2.png";
 import component3 from "../assets/images/component3.png";
 import component4 from "../assets/images/Mask.png";
-import dashboard from "../assets/images/dashboard.png";
+import dashboard from "../assets/images/Dashboard.png";
 import {
   FaCheck,
   FaFacebookF,
