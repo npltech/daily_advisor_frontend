@@ -19,6 +19,7 @@ import message from "../assets/images/message.png";
 import bgImage from "../assets/images/banner.png";
 import abouticon from "../assets/images/abouticon.png";
 import bannertop from "../assets/images/bannertop.png";
+import { RiCheckboxCircleLine } from "react-icons/ri";
 
 const Home = () => {
   return (
@@ -289,6 +290,78 @@ const Home = () => {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full bg-[#F8F9FF] py-14">
+        {/* Heading */}
+        <div className="text-center mb-10">
+          <h2 className="text-[32px] font-[700] text-[#000] tracking-wide">
+            PRICING
+          </h2>
+          <p className="text-[14px] text-[#4B5563] mt-2">
+            Choose the plan that fits your ambitions. All plans include a 14-day
+            free trial.
+          </p>
+        </div>
+
+        <div className="max-w-[900px] mx-auto flex justify-center">
+          <div className="w-[360px] bg-[#0A0A0A] rounded-2xl shadow-lg p-8">
+             <button className="bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-[8px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
+              Start Pro Trial
+            </button>
+            {/* Plan Name */}
+            <h3 className="text-[24px] font-[700] text-[#FFFFFF]">Pro</h3>
+            <p className="text-[14px] text-[#D1D5DC] mt-1">
+              For serious personal growth
+            </p>
+
+            {/* Price */}
+            <div className="mt-[20px]">
+              <span className="text-[58px] font-bold text-[#E6C26B]">$29</span>
+              <span className="text-[14px] text-[#D1D5DC]"> /per month</span>
+            </div>
+
+            {/* Button */}
+            <button className="w-full mt-[20px] bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-[8px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
+              Start Pro Trial
+            </button>
+
+            {/* Divider */}
+            <div className="w-full h-[1px] bg-[#E4E4E4] my-6"></div>
+
+            {/* Features */}
+            <ul className="space-y-3">
+              <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <RiCheckboxCircleLine />
+                Unlimited AI conversations
+              </li>
+              <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <RiCheckboxCircleLine />
+                Advanced daily check-ins
+              </li>
+              <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <RiCheckboxCircleLine />
+                Custom goal frameworks
+              </li>
+              <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <RiCheckboxCircleLine />
+                Priority AI coaching
+              </li>
+              <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <RiCheckboxCircleLine />
+                Weekly strategy sessions
+              </li>
+              <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <RiCheckboxCircleLine />
+                Insights & productivity tools
+              </li>
+              <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <RiCheckboxCircleLine />
+                Weekly support
+              </li>
+            </ul>
           </div>
         </div>
       </section>
