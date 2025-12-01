@@ -263,7 +263,7 @@ h3.text-xl.text-\[\#FFFFFF\].font-700.py-8 {
     font-size: 32px;
     line-height: 36px;
 }
-p.text-daily.text-\[\#FFFFFF\] {
+p.text-daily {
     font-size: 14px;
     line-height: 18px;
     color: #D1D5DC;
@@ -418,10 +418,6 @@ p.smar {
 /* End Section Features Styling */
 
 /* Start Section Get In Touch Styling */
-
-section.GET-In-Touch {
-    padding: 80px 0;
-}
 .top-heading {
     max-width: 1440px;
     margin: 0 auto;
@@ -923,5 +919,15 @@ h1.welcome-heading {
 .banner-content h2 {
     font-size: 28px;
     line-height: 32px;
+}
+.about-us-content h3 {
+    font-size: 24px;
+    line-height: 28px;
+}
+.logo {
+    font-size: 14px;
+}
+p.text-daily {
+    max-width: unset;
 }
 }

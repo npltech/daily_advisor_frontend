@@ -61,7 +61,7 @@ const CreateGoal = () => {
 
         {/* Chat Box */}
         <div className="design-create w-full max-w-3xl mt-10 mx-auto mb-[20px]">
-          <div className="bg-white px-[12px] py-[12px] lg:px-[24px] lg:py-[24px]">
+          <div className="bg-white px-[12px] py-[12px] lg:px-[12px] lg:py-[12px]">
             {/* Input */}
             <div className="goal-button flex items-center justify-center iconwithtext pl-[16px] gap-[5px]">
               <img
@@ -81,7 +81,7 @@ const CreateGoal = () => {
         </div>
 
         {/* Section Title */}
-        <p className="text-[12px] leading-[16px] tracking-widest text-[#4B5563] font-[500] mt-12 text-center">
+        <p className="text-[12px] leading-[16px] tracking-widest text-[#4B5563] font-[500] mt-[32px] text-center">
           WHAT WOULD YOU LIKE TO WORK ON TODAY?
         </p>
         <div className="w-full flex justify-center mt-[32px]">

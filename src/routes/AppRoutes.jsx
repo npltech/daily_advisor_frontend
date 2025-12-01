@@ -24,7 +24,7 @@ const AppRoutes = () => {
   const navigate = useNavigate();
   const userToken = useSelector((state) => state.auth.token);
 
-  useEffect(()=>{
+  useEffect(()=>{    
     const token = Cookies.get("accessToken");
     
     if(token){
