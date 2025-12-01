@@ -19,7 +19,7 @@ import percent from "../assets/images/percent.png";
 import icon1 from "../assets/images/icon1.png";
 import "../styles/style.css";
 import icon2 from "../assets/images/icon2.png";
-import icon from "../assets/images/icon.png";
+import icon from "../assets/images/Icon.png";
 import email from "../assets/images/email.png";
 import message from "../assets/images/message.png";
 import bgImage from "../assets/images/banner.png";
