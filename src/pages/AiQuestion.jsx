@@ -5,10 +5,12 @@ import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { showLoader, hideLoader } from "../store/slices/loaderSlice";
 import { lastConversation } from "../apis/conversationApi";
-import { updateMultipleQuestions } from "../apis/questionApi";
+import { submitMultipleQuestions, updateMultipleQuestions } from "../apis/questionApi";
+import { useNavigate } from "react-router-dom";
 
 const AiQuestion = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     challenges: "",
     opportunities: "",
@@ -65,7 +67,7 @@ const AiQuestion = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value)
+    
     setFormData({ ...formData, [name]: value });
     setQuestionForm({ ...questionForm, [name]: value });
   };
@@ -95,7 +97,6 @@ const AiQuestion = () => {
   // };
 
   const nextQuestions = async () => {
-    console.log('form data', questionForm);
     let answers = [];
     
     for(const key in questionForm){
@@ -129,8 +130,33 @@ const AiQuestion = () => {
       });
   };
 
-  const submitQuestions = () => {
+  const submitQuestions = async () => {
     console.log('submit questions', questionForm);
+    let answers = [];
+    
+    for(const key in questionForm){
+      if(Array.isArray(questionForm[key])){
+        answers.push({questionId: parseInt(key), answer: questionForm[key].join(',')});
+      }else{
+        answers.push({questionId: parseInt(key), answer: questionForm[key]});
+      }
+    }
+
+    let postdata = {
+      answers
+    };
+    console.log('post data', postdata);
+
+    dispatch(showLoader());
+    await submitMultipleQuestions(postdata)
+      .then((res)=>{
+        console.log('res', res);
+        navigate("/user/chatbot");
+      })
+      .catch((err)=>{
+        dispatch(hideLoader());
+        console.log('err', err);
+      });
   };
 
   return (
@@ -139,13 +165,13 @@ const AiQuestion = () => {
         {/* Header */}
         <div className="flex justify-between text-[14px] font-medium text-[#4B5563] mb-[8px]">
           <span>Getting to know you</span>
-          <span className="font-medium text-[#1E3A8A]">Step 1 of 3</span>
+          {conversation!==null && conversation?.last_primary_questions.length && <span className="font-medium text-[#1E3A8A]">Step {conversation?.last_primary_questions[0].set_number} of 3</span>}
         </div>
 
         {/* Progress bar */}
-        <div className="w-full h-[12px] bg-[#E4E4E4] rounded-full mb-[8px]">
-          <div className="w-2/3 h-full bg-[#1E3A8A] rounded-full"></div>
-        </div>
+        {conversation!==null && conversation?.last_primary_questions.length && <div className="w-full h-[12px] bg-[#E4E4E4] rounded-full mb-[8px]">
+          <div className={`w-${conversation?.last_primary_questions[0].set_number}/3 h-full bg-[#1E3A8A] rounded-full`}></div>
+        </div>}
 
         {/* AI Request box */}
         <div className="w-full max-w-3xl mt-[16px] mx-auto mb-[8px]">
