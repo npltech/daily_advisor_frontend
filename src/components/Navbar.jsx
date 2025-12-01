@@ -1,29 +1,57 @@
-import React from "react";
+
+import React, { useState } from "react";
 
 import "../styles/style.css";
 
 
+
+
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <header className="Navbar fixed top-0 z-2 w-full">
+    <header className="Navbar fixed top-0 w-full z-10">
          <div className="container">
             <div className="flex p-[20px] justify-between w-full">
         <div className="w-[20%] logo">DAILY ADVISOR AI</div>
+        {/* Mobile Toggle Button */}
+          <button
+            className="lg:hidden block text-[24px] text-[#FFFFFF]"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? "✕" : "☰"}
+          </button>
 
-        <div className="w-[60%] menu">
-        <nav className="nav-links  justify-center">
+        <div className="w-[60%] menu hidden lg:flex justify-center">
+        <nav className="nav-links flex gap-[10px]">
           <a href="#">ABOUT</a>
           <a href="#">FEATURES</a>
           <a href="#">HOW IT WORKS</a>
           <a href="#">PRICING</a>
+          <a href="#">Contact</a>
         </nav>
         </div>
 
-          <div className="w-[20%] text-right">
-           <button className="contact-btn">CONTACT</button>
+
+          <div className="w-[20%] text-right hidden lg:block">
+           <button className="contact-btn">Login</button>
           </div>
         </div>
+         {/* Mobile Dropdown Menu */}
+        {menuOpen && (
+          <div className="lg:hidden w-full bg-white px-6 pb-4">
+            <nav className="flex flex-col gap-4 text-[16px]">
+              <a href="#">ABOUT</a>
+              <a href="#">FEATURES</a>
+              <a href="#">HOW IT WORKS</a>
+              <a href="#">PRICING</a>
+              <a href="#">Contact</a>
+
+              <button className="contact-btn mt-2 w-full">Login</button>
+            </nav>
+          </div>
+                  )}
       </div>
+
     </header>
   );
 };

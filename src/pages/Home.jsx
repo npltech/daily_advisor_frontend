@@ -5,7 +5,13 @@ import component2 from "../assets/images/component2.png";
 import component3 from "../assets/images/component3.png";
 import component4 from "../assets/images/Mask.png";
 import dashboard from "../assets/images/dashboard.png";
-import { FaCheck } from "react-icons/fa";
+import {
+  FaCheck,
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+} from "react-icons/fa";
 import browser from "../assets/images/browser.png";
 import { Container } from "postcss";
 import habit from "../assets/images/habit.png";
@@ -30,7 +36,7 @@ const Home = () => {
         className="banner z-1 bg-[length:100%_auto] bg-no-repeat bg-top-center"
         style={{ backgroundImage: `url(${bgImage})` }}
       >
-        <div className="banner-top-content w-full lg:pt-[200px]">
+        <div className="banner-top-content w-full lg:pt-[200px] pt-[40px]">
           <div className="subheading-top">
             <img src={bannertop} alt="Banner Top" />
             <h3 className="">Personalized AI Coach</h3>
@@ -51,11 +57,11 @@ const Home = () => {
       </section>
 
       {/* About Us Section */}
-      <section className="about-us px-[20px] md:px-[0]">
-        <div class="container">
-          <div class="flex w-full flex-wrap md:flex-nowrap ">
+      <section className="about-us px-[20px] lg:px-[20px]">
+        <div className="container">
+          <div className="flex w-full flex-wrap md:flex-nowrap ">
             <div className="about-us-content flex flex-col w-full md:w-1/2 mb-[20px] md:mb-0">
-              <h3 className="text-2xl font-semibold">ABOUT US</h3>
+              <h3 className="text-2xl font-semibold mb-[10px]">ABOUT US</h3>
               <p className="text-gray-700">
                 Daily Advisor AI is built to understand your goals, track your
                 progress, and offer daily insights that keep you moving forward.
@@ -97,18 +103,24 @@ const Home = () => {
                   <img src={component2} alt="About us" />
                 </div>
               </div>
-              <img src={component4} alt="About us" class="hidden md:block" />
+              <img
+                src={component4}
+                alt="About us"
+                className="hidden md:block"
+              />
             </div>
           </div>
         </div>
       </section>
 
       <section className="Features lg:py-[20px] bg-[url('/src/assets/images/features1.png')] bg-no-repeat bg-cover bg-top py-[16px] px-6">
-        <div class="container">
+        <div className="container">
           <div className="features-bg-img ">
             {/* Heading */}
             <div className="text-center mb-12">
-              <h2 className="text-[32px] font-bold text-gray-700">FEATURES</h2>
+              <h2 className="text-[24px] md:text-[32px] font-bold text-[#0A0A0A]-700">
+                FEATURES
+              </h2>
               <p className="text-[14px] text-[#4B5563] mt-2">
                 A complete ecosystem for personal and professional growth,
                 designed to fit seamlessly into your daily routine.
@@ -120,7 +132,7 @@ const Home = () => {
               {/* Daily Check-ins */}
               <div className="w-full md:w-2/3 bg-[url('/src/assets/images/daily.png')] bg-no-repeat bg-cover bg-top flex text-white p-6 rounded-2xl relative">
                 <div className="features_content pt-0 pb-[10px] md:pt-[40px] md:pb-[40px]">
-                  <h3 className="text-xl text-[#FFFFFF] font-700 py-8">
+                  <h3 className="text-[24px] md:text-[32px] text-[#FFFFFF] font-700 py-[20px] md:py-8">
                     Daily Check-ins
                   </h3>
                   <p className="text-daily text-[#FFFFFF]">
@@ -136,7 +148,7 @@ const Home = () => {
               {/* Habit Tracking */}
               <div className="bg-white w-full md:w-1/3 p-6 rounded-2xl shadow-md flex flex-col justify-between">
                 <div>
-                  <h3 className="text-[32px] font-bold text-[#171717] mb-3">
+                  <h3 className="text-[24px] md:text-[32px] font-bold text-[#171717] mb-3">
                     Habit Tracking
                   </h3>
                   <p className="text-[14px] text-[#4B5563]-400">
@@ -151,7 +163,7 @@ const Home = () => {
             <div className="daily-check flex flex-wrap md:flex-nowrap w-full gap-[20px] mb-[20px]">
               <div className=" progress-a  w-full md:w-1/3 bg-white p-6 rounded-2xl shadow-md flex flex-col justify-between">
                 <div>
-                  <h3 className="text-[32px] font-bold text-[#171717] mb-3">
+                  <h3 className="text-[24px] md:text-[32px] font-bold text-[#171717] mb-3">
                     Progress Analytics
                   </h3>
                   <p className="text-[14px] text-[#4B5563]-400">
@@ -166,7 +178,7 @@ const Home = () => {
               <div className="daily-check2 w-full md:w-1/3 flex flex-col">
                 <div className="ai-guidence bg-white rounded-2xl shadow-md flex flex-row flex-wrap md:flex-nowrap">
                   <div className="ai-guidence-content w-full md:w-[50%] pr-[0%] md:pr-[10%]">
-                    <h3 className="text-[32px] font-bold text-[#171717] mb-3">
+                    <h3 className="text-[24px] md:text-[32px] font-bold text-[#171717] mb-3">
                       AI Guidance
                     </h3>
                     <p className="text-[14px] text-[#4B5563] max-w-lg mb-10">
@@ -223,7 +235,7 @@ const Home = () => {
       <section className="How-it-works py-20 bg-[#fff]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-left mb-16">
-            <h2 className="text-[32px] font-[700] leading-[36px] text-[#0A0A0A]-900 uppercase mb-[10px]">
+            <h2 className="text-[24px] md:text-[32px] font-[700] leading-[36px] text-[#0A0A0A]-900 uppercase mb-[10px]">
               HOW IT WORKS
             </h2>
             <p className="text-[#4B5563]-500 text-[14px] leading-[18px] font-[400] text-sm max-w-md">
@@ -297,7 +309,7 @@ const Home = () => {
       <section className="w-full bg-[#F8F9FF] py-14">
         {/* Heading */}
         <div className="text-center mb-10">
-          <h2 className="text-[32px] font-[700] text-[#000] tracking-wide">
+          <h2 className="text-[24px] md:text-[32px] font-[700] text-[#000] tracking-wide">
             PRICING
           </h2>
           <p className="text-[14px] text-[#4B5563] mt-2">
@@ -308,9 +320,11 @@ const Home = () => {
 
         <div className="max-w-[900px] mx-auto flex justify-center">
           <div className="w-[360px] bg-[#0A0A0A] rounded-2xl shadow-lg p-8">
-             <button className="bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-[8px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
-              Start Pro Trial
-            </button>
+            <div className="flex justify-end">
+              <button className="mt-[-32px] mr-[-32px] bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-tr-[15px] rounded-bl-[15px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
+                Start Pro Trial
+              </button>
+            </div>
             {/* Plan Name */}
             <h3 className="text-[24px] font-[700] text-[#FFFFFF]">Pro</h3>
             <p className="text-[14px] text-[#D1D5DC] mt-1">
@@ -366,19 +380,19 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="GET-In-Touch  py-[40px] md:py-16 px-[20px] bg-[#fff]">
-        <div class="container w-full">
-          <div className="emailsection flex  flex-wrap md:flex-nowrap w-full gap-[20px]">
-            <div className="w-full md:w-50  left_part flex flex-col justify-between">
+      <section className="GET-In-Touch py-[30px] lg:py-[80px] px-[20px] bg-[#fff]">
+        <div className="container w-full">
+          <div className="emailsection flex flex-wrap md:flex-nowrap w-full gap-[20px]">
+            <div className="w-full md:w-50 left_part flex flex-col justify-between">
               <div className="top_heading">
-                <h2 className="get-heading text-[28px] md:text-[32px] leading-[36px] font-bold text-[#121212]-700 md:mb-[15px]">
+                <h2 className="get-heading text-[24px] md:text-[32px] leading-[36px] font-bold text-[#121212]-700 md:mb-[15px]">
                   GET IN TOUCH WITH US
                 </h2>
                 <p className="text-[#848282]-400 text-[16px] leading-[20px] md:mt-2">
                   We're here to assist you.
                 </p>
               </div>
-              <div class="flex flex-row w-full gap-[20px]">
+              <div className="flex flex-row w-full gap-[20px]">
                 <div className="mail bg-[#F8F9FF] rounded-[24px] py-[40px] px-[24px] shadow-sm text-center hover:shadow-md transition w-1/2">
                   <div className="email mb-4">
                     <img src={email} alt="Email" />
@@ -437,9 +451,53 @@ const Home = () => {
         </div>
       </section>
 
-      {/* <footer className="footer bg-[#1E3A8A] text-[#fff] p-[24px]">
-        <Footer />
-      </footer> */}
+      <footer class="w-full bg-[#1E3A8A] text-white py-[24px]">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+          <div class="w-full md:w-1/3 mb-6 md:mb-0">
+            <h2 class="text-[24px] font-[700]">DAILY ADVISOR AI</h2>
+            <p class="text-[14px] mt-2 leading-[18px] w-[275px]">
+              DailyAdvisorAI — Your AI-powered daily companion for life and
+              business growth.
+            </p>
+          </div>
+
+          <div class="flex gap-8 text-[14px] font-[400]">
+            <a href="#" class="">
+              Home
+            </a>
+            <a href="#" class="">
+              About
+            </a>
+            <a href="#" class="">
+              Features
+            </a>
+            <a href="#" class="">
+              Pricing
+            </a>
+            <a href="#" class="">
+              How it Works
+            </a>
+            <a href="#" class="">
+              Contact
+            </a>
+          </div>
+
+          <div class="flex gap-4 mt-6 md:mt-0">
+            <FaFacebookF />
+            <FaInstagram />
+            <FaTwitter />
+            <FaLinkedin />
+          </div>
+        </div>
+
+        <div class="w-full border-b-[1px] border-[#282828]/20 mt-6"></div>
+
+        <div class="max-w-6xl mx-auto text-center text-[10px] mt-4 flex justify-center gap-6">
+          <span>© 2024. All rights reserved.</span>
+          <span class="cursor-pointer">Privacy Policy</span>
+          <span class="cursor-pointer">Terms of Service</span>
+        </div>
+      </footer>
     </>
   );
 };
