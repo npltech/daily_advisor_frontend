@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import creategoal from "../assets/images/creategoal.png";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
@@ -8,6 +8,7 @@ import { lastConversation } from "../apis/conversationApi";
 import { updateMultipleQuestions } from "../apis/questionApi";
 
 const AiQuestion = () => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     challenges: "",
     opportunities: "",
@@ -36,6 +37,7 @@ const AiQuestion = () => {
         if(res.last_primary_questions.length>0){
           createFormData(res.last_primary_questions);
         }
+        console.log(res);
         setConversation(res);
         dispatch(hideLoader());
       })
@@ -57,12 +59,13 @@ const AiQuestion = () => {
         form_data[value.id] = value.type==='multiselect'?[]:'';
       }      
     })
-    console.log(form_data);
+    console.log('form data', form_data);
     setQuestionForm(form_data);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value)
     setFormData({ ...formData, [name]: value });
     setQuestionForm({ ...questionForm, [name]: value });
   };
@@ -112,6 +115,11 @@ const AiQuestion = () => {
     await updateMultipleQuestions(postdata)
       .then((res)=>{
         console.log('res', res);
+        createFormData(res.newQuestions);
+        setConversation((prev)=>({
+          ...prev,
+          last_primary_questions: res.newQuestions
+        }));
       })
       .catch((err)=>{
         console.log('err', err);
@@ -119,6 +127,10 @@ const AiQuestion = () => {
       .finally(()=>{
         dispatch(hideLoader());
       });
+  };
+
+  const submitQuestions = () => {
+    console.log('submit questions', questionForm);
   };
 
   return (
@@ -246,17 +258,24 @@ const AiQuestion = () => {
           ))}
           <div className="w-full flex items-center justify-between mt-10 gap-[5px]">
             {/* Back Button */}
-            <button className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#FFFFFF] text-[#1E3A8A] text-[14px] hover:bg-gray-50 transition">
+            {conversation.last_primary_questions[0].set_number>1 ? <button className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#FFFFFF] text-[#1E3A8A] text-[14px] hover:bg-gray-50 transition">
               <FaArrowLeftLong />
               Back
-            </button>
+            </button>:
+            <div></div>}
             {/* Next Button */}
-            <button type="button" className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#1E3A8A] text-[#FFFFFF] text-[14px] hover:bg-gray-50 transition"
+            {conversation.last_primary_questions[0].set_number<3 && <button type="button" className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#84822] text-[#FFFFFF] text-[14px] hover:bg-[#1E3A8A] transition"
               onClick={nextQuestions}
             >
               Next
               <FaArrowRightLong />
-            </button>
+            </button>}
+            {conversation.last_primary_questions[0].set_number===3 && <button type="button" className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#1E3A8A] text-[#FFFFFF] text-[14px] hover:bg-gray-50 transition"
+              onClick={submitQuestions}
+            >
+              Submit
+              <FaArrowRightLong />
+            </button>}
           </div>          
         </div>}
         {/* <div className="max-w-3xl mx-auto  bg-white rounded-lg mt-4">

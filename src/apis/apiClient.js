@@ -1,8 +1,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-// const BASE_URL = import.meta.env.VITE_BASE_URL;
-const BASE_URL = import.meta.env.VITE_STAGING_URL;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+// const BASE_URL = import.meta.env.VITE_STAGING_URL;
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
