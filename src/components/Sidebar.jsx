@@ -1,11 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getConversationList } from "../apis/conversationApi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import user from "../assets/images/user.png";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+import { logoutUser } from "../store/slices/authSlice";
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [conversation, setConversation] = useState([]);
+  const [searchParams] = useSearchParams();
+  const chatid = searchParams.get("chatid");
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchConversations = async () => {
@@ -18,8 +38,11 @@ const Sidebar = () => {
   const getConversations = async () => {
     await getConversationList()
       .then((res) => {
-        if (res.isArray()) {
+        console.log(res);
+        if (chatid) {
           setConversation(res);
+        } else {
+          loadChat(res[0]?.id);
         }
       })
       .catch((err) => {});
@@ -29,8 +52,13 @@ const Sidebar = () => {
     navigate(`/user/chatbot?chatid=${id}`);
   };
 
+  const logout = ()=>{
+    Cookies.remove("accessToken");
+    dispatch(logoutUser());   
+  }
+
   return (
-    <div className="w-full flex flex-col justify-between h-auto xl:h-screen xl:w-[280px] border-r bg-white gap-[20px]">
+    <div className="w-full flex flex-col justify-between h-auto xl:h-screen border-r bg-white gap-[20px]">
       {/* ------------------- TOP SECTION ------------------- */}
       <div>
         {/* Logo / Title */}
@@ -70,13 +98,13 @@ const Sidebar = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="size-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
                 />
               </svg>
@@ -90,18 +118,18 @@ const Sidebar = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="size-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                 />
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M9 9.563C9 9.252 9.252 9 9.563 9h4.874c.311 0 .563.252.563.563v4.874c0 .311-.252.563-.563.563H9.564A.562.562 0 0 1 9 14.437V9.564Z"
                 />
               </svg>
@@ -115,13 +143,13 @@ const Sidebar = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="size-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="m7.875 14.25 1.214 1.942a2.25 2.25 0 0 0 1.908 1.058h2.006c.776 0 1.497-.4 1.908-1.058l1.214-1.942M2.41 9h4.636a2.25 2.25 0 0 1 1.872 1.002l.164.246a2.25 2.25 0 0 0 1.872 1.002h2.092a2.25 2.25 0 0 0 1.872-1.002l.164-.246A2.25 2.25 0 0 1 16.954 9h4.636M2.41 9a2.25 2.25 0 0 0-.16.832V12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 12V9.832c0-.287-.055-.57-.16-.832M2.41 9a2.25 2.25 0 0 1 .382-.632l3.285-3.832a2.25 2.25 0 0 1 1.708-.786h8.43c.657 0 1.281.287 1.709.786l3.284 3.832c.163.19.291.404.382.632M4.5 20.25h15A2.25 2.25 0 0 0 21.75 18v-2.625c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125V18a2.25 2.25 0 0 0 2.25 2.25Z"
                 />
               </svg>
@@ -143,42 +171,76 @@ const Sidebar = () => {
 
         {/* Conversation Items */}
         <ul className="sidebar-style space-y-1 ml-[12px]">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <li
-              key={i}
-              className="flex items-center py-[4px] gap-[10px] text-[14px] leading-[20px] font-[500] text-[#252F40] cursor-pointer hover:text-[#1E3A8A] active:text-[#252F40]"
-            >
-              <div className="w-[10%] rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
-                  />
-                </svg>
-              </div>
-              Goal Setting for Q1 2025
-            </li>
-          ))}
+          {conversation.length > 0 &&
+            conversation.map((con, i) => (
+              <li
+                key={`conversation-${i}`}
+                className="flex items-center py-[4px] gap-[10px] text-[14px] leading-[20px] font-[500] text-[#252F40] cursor-pointer hover:text-[#1E3A8A] active:text-[#252F40]"
+              >
+                <div className="w-[10%] rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
+                    />
+                  </svg>
+                </div>
+                {con.title}
+              </li>
+            ))}
         </ul>
         <div className="bottom-border-sty"></div>
       </div>
 
-      {/* ------------------- BOTTOM USER BOX ------------------- */}
-      <div className="bg-[#F2F2F2] p-[12px] rounded-[12px] flex items-center gap-[10px] shadow-sm mt-5">
-        <div className="rounded-full flex items-center justify-center">
-          <img src={user} alt="User Icon" className="w-4 h-4" />
+      <div className="bg-[#F2F2F2] p-[12px] rounded-[12px] shadow-sm mt-5 cursor-pointer">
+        <div
+          className="relative flex items-center gap-[10px]"
+          ref={menuRef}
+          onClick={() => setOpen(!open)}
+        >
+          <div className="rounded-full flex items-center justify-center">
+            <img src={user} alt="User Icon" className="w-4 h-4" />
+          </div>
+          <span
+            className="text-[14px] font-[400] text-[#404040] LEADING-[18PX]"            
+          >
+            Nancy
+          </span>
+
+          {open && (
+            <div className="absolute 
+          bottom-full left-0 
+          mb-2
+          w-48 
+          bg-white border rounded-lg shadow-lg py-2 z-50">
+              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">
+                My Profile
+              </button>
+              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">
+                Settings
+              </button>
+              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">
+                Help
+              </button>
+
+              <hr className="my-2" />
+
+              <button className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 text-sm"
+                onClick={logout}
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
-        <span className="text-[14px] font-[400] text-[#404040] LEADING-[18PX]">
-          Nancy
-        </span>
       </div>
     </div>
     // <div>

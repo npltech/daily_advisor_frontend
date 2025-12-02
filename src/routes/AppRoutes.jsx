@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Login from '../pages/Login.jsx';
 import Home from '../pages/Home.jsx';
 import Signup from '../pages/Signup.jsx';
@@ -22,6 +22,7 @@ import { lastConversation } from '../apis/conversationApi.js';
 const AppRoutes = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const userToken = useSelector((state) => state.auth.token);
 
   useEffect(()=>{    
@@ -35,8 +36,11 @@ const AppRoutes = () => {
   useEffect(()=>{
     if(userToken){
       const decoded = jwtDecode(userToken);
+      
       if (decoded?.setup_completed) {
-        navigate("/user/chatbot");
+        if(location.pathname.startsWith('/goal') || location.pathname.startsWith('/login')){
+          // navigate("/user");
+        }
       } else {
         fetchLastConversation();            
       }

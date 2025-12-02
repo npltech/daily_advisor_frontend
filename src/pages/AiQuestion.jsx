@@ -7,6 +7,7 @@ import { showLoader, hideLoader } from "../store/slices/loaderSlice";
 import { lastConversation } from "../apis/conversationApi";
 import { submitMultipleQuestions, updateMultipleQuestions } from "../apis/questionApi";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../store/slices/authSlice";
 
 const AiQuestion = () => {
   const dispatch = useDispatch();
@@ -150,8 +151,11 @@ const AiQuestion = () => {
     dispatch(showLoader());
     await submitMultipleQuestions(postdata)
       .then((res)=>{
-        console.log('res', res);
-        navigate("/user/chatbot");
+        console.log('res', res);        
+        if (res?.accessToken) {
+          dispatch(loginUser(res.accessToken));
+        }
+        navigate(`/user/chatbot?chatid=${res.conversationId}`);
       })
       .catch((err)=>{
         dispatch(hideLoader());
@@ -208,13 +212,14 @@ const AiQuestion = () => {
           {conversation?.last_primary_questions.map((question, index)=>(
             <div key={`qu-${index}`} className="w-full mb-[12px]">
               <label className="block text-[12px] font-[400] text-[#4B5563]">
-                {question.question}
+                {question.question} *
               </label>
               {question.type==='text' && <input
                 type="text"
                 name={question.id}
                 value={questionForm[question.id]}
                 onChange={handleChange}
+                placeholder="Type your answer"
                 className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
               />}
               {question.type==='number' && <input
@@ -222,6 +227,7 @@ const AiQuestion = () => {
                 name={question.id}
                 value={questionForm[question.id]}
                 onChange={handleChange}
+                placeholder="Type your answer"
                 className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
               />}
               {question.type==='date' && <input
