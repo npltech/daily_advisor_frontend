@@ -10,18 +10,21 @@ import { useDispatch } from "react-redux";
 import { showLoader, hideLoader } from "../store/slices/loaderSlice";
 import { createConversation } from "../apis/conversationApi";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import sendGif from "../assets/gifs/send_gif.gif";
 
 const CreateGoal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(()=>{
     dispatch(hideLoader());
   }, [])
 
   const sendQuery = async ()=>{
-    dispatch(showLoader());
+    setLoading(true);
     const postdata = {
       query
     }
@@ -32,12 +35,20 @@ const CreateGoal = () => {
       navigate("/goal/questions");
     })
     .catch((err)=>{
-      dispatch(hideLoader());
-    })    
+      Swal.fire({
+        icon: "error",
+        title: err?.response?.data?.llmResponse?.message || err?.message || "Something went wrong!!",
+        text: '',
+        confirmButtonColor: "#3085d6",
+      });
+    }) 
+    .finally(()=>{
+      setLoading(false);
+    })
   }
 
   return (
-    <div className="flex items-center justify-center py-[40px]">
+    <div className="h-full flex items-center justify-center py-[40px] goal_background">
       <div className="w-full lg:w-[900px] shadow-sm px-[20px]">
         {/* Icon */}
         <div className="mt-10 mb-[10px] flex justify-center">
@@ -75,7 +86,12 @@ const CreateGoal = () => {
                 value={query}
                 onChange={(e)=> setQuery(e.target.value)}
               ></textarea>
-              <LuSend className="cursor-pointer" onClick={sendQuery} />
+              {!loading && <LuSend className="cursor-pointer w-8 h-8" onClick={sendQuery} />}
+              {loading && <img
+                src={sendGif}
+                alt="Send Gif"
+                className="w-8 h-8 object-contain"
+              />}
             </div>
           </div>
         </div>

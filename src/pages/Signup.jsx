@@ -88,11 +88,11 @@ const Signup = () => {
 
           {/* Right Section */}
           <div className="right-section w-full md:w-1/2 p-[20px] md:p-[40px] flex flex-col justify-center login_right bg-[#fff]">
-            <div className="btn-login flex mb-8 space-x-2 border-[1px] pb-2">
+            <div className="flex mb-8 space-x-2 px-[36px] pb-2">
               <Link to="/login" className="btnone">
                 Login
               </Link>
-              <button className="btnone">Sign Up</button>
+              <button className="btnone btnone bg-[#F8FAFC] rounded-sm shadow-[0px_0px_8px_0px_rgba(18,18,18,0.1)]">Sign Up</button>
             </div>
 
             <div className="left-cont">

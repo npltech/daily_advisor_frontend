@@ -5,9 +5,13 @@ import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { showLoader, hideLoader } from "../store/slices/loaderSlice";
 import { lastConversation } from "../apis/conversationApi";
-import { submitMultipleQuestions, updateMultipleQuestions } from "../apis/questionApi";
+import {
+  submitMultipleQuestions,
+  updateMultipleQuestions,
+} from "../apis/questionApi";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../store/slices/authSlice";
+import Swal from "sweetalert2";
 
 const AiQuestion = () => {
   const dispatch = useDispatch();
@@ -37,17 +41,15 @@ const AiQuestion = () => {
   const fetchLastConversation = async () => {
     await lastConversation()
       .then((res) => {
-        if(res.last_primary_questions.length>0){
+        if (res.last_primary_questions.length > 0) {
           createFormData(res.last_primary_questions);
         }
         console.log(res);
         setConversation(res);
         dispatch(hideLoader());
       })
-      .catch(() => {
-
-      })
-      .finally(()=>{
+      .catch(() => {})
+      .finally(() => {
         dispatch(hideLoader());
       });
   };
@@ -55,20 +57,21 @@ const AiQuestion = () => {
   const createFormData = (data) => {
     const form_data = {};
 
-    data.forEach(value => {
-      if(value.answer){
-        form_data[value.id] = value.type==='multiselect'?value.answer.split(','):value.answer;
-      }else{
-        form_data[value.id] = value.type==='multiselect'?[]:'';
-      }      
-    })
-    console.log('form data', form_data);
+    data.forEach((value) => {
+      if (value.answer) {
+        form_data[value.id] =
+          value.type === "multiselect" ? value.answer.split(",") : value.answer;
+      } else {
+        form_data[value.id] = value.type === "multiselect" ? [] : "";
+      }
+    });
+    console.log("form data", form_data);
     setQuestionForm(form_data);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     setFormData({ ...formData, [name]: value });
     setQuestionForm({ ...questionForm, [name]: value });
   };
@@ -99,218 +102,301 @@ const AiQuestion = () => {
 
   const nextQuestions = async () => {
     let answers = [];
-    
-    for(const key in questionForm){
-      if(Array.isArray(questionForm[key])){
-        answers.push({questionId: parseInt(key), answer: questionForm[key].join(',')});
-      }else{
-        answers.push({questionId: parseInt(key), answer: questionForm[key]});
+
+    for (const key in questionForm) {
+      if (Array.isArray(questionForm[key])) {
+        answers.push({
+          questionId: parseInt(key),
+          answer: questionForm[key].join(","),
+        });
+      } else {
+        answers.push({ questionId: parseInt(key), answer: questionForm[key] });
       }
     }
 
     let postdata = {
-      answers
+      answers,
     };
-    console.log('post data', postdata);
+    console.log("post data", postdata);
 
     dispatch(showLoader());
     await updateMultipleQuestions(postdata)
-      .then((res)=>{
-        console.log('res', res);
+      .then((res) => {
+        console.log("res", res);
         createFormData(res.newQuestions);
-        setConversation((prev)=>({
+        setConversation((prev) => ({
           ...prev,
-          last_primary_questions: res.newQuestions
+          last_primary_questions: res.newQuestions,
         }));
       })
-      .catch((err)=>{
-        console.log('err', err);
+      .catch((err) => {
+        
+        Swal.fire({
+          icon: "error",
+          title:
+            err?.response?.data?.llmResponse?.details?.message || err?.response?.data?.llmResponse?.message ||
+            err?.message ||
+            "Something went wrong!!",
+          text: "",
+          confirmButtonColor: "#3085d6",
+        });
       })
-      .finally(()=>{
+      .finally(() => {
         dispatch(hideLoader());
       });
   };
 
   const submitQuestions = async () => {
-    console.log('submit questions', questionForm);
+    console.log("submit questions", questionForm);
     let answers = [];
-    
-    for(const key in questionForm){
-      if(Array.isArray(questionForm[key])){
-        answers.push({questionId: parseInt(key), answer: questionForm[key].join(',')});
-      }else{
-        answers.push({questionId: parseInt(key), answer: questionForm[key]});
+
+    for (const key in questionForm) {
+      if (Array.isArray(questionForm[key])) {
+        answers.push({
+          questionId: parseInt(key),
+          answer: questionForm[key].join(","),
+        });
+      } else {
+        answers.push({ questionId: parseInt(key), answer: questionForm[key] });
       }
     }
 
     let postdata = {
-      answers
+      answers,
     };
-    console.log('post data', postdata);
+    console.log("post data", postdata);
 
     dispatch(showLoader());
     await submitMultipleQuestions(postdata)
-      .then((res)=>{
-        console.log('res', res);        
+      .then((res) => {
+        console.log("res", res);
         if (res?.accessToken) {
           dispatch(loginUser(res.accessToken));
         }
         navigate(`/user/chatbot?chatid=${res.conversationId}`);
       })
-      .catch((err)=>{
+      .catch((err) => {
         dispatch(hideLoader());
-        console.log('err', err);
+        console.log("err", err);
       });
   };
 
   return (
-    <div className="flex items-center justify-center bg-white my-[10px] sm:my-[16px] md:my-[20px] px-[16px]">
-      <div className="ai-border-sty max-w-[900px] w-[60%] bg-white border border-[#ffffff]-200 rounded-[24px] shadow-sm p-[40px] p-[20px] sm:p-[32px] md:p-[40px]">
-        {/* Header */}
-        <div className="flex justify-between text-[14px] font-medium text-[#4B5563] mb-[8px]">
-          <span>Getting to know you</span>
-          {conversation!==null && conversation?.last_primary_questions.length && <span className="font-medium text-[#1E3A8A]">Step {conversation?.last_primary_questions[0].set_number} of 3</span>}
-        </div>
-
-        {/* Progress bar */}
-        {conversation!==null && conversation?.last_primary_questions.length && <div className="w-full h-[12px] bg-[#E4E4E4] rounded-full mb-[8px]">
-          <div className={`w-${conversation?.last_primary_questions[0].set_number}/3 h-full bg-[#1E3A8A] rounded-full`}></div>
-        </div>}
-
-        {/* AI Request box */}
-        <div className="w-full max-w-3xl mt-[16px] mx-auto mb-[8px]">
-          <div className="bg-gradient-to-r from-[#FAF5FF] to-[#ECFEFF] border border-[#E9D4FF] rounded-[16px] px-[16px] py-[24px]">
-            <div className="flex items-center">
-              <img
-                src={creategoal}
-                alt="Create Icon"
-                className="w-[28px] h-[28px]"
-              />
-              <p className="text-[14px] text-[#4B5563] ml-[8px]">
-                Your request:
-              </p>
-            </div>
-
-            <h2 className="text-[12px] sm:text-[16px] font-[600] text-[#0A0A0A] ml-[30px] mt-[6px]">
-              {conversation?.first_user_message?.message}
-            </h2>
+    <div className="h-full goal_background py-[40px] px-[140px]">
+      <div className="flex items-center justify-center my-[10px] sm:my-[16px] md:my-[20px] px-[16px]">
+        <div className="w-full flex justify-between items-center max-w-[900px] w-[60%] px-[20px] sm:px-[32px] md:px-[40px]">
+          <div className="flex">
+            AA
+          </div>
+          <div>
+            <button
+              className="flex items-center gap-2 text-xs font-medium text-[#1E3A8A] px-2 py-2 rounded-sm shadow-md hover:shadow-lg transition"
+              onClick={() => navigate("/goal/create")}
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.5 6H9.5" stroke="#1E3A8A" strokeLinecap="round" stroke-linejoin="round"/>
+              <path d="M6 2.5V9.5" stroke="#1E3A8A" strokeLinecap="round" stroke-linejoin="round"/>
+              </svg>
+              New Goal
+            </button>
           </div>
         </div>
+      </div>      
+      <div className="flex items-center justify-center my-[10px] sm:my-[16px] md:my-[20px] px-[16px]">
+        <div className="ai-border-sty max-w-[900px] w-[60%] bg-white border border-[#ffffff]-200 rounded-[24px] shadow-sm p-[20px] sm:p-[32px] md:p-[40px]">
+          {/* Header */}
+          <div className="flex justify-between text-[14px] font-medium text-[#4B5563] mb-[8px]">
+            <span>Getting to know you</span>
+            {conversation !== null &&
+              conversation?.last_primary_questions.length && (
+                <span className="font-medium text-[#1E3A8A]">
+                  Step {conversation?.last_primary_questions[0].set_number} of 3
+                </span>
+              )}
+          </div>
 
-        {/* Title Section */}
-        <div>
-          <h2 className="text-[12px] sm:text-[24px] font-[700] text-[#0A0A0A] mb-[4px]">
-            Please answer the following questions.
-          </h2>
-          <p className="text-[#4B5563] text-[12px] mb-[12px]">
-            This helps us personalize your AI coaching experience from day one.
-          </p>
-        </div>
+          {/* Progress bar */}
+          {conversation !== null &&
+            conversation?.last_primary_questions.length && (
+              <div className="w-full h-[12px] bg-[#E4E4E4] rounded-full mb-[8px]">
+                <div
+                  className={`w-${conversation?.last_primary_questions[0].set_number}/3 h-full bg-[#1E3A8A] rounded-full`}
+                ></div>
+              </div>
+            )}
 
-        {/* Inputs */}
-        {conversation!==null && conversation?.last_primary_questions.length && <div className="max-w-3xl mx-auto bg-white rounded-lg">
-          {conversation?.last_primary_questions.map((question, index)=>(
-            <div key={`qu-${index}`} className="w-full mb-[12px]">
-              <label className="block text-[12px] font-[400] text-[#4B5563]">
-                {question.question} *
-              </label>
-              {question.type==='text' && <input
-                type="text"
-                name={question.id}
-                value={questionForm[question.id]}
-                onChange={handleChange}
-                placeholder="Type your answer"
-                className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
-              />}
-              {question.type==='number' && <input
-                type="number"
-                name={question.id}
-                value={questionForm[question.id]}
-                onChange={handleChange}
-                placeholder="Type your answer"
-                className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
-              />}
-              {question.type==='date' && <input
-                type="date"
-                name={question.id}
-                value={questionForm[question.id]}
-                onChange={handleChange}
-                className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
-              />}
-              {question.type==='time' && <input
-                type="time"
-                name={question.id}
-                value={questionForm[question.id]}
-                onChange={handleChange}
-                className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
-              />}
-              {question.type==='option' && 
-                <select
-                  name={question.id}
-                  value={questionForm[question.id]}
-                  onChange={handleChange}
-                  className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] font-[500] text-[#181818] bg-white"
-                >
-                  {question.options.split(',').map((option, idx)=>(
-                    <option key={`opt-${idx}-${question.id}`} value={option}>{option}</option>
-                  ))}                  
-                </select>
-              }
-              {question.type==='multiselect' &&
-                <div className="flex gap-[15px] flex-wrap">
-                  {question.options.split(',').map((option, idx)=>(
-                    <div
-                      key={`multi-${idx}-${question.id}`}
-                      onClick={() => handleMultiOptions(question.id, option)}
-                      className={`checkbox-card cursor-pointer border rounded-[8px] p-[16px] w-[250px] 
+          {/* AI Request box */}
+          <div className="w-full max-w-3xl mt-[16px] mx-auto mb-[8px]">
+            <div className="bg-gradient-to-r from-[#FAF5FF] to-[#ECFEFF] border border-[#E9D4FF] rounded-[16px] px-[16px] py-[24px]">
+              <div className="flex items-center">
+                <img
+                  src={creategoal}
+                  alt="Create Icon"
+                  className="w-[28px] h-[28px]"
+                />
+                <p className="text-[14px] text-[#4B5563] ml-[8px]">
+                  Your request:
+                </p>
+              </div>
+
+              <h2 className="text-[12px] sm:text-[16px] font-[600] text-[#0A0A0A] ml-[30px] mt-[6px]">
+                {conversation?.first_user_message?.message}
+              </h2>
+            </div>
+          </div>
+
+          {/* Title Section */}
+          <div>
+            <h2 className="text-[12px] sm:text-[24px] font-[700] text-[#0A0A0A] mb-[4px]">
+              Please answer the following questions.
+            </h2>
+            <p className="text-[#4B5563] text-[12px] mb-[12px]">
+              This helps us personalize your AI coaching experience from day
+              one.
+            </p>
+          </div>
+
+          {/* Inputs */}
+          {conversation !== null &&
+            conversation?.last_primary_questions.length && (
+              <div className="max-w-3xl mx-auto bg-white rounded-lg">
+                {conversation?.last_primary_questions.map((question, index) => (
+                  <div key={`qu-${index}`} className="w-full mb-[12px]">
+                    <label className="block text-[12px] font-[400] text-[#4B5563]">
+                      {question.question} *
+                    </label>
+                    {question.type === "text" && (
+                      <input
+                        type="text"
+                        placeholder={
+                          question?.placeholder || "Type your answer"
+                        }
+                        name={question.id}
+                        value={questionForm[question.id]}
+                        onChange={handleChange}
+                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
+                      />
+                    )}
+                    {question.type === "number" && (
+                      <input
+                        type="number"
+                        placeholder={
+                          question?.placeholder || "Type your answer"
+                        }
+                        name={question.id}
+                        value={questionForm[question.id]}
+                        onChange={handleChange}
+                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
+                      />
+                    )}
+                    {question.type === "date" && (
+                      <input
+                        type="date"
+                        name={question.id}
+                        value={questionForm[question.id]}
+                        onChange={handleChange}
+                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
+                      />
+                    )}
+                    {question.type === "time" && (
+                      <input
+                        type="time"
+                        name={question.id}
+                        value={questionForm[question.id]}
+                        onChange={handleChange}
+                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
+                      />
+                    )}
+                    {question.type === "option" && (
+                      <select
+                        name={question.id}
+                        placeholder={question?.placeholder || "Select"}
+                        value={questionForm[question.id]}
+                        onChange={handleChange}
+                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] font-[500] text-[#181818] bg-white"
+                      >
+                        <option value="">Select</option>
+                        {question.options.split(",").map((option, idx) => (
+                          <option
+                            key={`opt-${idx}-${question.id}`}
+                            value={option}
+                          >
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                    {question.type === "multiselect" && (
+                      <div className="flex gap-[15px] flex-wrap">
+                        {question.options.split(",").map((option, idx) => (
+                          <div
+                            key={`multi-${idx}-${question.id}`}
+                            onClick={() =>
+                              handleMultiOptions(question.id, option)
+                            }
+                            className={`checkbox-card cursor-pointer border rounded-[8px] p-[16px] w-[250px] 
                       ${
                         questionForm[question.id].includes(option)
                           ? "border-[#E4E4E4] bg-[#EEF4FF]"
                           : "border-[#DBDBDB]"
                       }
                       `}
-                    >
-                      <div className="flex gap-[20px] items-center">
-                        <input
-                          type="checkbox"
-                          checked={questionForm[question.id].includes(option)}
-                          readOnly
-                        />
-                        <div>
-                          <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
-                            {option}
-                          </h4>
-                        </div>
+                          >
+                            <div className="flex gap-[20px] items-center">
+                              <input
+                                type="checkbox"
+                                checked={questionForm[question.id].includes(
+                                  option
+                                )}
+                                readOnly
+                              />
+                              <div>
+                                <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
+                                  {option}
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    </div>
-                  ))}        
-                </div>                         
-              }
-            </div>            
-          ))}
-          <div className="w-full flex items-center justify-between mt-10 gap-[5px]">
-            {/* Back Button */}
-            {conversation.last_primary_questions[0].set_number>1 ? <button className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#FFFFFF] text-[#1E3A8A] text-[14px] hover:bg-gray-50 transition">
-              <FaArrowLeftLong />
-              Back
-            </button>:
-            <div></div>}
-            {/* Next Button */}
-            {conversation.last_primary_questions[0].set_number<3 && <button type="button" className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#84822] text-[#FFFFFF] text-[14px] hover:bg-[#1E3A8A] transition"
-              onClick={nextQuestions}
-            >
-              Next
-              <FaArrowRightLong />
-            </button>}
-            {conversation.last_primary_questions[0].set_number===3 && <button type="button" className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#1E3A8A] text-[#FFFFFF] text-[14px] hover:bg-gray-50 transition"
-              onClick={submitQuestions}
-            >
-              Submit
-              <FaArrowRightLong />
-            </button>}
-          </div>          
-        </div>}
-        {/* <div className="max-w-3xl mx-auto  bg-white rounded-lg mt-4">
+                    )}
+                  </div>
+                ))}
+                <div className="w-full flex items-center justify-between mt-10 gap-[5px]">
+                  {/* Back Button */}
+                  {conversation.last_primary_questions[0].set_number > 1 ? (
+                    <button className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#FFFFFF] text-[#1E3A8A] text-[14px] hover:bg-gray-50 transition">
+                      <FaArrowLeftLong />
+                      Back
+                    </button>
+                  ) : (
+                    <div></div>
+                  )}
+                  {/* Next Button */}
+                  {conversation.last_primary_questions[0].set_number < 3 && (
+                    <button
+                      type="button"
+                      className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#868686] text-[#FFFFFF] text-[14px] hover:bg-[#1E3A8A] transition"
+                      onClick={nextQuestions}
+                    >
+                      Next
+                      <FaArrowRightLong />
+                    </button>
+                  )}
+                  {conversation.last_primary_questions[0].set_number === 3 && (
+                    <button
+                      type="button"
+                      className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#1E3A8A] text-[#FFFFFF] text-[14px] hover:bg-gray-50 transition"
+                      onClick={submitQuestions}
+                    >
+                      Submit
+                      <FaArrowRightLong />
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
+          {/* <div className="max-w-3xl mx-auto  bg-white rounded-lg mt-4">
           <div className="mb-[12px]">
             <label className="block text-[12px] font-[400] text-[#4B5563]">
               What challenges are you facing right now?
@@ -520,6 +606,7 @@ const AiQuestion = () => {
             </div>
           </div>
         </div> */}
+        </div>
       </div>
     </div>
   );
