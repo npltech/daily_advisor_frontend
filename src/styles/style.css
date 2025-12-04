@@ -63,7 +63,6 @@ section.How-it-works.py-20.bg-\[\#fff\] {
 
 .contact-btn {
   background-color: white;
-  /* color: #1d3b8e; */
   font-weight: 700;
   border: none;
   padding: 6px 20px;
@@ -936,4 +935,8 @@ p.text-daily {
     background-image: url('../assets/images/background.png');
     background-size: cover;
     background-position: center;
+}
+
+.hide_scrollbar{
+    scrollbar-width: none;
 }

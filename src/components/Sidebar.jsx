@@ -1,10 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import { getConversationList } from "../apis/conversationApi";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import user from "../assets/images/user.png";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import { logoutUser } from "../store/slices/authSlice";
+import { useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode";
+import { setNavHeading } from "../store/slices/navbarSlice";
+
+const headings = {
+  "/user": "Dashboard Overview",
+  "/user/dashboard": "Dashboard Overview",
+  "/user/goals": "Goal Review",
+  "/user/chatbot": "AI Conversation",
+}
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -14,6 +24,24 @@ const Sidebar = () => {
   const chatid = searchParams.get("chatid");
   const [open, setOpen] = useState(false);
   const menuRef = useRef();
+  const userToken = useSelector((state) => state.auth.token);
+  const [userData, setUserData] = useState(null);
+  const location = useLocation();
+
+  useEffect(()=>{
+    if(userToken){
+      const decoded = jwtDecode(userToken);
+      setUserData(decoded);
+    }
+  }, [userToken])
+
+  useEffect(()=>{
+    const fetchHeading = ()=>{
+      setNavbarHeading(headings[location.pathname]);
+    }    
+
+    fetchHeading();
+  }, [location])
 
   useEffect(() => {
     const handler = (e) => {
@@ -32,24 +60,33 @@ const Sidebar = () => {
       await getConversations();
     };
 
-    fetchConversations();
-  }, []);
+    fetchConversations();  
+  }, [chatid]);
 
   const getConversations = async () => {
     await getConversationList()
       .then((res) => {
         console.log(res);
-        if (chatid) {
+        if (res.length) {
           setConversation(res);
-        } else {
-          loadChat(res[0]?.id);
+          if(location.pathname.startsWith('/user/chatbot')){
+            if(!chatid){
+              loadChat(res[0]?.id);
+            }else{
+              loadChat(chatid);
+            }
+          }
         }
       })
       .catch((err) => {});
   };
 
   const loadChat = (id) => {
-    navigate(`/user/chatbot?chatid=${id}`);
+    navigate(`/user/chatbot?chatid=${id}`);    
+  };
+
+  const loadPage = (path) => {
+    navigate(path);
   };
 
   const logout = ()=>{
@@ -57,22 +94,25 @@ const Sidebar = () => {
     dispatch(logoutUser());   
   }
 
+  const setNavbarHeading = (value)=>{
+    dispatch(setNavHeading(value));
+  }
+
   return (
-    <div className="w-full flex flex-col justify-between h-auto xl:h-screen border-r bg-white gap-[20px]">
-      {/* ------------------- TOP SECTION ------------------- */}
+    <div className="w-full flex flex-col justify-between h-auto xl:h-screen border-r bg-white gap-[20px] pt-2">
       <div>
-        {/* Logo / Title */}
         <h1 className="text-[20px] leading-[24px] font-[500] text-[#1E3A8A] m-[30px] align-center">
           Daily Advisor AI
         </h1>
 
-        {/* Quick Actions */}
         <h2 className="text-[16px] font-[700] text-[#4B5563] leading-[20px] mb-[10px] ml-[10px]">
           Quick Actions
         </h2>
 
         <ul className="sidebar-style space-y-1 ml-[15px]">
-          <li className="flex items-center gap-[10px] text-[14px] font-[500] leading-[18px] text-[#252F40] cursor-pointer hover:text-[#1E3A8A] active:text-[#252F40] py-[4px]">
+          <li className={`${location.pathname==='/user' || location.pathname==='/dashboard'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-[14px] font-[500] leading-[18px] cursor-pointer py-[4px]`}
+            onClick={()=>loadPage('/user')}
+          >
             <div className="w-[10%] rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +132,9 @@ const Sidebar = () => {
             Dashboard
           </li>
 
-          <li className="flex items-center gap-[10px] text-[14px] leading-[20px] font-[500] text-[#252F40] cursor-pointer hover:text-[#1E3A8A] active:text-[#252F40]">
+          {/* <li className={`${location.pathname==='/user/daily-checkin'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-[14px] font-[500] leading-[18px] cursor-pointer py-[4px]`}
+            onClick={()=>loadPage('/user/daily-checkin')}
+          >
             <div className="w-[10%] rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -110,9 +152,11 @@ const Sidebar = () => {
               </svg>
             </div>
             Daily Check-in
-          </li>
+          </li> */}
 
-          <li className="flex items-center gap-[10px] text-[14px] leading-[20px] font-[500] text-[#252F40] cursor-pointer hover:text-[#1E3A8A] active:text-[#252F40] py-[4px]">
+          <li className={`${location.pathname==='/user/goals'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-[14px] font-[500] leading-[18px] cursor-pointer py-[4px]`}
+            onClick={()=>loadPage('/user/goals')}
+          >
             <div className="w-[10%] rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +181,9 @@ const Sidebar = () => {
             Goal Review
           </li>
 
-          <li className="flex items-center gap-[10px] text-[14px] leading-[20px] font-[500] text-[#252F40] cursor-pointer hover:text-[#1E3A8A] ">
+          {/* <li className={`${location.pathname==='/user/insights' || location.pathname==='/dashboard'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-[14px] font-[500] leading-[18px] cursor-pointer py-[4px]`}
+            onClick={()=> loadPage('/user/insights')}
+          >
             <div className="w-[10%] rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -155,13 +201,11 @@ const Sidebar = () => {
               </svg>
             </div>
             Get Insights
-          </li>
+          </li> */}
         </ul>
 
-        {/* Line Divider */}
         <div className=" sidebar-border border-t pt-[16px] mt-[16px]" />
 
-        {/* AI Conversation */}
         <div className="flex justify-between items-center mb-[10px] ml-[10px]">
           <h2 className="text-[16px] font-[700] text-[#4B5563] leading-[20px] mb-[10px] ">
             AI Conversation
@@ -169,13 +213,13 @@ const Sidebar = () => {
           <i className="fa-solid fa-chevron-up text-gray-500 text-[12px]"></i>
         </div>
 
-        {/* Conversation Items */}
         <ul className="sidebar-style space-y-1 ml-[12px]">
           {conversation.length > 0 &&
             conversation.map((con, i) => (
               <li
                 key={`conversation-${i}`}
-                className="flex items-center py-[4px] gap-[10px] text-[14px] leading-[20px] font-[500] text-[#252F40] cursor-pointer hover:text-[#1E3A8A] active:text-[#252F40]"
+                className={`${con.id==chatid?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center py-[4px] gap-[10px] text-[14px] leading-[20px] font-medium cursor-pointer`}
+                onClick={()=>loadChat(con.id)}
               >
                 <div className="w-[10%] rounded-full">
                   <svg
@@ -197,6 +241,11 @@ const Sidebar = () => {
               </li>
             ))}
         </ul>
+        <div className="flex justify-center pt-2">
+          <button type="button" className="w-[80%] rounded-md text-[#FFFFFF] text-xs font-normal bg-[#1E3A8A] px-2 py-1"
+            onClick={()=>loadPage('/goal/create')}
+          >New Goal</button>
+        </div>
         <div className="bottom-border-sty"></div>
       </div>
 
@@ -206,14 +255,18 @@ const Sidebar = () => {
           ref={menuRef}
           onClick={() => setOpen(!open)}
         >
-          <div className="rounded-full flex items-center justify-center">
-            <img src={user} alt="User Icon" className="w-4 h-4" />
-          </div>
-          <span
-            className="text-[14px] font-[400] text-[#404040] LEADING-[18PX]"            
-          >
-            Nancy
-          </span>
+          {userData!==null && 
+            <>
+              <div className="rounded-full flex items-center justify-center">
+                <img src={user} alt="User Icon" className="w-4 h-4" />
+              </div>
+              <span
+                className="text-[14px] font-[400] text-[#404040] LEADING-[18PX]"            
+              >
+                {userData.fname}
+              </span>
+            </>
+          }
 
           {open && (
             <div className="absolute 
@@ -221,7 +274,7 @@ const Sidebar = () => {
           mb-2
           w-48 
           bg-white border rounded-lg shadow-lg py-2 z-50">
-              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">
+              {/* <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">
                 My Profile
               </button>
               <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">
@@ -229,9 +282,9 @@ const Sidebar = () => {
               </button>
               <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">
                 Help
-              </button>
+              </button> */}
 
-              <hr className="my-2" />
+              {/* <hr className="my-2" /> */}
 
               <button className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 text-sm"
                 onClick={logout}
@@ -242,14 +295,7 @@ const Sidebar = () => {
           )}
         </div>
       </div>
-    </div>
-    // <div>
-    //   <h2>Daily Advisor AI</h2>
-    //   <h6>AI Conversation</h6>
-    //   {conversation.length>0 && conversation.map((val, i)=>(
-    //     <div key={`conversation_${i}`} onClick={()=>loadChat(val.id)}>{val.title}</div>
-    //   ))}
-    // </div>
+    </div>    
   );
 };
 

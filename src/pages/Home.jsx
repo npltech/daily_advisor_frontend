@@ -451,38 +451,38 @@ const Home = () => {
         </div>
       </section>
 
-      <footer class="w-full bg-[#1E3A8A] text-white py-[24px]">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center px-4">
-          <div class="w-full md:w-1/3 mb-6 md:mb-0">
-            <h2 class="text-[24px] font-[700]">DAILY ADVISOR AI</h2>
-            <p class="text-[14px] mt-2 leading-[18px] w-[275px]">
+      <footer className="w-full bg-[#1E3A8A] text-white py-[24px]">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+          <div className="w-full md:w-1/3 mb-6 md:mb-0">
+            <h2 className="text-[24px] font-[700]">DAILY ADVISOR AI</h2>
+            <p className="text-[14px] mt-2 leading-[18px] w-[275px]">
               DailyAdvisorAI — Your AI-powered daily companion for life and
               business growth.
             </p>
           </div>
 
-          <div class="flex gap-8 text-[14px] font-[400]">
-            <a href="#" class="">
+          <div className="flex gap-8 text-[14px] font-[400]">
+            <a href="#" className="">
               Home
             </a>
-            <a href="#" class="">
+            <a href="#" className="">
               About
             </a>
-            <a href="#" class="">
+            <a href="#" className="">
               Features
             </a>
-            <a href="#" class="">
+            <a href="#" className="">
               Pricing
             </a>
-            <a href="#" class="">
+            <a href="#" className="">
               How it Works
             </a>
-            <a href="#" class="">
+            <a href="#" className="">
               Contact
             </a>
           </div>
 
-          <div class="flex gap-4 mt-6 md:mt-0">
+          <div className="flex gap-4 mt-6 md:mt-0">
             <FaFacebookF />
             <FaInstagram />
             <FaTwitter />
@@ -490,12 +490,12 @@ const Home = () => {
           </div>
         </div>
 
-        <div class="w-full border-b-[1px] border-[#282828]/20 mt-6"></div>
+        <div className="w-full border-b-[1px] border-[#282828]/20 mt-6"></div>
 
-        <div class="max-w-6xl mx-auto text-center text-[10px] mt-4 flex justify-center gap-6">
+        <div className="max-w-6xl mx-auto text-center text-[10px] mt-4 flex justify-center gap-6">
           <span>© 2024. All rights reserved.</span>
-          <span class="cursor-pointer">Privacy Policy</span>
-          <span class="cursor-pointer">Terms of Service</span>
+          <span className="cursor-pointer">Privacy Policy</span>
+          <span className="cursor-pointer">Terms of Service</span>
         </div>
       </footer>
     </>

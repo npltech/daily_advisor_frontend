@@ -5,13 +5,15 @@ import { Outlet } from 'react-router-dom'
 
 const Userlayout = () => {
   return (
-    <div className='flex w-full flex-wrap'>
-        <div className='w-[100%] sm:w-[35%] lg:w-[25%] p-[20px] lg:p-[0px]'>
+    <div className='flex w-full flex-wrap h-screen overflow-hidden'>
+        <div className='w-[100%] sm:w-[35%] lg:w-[20%] p-[20px] lg:p-[0px] h-screen overflow-y-auto'>
             <Sidebar />
         </div>        
-        <div className='w-[100%] sm:w-[65%]  lg:w-[75%] '>
+        <div className='w-[100%] sm:w-[65%] lg:w-[80%]'>
             <Navbar1 />
-            <Outlet />
+            <div className="overflow-y-auto h-[calc(100vh-40px)]">
+              <Outlet />
+            </div>            
         </div>
     </div>
   )

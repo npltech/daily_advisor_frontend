@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import login from "../assets/images/login.png";
 import button12 from "../assets/images/Button.png";
 import { createMessage, getMessagesByConversation } from "../apis/messageApi";
@@ -7,6 +7,8 @@ import chatbotmessage from "../assets/images/chatbotmessage.png";
 import user from "../assets/images/user.png";
 import { useDispatch } from "react-redux";
 import { hideLoader } from "../store/slices/loaderSlice";
+import sendGif from "../assets/gifs/send_gif.gif";
+import Swal from "sweetalert2";
 
 const Chatbot = () => {
   const dispatch = useDispatch();
@@ -15,6 +17,8 @@ const Chatbot = () => {
   const [fetched, setFetched] = useState(false);
   const [searchParams] = useSearchParams();
   const chatid = searchParams.get("chatid");
+  const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     dispatch(hideLoader());
@@ -25,7 +29,13 @@ const Chatbot = () => {
     };
 
     fecthChats();
-  }, []);
+  }, [chatid]);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   const getMessages = async () => {
     await getMessagesByConversation(chatid)
@@ -39,99 +49,120 @@ const Chatbot = () => {
       });
   };
 
-  const sendQuery = async () => {
+  const sendQuery = async (e) => {
+    e.preventDefault();
+    setLoading(true);
     const postdata = {
-      message: query,
+      conversation_id: parseInt(chatid),
+      query: query,
     };
 
     await createMessage(postdata)
       .then((res) => {
         console.log(res);
+        res.data.forEach((val)=>{
+          setMessages((prevMessages) => [...prevMessages, val]);
+        });
+        setQuery("");
       })
-      .catch((err) => {});
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: err?.response?.data?.llmResponse?.message || err.response?.data?.message || err?.message || "Something went wrong!!",
+          text: '',
+          confirmButtonColor: "#3085d6",
+        });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
     <>
       {fetched && (
-        <div className="bg-[#ffffff] p-[10px] xl:p-[40px] my-[10px] xl:my-[40px] h-dvh flex flex-col justify-between">
+        <div className="bg-white pt-6 pb-2 px-4 h-full flex flex-col overflow-hidden">
           {messages.length === 0 && (
             <div className="chatbot w-full xl:w-[900px] bg-white text-center mx-auto">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-900 text-yellow-300 rounded-lg mb-4">
-                <div className="star-icon">
-                  <img src={login} alt="Login Icon" className="w-auto" />
-                </div>
+                <img src={login} alt="Login Icon" />
               </div>
 
-              <h1 className="text-[20px] lg:text-[24px] font-[700] text-[#0A0A0A] leading-[24px] lg:leading-[28px] py-[10px]">
+              <h1 className="text-[20px] lg:text-[24px] font-[700] text-[#0A0A0A] leading-[28px] py-2">
                 Hi Nancy!
               </h1>
+
               <p className="text-[#4B5563] font-[400] mt-2 text-[14px] leading-[18px] w-full lg:w-2/3 mx-auto">
-                I'm your Daily Advisor AI. Based on what you've shared, I'm here
-                to help you track progress, stay motivated, and achieve your
-                goals. What would you like to work on today?
+                I'm your Daily Advisor AI. What would you like to work on today?
               </p>
             </div>
           )}
-          <div>            
-          </div>
-          {messages.length > 0 && (
-            <section className="message-box1 w-full bg-[#ffffff] py-10 px-4 flex justify-center mt-[40px] overflow-y-[auto]">
-              <div className=" w-full space-y-8">
-                {messages.map((val, i) => (
-                  <div key={`message_${i}`}>
-                    {val.message_type==='aireply'?
-                    <div className="flex w-full items-start gap-[8px]">
-                      <img
-                        src={chatbotmessage}
-                        alt="Chatmessage Icon"
-                        className="w-4 h-4"
-                      />
 
-                      <div className="w-full lg:w-[80%] message-box bg-[#ffffff] border-[2px] border-[#E4E4E4] p-[24px] shadow-sm max-w-xl">
-                        <p className="text-[#0A0A0A] font-400 text-[14px] leading-[18px]">
-                          {val.message}
-                        </p>
+          <div className="flex-1 overflow-y-auto hide_scrollbar px-4 mt-6">
+            {messages.length > 0 && (
+              <div className="w-full space-y-8 max-w-[800px] mx-auto">
+                {messages.map((val, i) => (
+                  <div key={i}>
+                    {val.message_type === "aireply" ? (
+                      <div className="flex w-full items-start gap-2">
+                        <img
+                          src={chatbotmessage}
+                          alt="AI"
+                          className="w-4 h-4"
+                        />
+
+                        <div className="bg-white border border-[#E4E4E4] p-4 shadow-sm rounded-lg max-w-xl">
+                          <p className="text-[14px] text-[#0A0A0A]">
+                            {val.message}
+                          </p>
+                        </div>
                       </div>
-                    </div>                    
-                    :
-                    <div className="flex justify-end align-baseline gap-[8px]">
-                      <div className="user-content">
-                        <p className="text-[#0A0A0A] font-400 text-[14px] leading-[18px]">
-                          {val.message}
-                        </p>
+                    ) : (
+                      <div className="flex justify-end items-start gap-2">
+                        <div className="bg-[#EAF2FF] p-3 rounded-lg">
+                          <p className="text-[14px] text-[#0A0A0A]">
+                            {val.message}
+                          </p>
+                        </div>
+                        <img
+                          src={user}
+                          alt="You"
+                          className="w-[30px] h-[30px]"
+                        />                        
                       </div>
-                      <img
-                        src={user}
-                        alt="User Icon"
-                        className="w-[30px] h-[30px]"
-                      />
-                    </div>}
+                    )}
                   </div>
                 ))}
               </div>
-            </section>
-          )}
-          <form className="w-full xl:w-[900px] mx-auto">
-            <div className="form-group flex items-center gap-2 w-2/3 mx-auto border-[2px] border-[#E5F2FF] p-3 rounded-[16px] w-full h-[56px] text-[14px] leading-[18px] font-[500] mb-[20px]">
-              <input
-                type="text"
-                placeholder="What would you like to work on...?"
-                className="message border-none py-[10px] px-[12px] w-full"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-              <button
-                type="button"
-                className="btn btn-submit"
-                onClick={sendQuery}
-              >
-                <img src={button12} alt="Send" />
-              </button>
-            </div>
-          </form>
+            )}
+            <div ref={messagesEndRef}></div>
+          </div>
+
+          {/* 🟦 INPUT BOX — FIXED AT BOTTOM */}
+          <div className="w-full shrink-0 bg-white pt-4 pb-8">
+            <form className="w-full max-w-[800px] mx-auto" onSubmit={(e)=>sendQuery(e)}>
+              <div className="w-full flex items-center gap-3 border-2 border-[#E5F2FF] p-3 rounded-[16px] h-[56px]">
+                <input
+                  type="text"
+                  placeholder="What would you like to work on...?"
+                  className="flex-1 outline-none text-[14px]"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+
+                {!loading && <button type="button" onClick={(e)=>sendQuery(e)}>
+                  <img src={button12} alt="Send" />                  
+                </button>}
+                {loading && <img
+                  src={sendGif}
+                  alt="Send Gif"
+                  className="w-8 h-8 object-contain"
+                />}
+              </div>
+            </form>
+          </div>
         </div>
-      )}
+      )}      
     </>
   );
 };

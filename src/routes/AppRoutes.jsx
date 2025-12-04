@@ -38,8 +38,10 @@ const AppRoutes = () => {
       const decoded = jwtDecode(userToken);
       
       if (decoded?.setup_completed) {
-        if(location.pathname.startsWith('/goal') || location.pathname.startsWith('/login')){
-          // navigate("/user");
+        if(location.pathname.startsWith('/goal')){
+          // navigate("/user/create");
+        }else if(location.pathname.startsWith('/login') || location.pathname.startsWith('/signup') || location.pathname === '/'){
+          navigate("/user");
         }
       } else {
         fetchLastConversation();            
@@ -85,13 +87,11 @@ const AppRoutes = () => {
           <Userlayout />
         </ProtectedRoute>}>
         <Route path="" element={<Dashboard />} />
-        <Route path="welcome" element={<Welcome />} />
-        <Route path="onboarding" element={<Onboarding />} />        
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="chatbot" element={<Chatbot />} />
-        <Route path="creategoal" element={<CreateGoal />} />
-        <Route path="question" element={<AiQuestion />} />
-        <Route path="goals" element={<Goals />} />
+        {/* <Route path="welcome" element={<Welcome />} /> */}
+        <Route path="onboarding" element={<Onboarding />} />                
+        <Route path="chatbot" element={<Chatbot />} />                
+        <Route path="goals" element={<Goals />} />        
       </Route>
     </Routes>
   )

@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import score from "../assets/images/score.png";
 import goaldeshboard from "../assets/images/goaldeshboard.png";
 import insight from "../assets/images/insight.png";
-import todayscore from "../assets/images/todayscore.png";
 import scorestar from "../assets/images/scorestar.png";
 import {
   BarChart,
@@ -18,6 +17,8 @@ import {
 } from "recharts";
 import { BiMessageRoundedDots } from "react-icons/bi";
 import { AiFillApi, AiOutlineApi } from "react-icons/ai";
+import { useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode";
 
 const ProgressItem = ({ title, percent, color }) => {
   return (
@@ -83,6 +84,15 @@ const Deshboard = () => {
   const progressRef = useRef(null);
   const [value, setValue] = useState(0);
   const [percent, setPercent] = useState(87);
+  const [userData, setUserData] = useState(null);
+  const userToken = useSelector((state) => state.auth.token);
+
+  useEffect(()=>{
+    if(userToken){
+      const decoded = jwtDecode(userToken);
+      setUserData(decoded);
+    }
+  }, [userToken])
 
   useEffect(() => {
     const circle = progressRef.current;
@@ -116,7 +126,7 @@ const Deshboard = () => {
     <div className="w-full bg-[#F5F7FA] p-[40px]">
       {/* Header */}
       <h1 className="text-[20px] md:text-[24px] font-[700] leading-[24px] md:leading-[28px] text-[#0A0A0A]">
-        Hi Nancy
+        {userData!==null && userData.fname}
       </h1>
       <p className="text-[#4B5563] font-[400] text-[14px] leading-[18px] mt-[10px] mb-[20px]">
         Here's your progress overview for today
