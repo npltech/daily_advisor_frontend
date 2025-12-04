@@ -17,8 +17,9 @@ import {
 } from "recharts";
 import { BiMessageRoundedDots } from "react-icons/bi";
 import { AiFillApi, AiOutlineApi } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
+import { hideLoader } from "../store/slices/loaderSlice";
 
 const ProgressItem = ({ title, percent, color }) => {
   return (
@@ -81,6 +82,7 @@ const habitdata = [
 ];
 
 const Deshboard = () => {
+  const dispatch = useDispatch();
   const progressRef = useRef(null);
   const [value, setValue] = useState(0);
   const [percent, setPercent] = useState(87);
@@ -88,6 +90,7 @@ const Deshboard = () => {
   const userToken = useSelector((state) => state.auth.token);
 
   useEffect(()=>{
+    dispatch(hideLoader());
     if(userToken){
       const decoded = jwtDecode(userToken);
       setUserData(decoded);
