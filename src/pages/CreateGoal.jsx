@@ -37,7 +37,7 @@ const CreateGoal = () => {
     .catch((err)=>{
       Swal.fire({
         icon: "error",
-        title: err?.response?.data?.llmResponse?.message || err?.message || "Something went wrong!!",
+        title: err?.response?.data?.llmResponse?.details?.message || err?.response?.data?.llmResponse?.detail?.message || err?.response?.data?.llmResponse?.message || err?.message || "Something went wrong!!",
         text: '',
         confirmButtonColor: "#3085d6",
       });
