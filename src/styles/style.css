@@ -36,10 +36,8 @@ section.How-it-works.py-20.bg-\[\#fff\] {
 }
 
 .logo {
-    color: #fff;
     font-weight: 700;
     height: auto;
-    /* background: var(--primary-color); */
     font-size: 24px;
     line-height: 28px;
 }
@@ -49,16 +47,11 @@ section.How-it-works.py-20.bg-\[\#fff\] {
   gap: 25px;
 }
 
-.nav-links a {
+.nav-links{
   text-decoration: none;
-  color: var(--primary-color);
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
   transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: var(--primary-color);
 }
 
 .contact-btn {
@@ -86,10 +79,6 @@ section.How-it-works.py-20.bg-\[\#fff\] {
 }
 
 .banner .banner-content {
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
   color: white;
   text-align: center;
   max-width: 724px;
@@ -107,7 +96,7 @@ section.How-it-works.py-20.bg-\[\#fff\] {
     font-size: 14px;
     line-height: 18px;
     font-weight: 400;
-    padding: 24px 0;
+    padding: 12px 0;
 }
 /* button.first {
     background: #ffffff;
@@ -140,10 +129,8 @@ button.second {
     justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 5px;
-    background: #1A2C4E80;
+    gap: 8px;
     padding: 10px 16px;
-    border-radius: 50px;
     width: fit-content;
     margin: 0 auto;
 }
@@ -251,28 +238,12 @@ ul.about-list {
     align-items: flex-start;
     text-align: left;
 }
-/* .bg-white.p-6.rounded-2xl.shadow-md.flex.flex-col.justify-between {
-    width: 40%;
-} */
-/* .features_content {
-    padding-left: 40px;
-    padding-top: 40px;
-} */
+
 h3.text-xl.text-\[\#FFFFFF\].font-700.py-8 {
     font-size: 32px;
     line-height: 36px;
 }
-p.text-daily {
-    font-size: 14px;
-    line-height: 18px;
-    color: #D1D5DC;
-    font-weight: 400;
-    max-width: 61%;
-    width: 100%;
-}
-.features_img {
-    padding: 40px 0;
-}
+
 .md\:col-span-2.bg-\[url\(\'\/src\/assets\/daily\.png\'\)\].bg-no-repeat.bg-cover.bg-top.flex.text-white.p-6.rounded-2xl.relative {
     display: flex;
     align-items: flex-start;
@@ -310,7 +281,6 @@ p.text-daily {
     max-width: 1440px;
     margin: 0 auto;
     gap: 20px;
-    padding-top: 40px;
     background: #FFF3D7;
     border-radius: 24px;
 }
@@ -539,10 +509,9 @@ ul.menu-item {
     width: 30px;
 }
 .star-icon {
-    background: #102768;
     width: fit-content;
     border-radius: 10px;
-    padding: 8px 12px;
+    padding: 8px;
 }
 h1.welcome-heading {
     font-size: 24px;
@@ -580,9 +549,7 @@ h1.welcome-heading {
     background-color: #fff;
     border-radius: 10px 0px 0px 10px;
 }
-/* .right-section {
-        gap: 24px;
-} */
+
  .left-cont {
     margin-top: 40px;
 }
@@ -926,9 +893,6 @@ h1.welcome-heading {
 .logo {
     font-size: 14px;
 }
-p.text-daily {
-    max-width: unset;
-}
 }
 
 .goal_background {
@@ -939,4 +903,11 @@ p.text-daily {
 
 .hide_scrollbar{
     scrollbar-width: none;
+}
+
+.flex_item_center{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
 }

@@ -26,38 +26,61 @@ import bgImage from "../assets/images/banner.png";
 import abouticon from "../assets/images/abouticon.png";
 import bannertop from "../assets/images/bannertop.png";
 import { RiCheckboxCircleLine } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const navigateLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <>
       <Navbar />
       {/* Banner section */}
-      <section
-        className="banner z-1 bg-[length:100%_auto] bg-no-repeat bg-top-center"
-        style={{ backgroundImage: `url(${bgImage})` }}
-      >
-        <div className="banner-top-content w-full lg:pt-[200px] pt-[40px]">
-          <div className="subheading-top">
-            <img src={bannertop} alt="Banner Top" />
-            <h3 className="">Personalized AI Coach</h3>
+      <section className="bg-[#FFFFFF] p-4">
+        <div
+          className="banner z-1 h-[800px] bg-contain bg-no-repeat bg-top-center"
+          style={{
+            backgroundImage: `url(${bgImage})`,
+            backgroundSize: "100% 100%",
+          }}
+        >
+          <div className="banner-top-content w-full lg:pt-[140px] pt-[40px]">
+            <div className="subheading-top bg-[#1E3A8A66] rounded-sm">
+              <img src={bannertop} alt="Banner Top" />
+              <h3 className="">Personalized AI Coach</h3>
+            </div>
           </div>
-        </div>
-        <div className="banner-content">
-          <h2 className="">Your Daily AI Advisor for Life & Business</h2>
-          <p>
-            Beyond generic AI. Get structured onboarding, personalized coaching,
-            and goal-driven insights tailored to your unique journey.
-          </p>
-          <button className="first">Get Started</button>
-          <button className="second">REQUEST DEMO</button>
-        </div>
-        <div className="banner-image">
-          <img src={dashboard} alt="Banner Image" />
+          <div className="banner-content">
+            <h2 className="">Your Daily AI Advisor for Life & Business</h2>
+            <p className="text-[#D1D5DC]">
+              Beyond generic AI. Get structured onboarding, personalized
+              coaching, and goal-driven insights tailored to your unique
+              journey.
+            </p>
+            <div className="pt-4 flex justify-center gap-4">
+              <button
+                type="button"
+                className="px-4 py-2 bg-[#FFFFFF] text-[#1E3A8A] text-sm font-medium rounded-md"
+                onClick={navigateLogin}
+              >
+                GET STARTED
+              </button>
+              <button className="px-4 py-2 bg-[#1E3A8A] text-[#FFFFFF] text-sm font-medium rounded-md">
+                REQUEST DEMO
+              </button>
+            </div>
+          </div>
+          <div className="banner-image">
+            <img src={dashboard} alt="Banner Image" />
+          </div>
         </div>
       </section>
 
       {/* About Us Section */}
-      <section className="about-us px-[20px] lg:px-[20px]">
+      <section className="about-us px-[20px] pt-[520px]">
         <div className="container">
           <div className="flex w-full flex-wrap md:flex-nowrap ">
             <div className="about-us-content flex flex-col w-full md:w-1/2 mb-[20px] md:mb-0">
@@ -113,117 +136,120 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="Features lg:py-[20px] bg-[url('/src/assets/images/features1.png')] bg-no-repeat bg-cover bg-top py-[16px] px-6">
-        <div className="container">
-          <div className="features-bg-img ">
-            {/* Heading */}
-            <div className="text-center mb-12">
-              <h2 className="text-[24px] md:text-[32px] font-bold text-[#0A0A0A]-700">
-                FEATURES
-              </h2>
-              <p className="text-[14px] text-[#4B5563] mt-2">
-                A complete ecosystem for personal and professional growth,
-                designed to fit seamlessly into your daily routine.
-              </p>
-            </div>
+      <section className="bg-[#FFFFFF] p-4">
+        <div className="Features bg-[url('/src/assets/images/features1.png')] bg-no-repeat bg-cover bg-top mt-[100px] pb-[16px] px-6">
+          <div className="container">
+            <div className="features-bg-img ">
+              {/* Heading */}
+              <div className="text-center mb-12 pt-[16px]">
+                <h2 className="text-[32px] font-bold text-[#0A0A0A]">
+                  FEATURES
+                </h2>
+                <p className="text-sm font-normal text-[#4B5563]">
+                  A complete ecosystem for personal and professional growth,
+                  designed to fit seamlessly into your daily routine.
+                </p>
+              </div>
 
-            {/* Features Grid */}
-            <div className="daily-check flex flex-wrap md:flex-nowrap w-full gap-[20px] mb-[20px]">
-              {/* Daily Check-ins */}
-              <div className="w-full md:w-2/3 bg-[url('/src/assets/images/daily.png')] bg-no-repeat bg-cover bg-top flex text-white p-6 rounded-2xl relative">
-                <div className="features_content pt-0 pb-[10px] md:pt-[40px] md:pb-[40px]">
-                  <h3 className="text-[24px] md:text-[32px] text-[#FFFFFF] font-700 py-[20px] md:py-8">
-                    Daily Check-ins
-                  </h3>
-                  <p className="text-daily text-[#FFFFFF]">
-                    Start each day with personalized prompts and reflections.
-                    Build consistency and self-awareness through guided morning
-                    and evening routines.
-                  </p>
-                </div>
-                <div className="features_img">
-                  <img src={browser} alt="Features Image" />
-                </div>
-              </div>
-              {/* Habit Tracking */}
-              <div className="bg-white w-full md:w-1/3 p-6 rounded-2xl shadow-md flex flex-col justify-between">
-                <div>
-                  <h3 className="text-[24px] md:text-[32px] font-bold text-[#171717] mb-3">
-                    Habit Tracking
-                  </h3>
-                  <p className="text-[14px] text-[#4B5563]-400">
-                    DailyAdvisor AI helps you build and maintain powerful habits
-                    that align with your personal and professional goals.
-                  </p>
-                </div>
-                <img src={habit} alt="Habit Image" />
-              </div>
-            </div>
-            {/* Progress Analytics */}
-            <div className="daily-check flex flex-wrap md:flex-nowrap w-full gap-[20px] mb-[20px]">
-              <div className=" progress-a  w-full md:w-1/3 bg-white p-6 rounded-2xl shadow-md flex flex-col justify-between">
-                <div>
-                  <h3 className="text-[24px] md:text-[32px] font-bold text-[#171717] mb-3">
-                    Progress Analytics
-                  </h3>
-                  <p className="text-[14px] text-[#4B5563]-400">
-                    DailyAdvisorAI goes beyond generic advice — it understands
-                    your goals, analyzes your behavior, and gives you tailored
-                    recommendations that grow with you.
-                  </p>
-                </div>
-                <img src={percent} alt="Progress Image" />
-              </div>
-              {/* AI Guidance */}
-              <div className="daily-check2 w-full md:w-1/3 flex flex-col">
-                <div className="ai-guidence bg-white rounded-2xl shadow-md flex flex-row flex-wrap md:flex-nowrap">
-                  <div className="ai-guidence-content w-full md:w-[50%] pr-[0%] md:pr-[10%]">
-                    <h3 className="text-[24px] md:text-[32px] font-bold text-[#171717] mb-3">
-                      AI Guidance
+              {/* Features Grid */}
+              <div className="daily-check flex flex-wrap md:flex-nowrap w-full gap-[20px] mb-[20px]">
+                {/* Daily Check-ins */}
+                <div className="w-full bg-[url('/src/assets/images/daily.png')] bg-no-repeat bg-cover bg-top flex text-white py-6 pl-6 rounded-2xl relative">
+                  <div className="w-[50%] px-4 py-4">
+                    <h3 className="text-[32px] text-[#FFFFFF] font-bold">
+                      Daily Check-ins
                     </h3>
-                    <p className="text-[14px] text-[#4B5563] max-w-lg mb-10">
+                    <p className="text-[#D1D5DC] text-sm font-normal pr-[40px]">
+                      Start each day with personalized prompts and reflections.
+                      Build consistency and self-awareness through guided
+                      morning and evening routines.
+                    </p>
+                  </div>
+                  <div className="w-[50%] py-4 pr-[1.5px]">
+                    <img src={browser} alt="Features Image" className="w-full" />
+                  </div>
+                </div>
+                
+                <div className="bg-white w-full md:w-1/3 pt-6 px-6 rounded-2xl shadow-md flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-[32px] font-bold text-[#0A0A0A]">
+                      Habit Tracking
+                    </h3>
+                    <p className="text-[14px] text-[#4B5563] font-normal">
+                      DailyAdvisor AI helps you build and maintain powerful
+                      habits that align with your personal and professional
+                      goals.
+                    </p>
+                  </div>
+                  <img src={habit} alt="Habit Image" />
+                </div>
+              </div>
+              {/* Progress Analytics */}
+              <div className="daily-check flex flex-wrap md:flex-nowrap w-full gap-[20px] mb-[20px]">
+                <div className=" progress-a  w-full md:w-1/3 bg-white p-6 rounded-2xl shadow-md flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-[24px] md:text-[32px] font-bold text-[#171717] mb-3">
+                      Progress Analytics
+                    </h3>
+                    <p className="text-[14px] text-[#4B5563]-400">
                       DailyAdvisorAI goes beyond generic advice — it understands
                       your goals, analyzes your behavior, and gives you tailored
                       recommendations that grow with you.
                     </p>
                   </div>
-                  <div className="Product W-100% md:w-[50%]">
-                    <div className="bg-white rounded-xl p-4 shadow-lg">
-                      <img src={icon1} alt="Product" />
-                      <p className="tip font-semibold text-[#171717] text-[14px] mb-1">
-                        Productivity Tip
-                      </p>
-                      <p className="focus text-[#4B5563] text-[13px] leading-snug">
-                        Focus on deep work between 9–11 AM for best results
-                      </p>
-                    </div>
-                  </div>
+                  <img src={percent} alt="Progress Image" />
                 </div>
-                <div className="Growth flex flex-row flex-wrap md:flex-nowrap gap-[20px] px-[20px]">
-                  <div className="w-full md:w-[26%]"></div>
-                  <div className="Growthone w-[45%] md:w-[37%]">
-                    <div className="growth-bottom bg-white rounded-xl p-4 shadow-lg">
-                      <img src={icon2} alt="Product1" />
-                      <p className="gro font-semibold text-[#171717] text-[14px] mb-1">
-                        Growth
-                      </p>
-                      <br></br>
-                      <p className="grow text-[#4B5563] text-[13px] leading-snug">
-                        You're 23% more consistent this month!
+                {/* AI Guidance */}
+                <div className="daily-check2 w-full md:w-1/3 flex flex-col">
+                  <div className="ai-guidence bg-white rounded-2xl shadow-md flex flex-row flex-wrap md:flex-nowrap">
+                    <div className="ai-guidence-content w-full md:w-[50%] pr-[0%] md:pr-[10%]">
+                      <h3 className="text-[24px] md:text-[32px] font-bold text-[#171717] mb-3">
+                        AI Guidance
+                      </h3>
+                      <p className="text-[14px] text-[#4B5563] max-w-lg mb-10">
+                        DailyAdvisorAI goes beyond generic advice — it
+                        understands your goals, analyzes your behavior, and
+                        gives you tailored recommendations that grow with you.
                       </p>
                     </div>
+                    <div className="Product W-100% md:w-[50%]">
+                      <div className="bg-white rounded-xl p-4 shadow-lg">
+                        <img src={icon1} alt="Product" />
+                        <p className="tip font-semibold text-[#171717] text-[14px] mb-1">
+                          Productivity Tip
+                        </p>
+                        <p className="focus text-[#4B5563] text-[13px] leading-snug">
+                          Focus on deep work between 9–11 AM for best results
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="Smart w-[45%] md:w-[37%]">
-                    <div className="bg-white rounded-xl p-4 shadow-lg">
-                      <img src={icon} alt="Product" />
-                      <p className="sma font-semibold text-[#171717] text-[14px] mb-1">
-                        {" "}
-                        Smart Reminder
-                      </p>
-                      <br></br>
-                      <p className="smar text-[#4B5563] text-[13px] leading-snug">
-                        Time for your afternoon reflection. Ready?
-                      </p>
+                  <div className="Growth flex flex-row flex-wrap md:flex-nowrap gap-[20px] px-[20px]">
+                    <div className="w-full md:w-[26%]"></div>
+                    <div className="Growthone w-[45%] md:w-[37%]">
+                      <div className="growth-bottom bg-white rounded-xl p-4 shadow-lg">
+                        <img src={icon2} alt="Product1" />
+                        <p className="gro font-semibold text-[#171717] text-[14px] mb-1">
+                          Growth
+                        </p>
+                        <br></br>
+                        <p className="grow text-[#4B5563] text-[13px] leading-snug">
+                          You're 23% more consistent this month!
+                        </p>
+                      </div>
+                    </div>
+                    <div className="Smart w-[45%] md:w-[37%]">
+                      <div className="bg-white rounded-xl p-4 shadow-lg">
+                        <img src={icon} alt="Product" />
+                        <p className="sma font-semibold text-[#171717] text-[14px] mb-1">
+                          {" "}
+                          Smart Reminder
+                        </p>
+                        <br></br>
+                        <p className="smar text-[#4B5563] text-[13px] leading-snug">
+                          Time for your afternoon reflection. Ready?
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>

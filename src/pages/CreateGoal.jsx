@@ -48,7 +48,7 @@ const CreateGoal = () => {
   }
 
   return (
-    <div className="h-full flex items-center justify-center py-[40px] goal_background">
+    <div className="h-screen flex items-center justify-center py-[40px] goal_background">
       <div className="w-full lg:w-[900px] shadow-sm px-[20px]">
         {/* Icon */}
         <div className="mt-10 mb-[10px] flex justify-center">

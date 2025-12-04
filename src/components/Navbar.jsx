@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "../styles/style.css";
 import { useNavigate } from "react-router-dom";
@@ -6,16 +6,30 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 5) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navigateLogin = () => {
     navigate("/login");
   };
 
   return (
-    <header className="Navbar fixed top-0 w-full z-10">
+    <header className={`Navbar fixed top-0 w-full z-10 pt-3 ${scrolled?'bg-[#FFFFFF]':''}`}>
       <div className="container">
-        <div className="flex p-[20px] justify-between w-full">
-          <div className="w-[20%] logo">DAILY ADVISOR AI</div>
+        <div className="flex items-center p-[20px] justify-between w-full">
+          <div className={`w-[20%] logo ${scrolled?'text-[#1E3A8A]':'text-[#FFFFFF]'}`}>DAILY ADVISOR AI</div>
           {/* Mobile Toggle Button */}
           <button
             className="lg:hidden block text-[24px] text-[#FFFFFF]"
@@ -26,18 +40,18 @@ const Navbar = () => {
 
           <div className="w-[60%] menu hidden lg:flex justify-center">
             <nav className="nav-links flex gap-[10px]">
-              <a href="#">ABOUT</a>
-              <a href="#">FEATURES</a>
-              <a href="#">HOW IT WORKS</a>
-              <a href="#">PRICING</a>
-              <a href="#">Contact</a>
+              <p className="text-[#0A0A0A] cursor-pointer">ABOUT</p>
+              <p className="text-[#0A0A0A] cursor-pointer">FEATURES</p>
+              <p className="text-[#0A0A0A] cursor-pointer">HOW IT WORKS</p>
+              <p className="text-[#0A0A0A] cursor-pointer">PRICING</p>
+              <p className="text-[#0A0A0A] cursor-pointer">CONTACT</p>
             </nav>
           </div>
 
           <div className="w-[20%] text-right hidden lg:block">
             <button
               type="button"
-              className="mt-2 px-2 py-1 rounded-sm shadow-sm hover:border bg-[#FFFFFF]"
+              className={`px-6 py-2 rounded-md shadow-sm text-sm font-bold text-[#1E3A8A] ${scrolled?'text-[#FFFFFF] bg-[#1E3A8A]':'text-[#1E3A8A] bg-[#FFFFFF]'}`}
               onClick={navigateLogin}
             >
               Login

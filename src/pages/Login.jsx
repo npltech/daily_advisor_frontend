@@ -62,52 +62,55 @@ function Login() {
           confirmButtonColor: "#3085d6",
         });
       });
-  };  
+  };
 
   return (
-    <div className="w-full min-h-screen p-[20px] md:p-[40px] bg-[#FFFFFF] flex items-center justify-center">
-      <div className="w-full flex min-h-screen items-center bg-gray-50 login_main">
+    <div className="w-full p-[20px] bg-[#FFFFFF] flex items-center justify-center mt-[120px] md:mt-[60px]">
+      <div className="w-full flex items-center login_main">
         <div className="box-style flex w-full flex-wrap rounded-[30px] shadow-lg bg-white">
           {/* Left Section */}
-          <div className="shape-one w-full md:w-1/2  bg-[url('/src/assets/images/shape.png')] bg-no-repeat bg-auto bg-right-top bg-[#1E3A8A] text-[#DBEAFE]  flex flex-col justify-center  login-left gap-[10px] text-[14px] leading-[18px]">
-            <div className="star-icon">
-              <img src={login} alt="Login Icon" className="w-auto" />
-            </div>
-            <h1 className="welcome-heading text-[20px] sm:text-[24px] font-semibold mb-2">
-              Welcome to Daily Advisor AI
-            </h1>
-            <p className="wel-para text-[14px] font-[400] text-[#DBEAFE]-200 mb-6">
-              Your personalized AI coach that understands YOUR goals, YOUR
-              journey, and YOUR growth.
-            </p>
+          <div className="hidden md:block w-full md:w-1/2 flex">
+            <div className="flex_item_center w-full shape-one bg-[url('/src/assets/images/shape.png')] bg-no-repeat bg-auto bg-right-top bg-[#1E3A8A] text-[#DBEAFE] login-left gap-[10px] text-[14px] leading-[18px]">
+              <div className="star-icon mb-4 bg-[#102768]">
+                <img src={login} alt="Login Icon" className="w-auto" />
+              </div>
+              <h1 className="welcome-heading text-[#FFFFFF] text-[20px] sm:text-[24px] font-semibold mb-2">
+                Welcome to Daily Advisor AI
+              </h1>
+              <p className="wel-para text-[14px] font-[400] text-[#DBEAFE]-200 mb-6">
+                Your personalized AI coach that understands YOUR goals, YOUR
+                journey, and YOUR growth.
+              </p>
 
-            <ul className="text-sm space-y-3">
-              <li className="flex items-center gap-2">
-                <div className="listicon">
-                  <img src={withbg} alt="Welcome Icon" />
-                </div>
-                Structured onboarding tailored to you
-              </li>
-              <li className="flex items-center gap-2">
-                <div className="listicon">
-                  <img src={withbg} alt="Welcome Icon" />
-                </div>
-                Goal-driven daily insights
-              </li>
-              <li className="flex items-center gap-2">
-                <div className="listicon">
-                  <img src={withbg} alt="Welcome Icon" />
-                </div>
-                Continuous learning and adaptation
-              </li>
-            </ul>
+              <ul className="text-sm space-y-3">
+                <li className="flex items-center gap-2 text-[#D1D5DC]">
+                  <div className="listicon">
+                    <img src={withbg} alt="Welcome Icon" />
+                  </div>
+                  Structured onboarding tailored to you
+                </li>
+                <li className="flex items-center gap-2 text-[#D1D5DC]">
+                  <div className="listicon">
+                    <img src={withbg} alt="Welcome Icon" />
+                  </div>
+                  Goal-driven daily insights
+                </li>
+                <li className="flex items-center gap-2 text-[#D1D5DC]">
+                  <div className="listicon">
+                    <img src={withbg} alt="Welcome Icon" />
+                  </div>
+                  Continuous learning and adaptation
+                </li>
+              </ul>
+            </div>
           </div>
 
-          {/* Right Section */}
-          <div className="right-section w-full md:w-1/2 p-[20px] md:p-[40px] flex flex-col justify-center login_right bg-[#fff]">
-            <div className="flex mb-8 space-x-2 px-[36px] pb-2">
-              <button className="btnone bg-[#F8FAFC] rounded-sm shadow-[0px_0px_8px_0px_rgba(18,18,18,0.1)]">Login</button>
-              <Link to="/signup" className="btnone rounded-sm">
+          <div className="w-full md:w-1/2 p-[20px] md:p-[40px] login_right bg-[#fff]">
+            <div className="flex mb-8 space-x-2 px-[36px] pb-2 mt-[30px]">
+              <button className="btnone bg-[#DEE6FF] text-[#1E3A8A] text-xs font-bold rounded-md shadow-[0px_0px_8px_0px_rgba(18,18,18,0.1)]">
+                Login
+              </button>
+              <Link to="/signup" className="btnone rounded-md">
                 Sign Up
               </Link>
             </div>
@@ -165,23 +168,6 @@ function Login() {
                 Login
               </button>
             </form>
-
-            {/* <div className="continue my-[20px] flex items-center justify-center text-[#E4E4E4]-500 text-sm">
-            <span className="border-t border-[#E4E4E4]-100 w-1/3"></span>
-            <span className="mx-2 text-[10px] font-[400] leading-[14px]">or continue with</span>
-            <span className="border-t border-[#E4E4E4]-100 w-1/3"></span>
-          </div> */}
-
-            {/* <div className="bottom-social flex space-x-3">
-            <button className="social-btn w-1/2 border rounded-[12px] py-2 flex items-center justify-center gap-[10px] text-[12px] text-[#0A0A0A]">
-              <img src={google} alt="Google Icon" />
-              Google
-            </button>
-            <button className="social-btn w-1/2 border rounded-[12px] py-2 flex items-center justify-center gap-[10px] text-[12px] text-[#0A0A0A]">
-              <img src={apple} alt="Apple Icon" />
-              Apple
-            </button>
-          </div> */}
           </div>
         </div>
       </div>
