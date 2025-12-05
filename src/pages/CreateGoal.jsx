@@ -6,22 +6,32 @@ import { CiCalendar } from "react-icons/ci";
 import { IoCalendarClearOutline } from "react-icons/io5";
 import { CgMediaLive } from "react-icons/cg";
 import { FaArrowTrendUp } from "react-icons/fa6";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showLoader, hideLoader } from "../store/slices/loaderSlice";
 import { createConversation } from "../apis/conversationApi";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import sendGif from "../assets/gifs/send_gif.gif";
+import { jwtDecode } from "jwt-decode";
 
 const CreateGoal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
+  const [setupCompleted, setSetupCompleted] = useState(false);
+  const userToken = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     dispatch(hideLoader());
   }, []);
+
+  useEffect(()=>{
+    if(userToken){
+      const decoded = jwtDecode(userToken);
+      setSetupCompleted(decoded?.setup_completed);
+    }
+  }, [userToken])
 
   const sendQuery = async (e) => {
     e.preventDefault();
@@ -32,7 +42,6 @@ const CreateGoal = () => {
 
     await createConversation(postdata)
       .then((res) => {
-        console.log(res);
         navigate("/goal/questions");
       })
       .catch((err) => {
@@ -53,9 +62,13 @@ const CreateGoal = () => {
       });
   };
 
+  const navigatePage = (page)=>{
+    setupCompleted?navigate(`/user/${page}`):'';
+  }
+
   return (
-    <div className="h-screen flex items-center justify-center py-[40px] px-[20px] goal_background">
-      <div className="w-full lg:w-[900px] shadow-sm px-[20px]">
+    <div className="h-full flex items-center justify-center py-[40px] px-[20px] goal_background">
+      <div className="h-full w-full lg:w-[900px] px-[20px]">
         {/* Icon */}
         <div className="mt-10 mb-[10px] flex justify-center">
           <img src={creategoal} alt="Create Icon" className="w-16 h-16" />
@@ -119,31 +132,38 @@ const CreateGoal = () => {
         <div className="w-full flex justify-center mt-[32px]">
           <div className="w-full flex flex-row lg:justify-between flex-wrap items-center gap-[4%] lg:gap-[1.33%]">
             {/* Card 1 */}
-            <div className="border-style-goal bg-[#ffffff] w-[100%] sm:w-[48%] lg:w-[32%] p-[20px] mb-[10px] rounded-[16px] border-[1px] border-[#ffffff] shadow-md hover:shadow-lg transition cursor-pointer">
-              <div className="icon-styleone bg-gradient-to-r from-[#2B7FFF] to-[#155DFC]">
+            <div className={`border-style-goal bg-[#ffffff] w-[100%] sm:w-[48%] lg:w-[32%] p-[20px] mb-[10px] rounded-[16px] border-[1px] border-[#ffffff] shadow-md hover:shadow-lg transition ${setupCompleted?'cursor-pointer':''}`}
+              onClick={(e)=>navigatePage('checkin')}
+            >
+              <div className={`icon-styleone bg-gradient-to-r ${setupCompleted?'from-[#2B7FFF] to-[#155DFC]':'from-[#4B5563] to-[#212933]'}`}>
                 <IoCalendarClearOutline />
               </div>
 
-              <p className="text-[#0A0A0A] font-[400] mt-[10px] text-[14px] leading-[18px]">
+              <p className={`${setupCompleted?'text-[#0A0A0A]':'text-[#4B5563]'} font-[400] mt-[10px] text-[14px] leading-[18px]`}>
                 Start my daily check-in
               </p>
             </div>
 
             {/* Card 2 */}
-            <div className="border-style-goal bg-[#ffffff] w-[100%] sm:w-[48%] lg:w-[32%] p-[20px] mb-[10px] rounded-[16px] border-[1px] border-[#ffffff] shadow-md hover:shadow-lg transition cursor-pointer">
-              <div className="icon-styleone bg-gradient-to-r from-[#AD46FF] to-[#9810FA]">
+            <div className={`border-style-goal bg-[#ffffff] w-[100%] sm:w-[48%] lg:w-[32%] p-[20px] mb-[10px] rounded-[16px] border-[1px] border-[#ffffff] shadow-md hover:shadow-lg transition ${setupCompleted?'cursor-pointer':''}`}
+              onClick={(e)=>navigatePage('goals')}
+            >
+              <div className={`icon-styleone bg-gradient-to-r ${setupCompleted?'from-[#AD46FF] to-[#9810FA]':'from-[#4B5563] to-[#212933]'}`}>
                 <CgMediaLive />
               </div>
-              <p className="text-[#0A0A0A] font-[400] mt-[10px] text-[14px] leading-[18px]">
+              <p className={`${setupCompleted?'text-[#0A0A0A]':'text-[#4B5563]'} font-[400] mt-[10px] text-[14px] leading-[18px]`}>
                 Review my goals for this week
               </p>
             </div>
 
-            <div className="border-style-goal bg-[#ffffff] w-[100%] sm:w-[48%] lg:w-[32%] p-[20px] mb-[10px] rounded-[16px] border-[1px] border-[#ffffff] shadow-md hover:shadow-lg transition cursor-pointer">
-              <div className="icon-styleone bg-gradient-to-r from-[#FF6900] to-[#F4AC36]">
+            <div
+              className={`border-style-goal bg-[#ffffff] w-[100%] sm:w-[48%] lg:w-[32%] p-[20px] mb-[10px] rounded-[16px] border-[1px] border-[#ffffff] shadow-md hover:shadow-lg transition ${setupCompleted?'cursor-pointer':''}`}
+              onClick={(e)=>navigatePage('insights')}
+            >
+              <div className={`icon-styleone bg-gradient-to-r ${setupCompleted?'from-[#FF6900] to-[#F4AC36]':'from-[#4B5563] to-[#212933]'}`}>
                 <FaArrowTrendUp />
               </div>
-              <p className="text-[#0A0A0A] font-[400] mt-[10px] text-[14px] leading-[18px]">
+              <p className={`${setupCompleted?'text-[#0A0A0A]':'text-[#4B5563]'} font-[400] mt-[10px] text-[14px] leading-[18px]`}>
                 Show my progress insights
               </p>
             </div>

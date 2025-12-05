@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import creategoal from "../assets/images/creategoal.png";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showLoader, hideLoader } from "../store/slices/loaderSlice";
 import { lastConversation } from "../apis/conversationApi";
 import {
@@ -12,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../store/slices/authSlice";
 import Swal from "sweetalert2";
+import { jwtDecode } from "jwt-decode";
 
 const AiQuestion = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,10 @@ const AiQuestion = () => {
     businessDescription: "",
   });
   const [conversation, setConversation] = useState(null);
+  const [goNext, setGoNext] = useState(false);
   const [questionForm, setQuestionForm] = useState({});
+  const [setupCompleted, setSetupCompleted] = useState(false);
+  const userToken = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     dispatch(showLoader());
@@ -37,6 +41,13 @@ const AiQuestion = () => {
     };
     getQuestions();
   }, []);
+
+  useEffect(()=>{
+    if(userToken){
+      const decoded = jwtDecode(userToken);
+      setSetupCompleted(decoded?.setup_completed);
+    }
+  }, [userToken])
 
   const fetchLastConversation = async () => {
     await lastConversation()
@@ -73,7 +84,7 @@ const AiQuestion = () => {
     const { name, value } = e.target;
 
     setFormData({ ...formData, [name]: value });
-    setQuestionForm({ ...questionForm, [name]: value });
+    setQuestionForm({ ...questionForm, [name]: value });    
   };
 
   const handleMultiOptions = (questionId, option) => {
@@ -87,8 +98,21 @@ const AiQuestion = () => {
     setQuestionForm({
       ...questionForm,
       [questionId]: updatedOptions,
-    });
+    });    
   };
+
+  useEffect(()=>{
+    let nextStep = true;
+    for(let q in questionForm){
+      if(Array.isArray(questionForm[q])){        
+        questionForm[q].length?'':nextStep=false;
+      }else{
+        questionForm[q]?'':nextStep=false;
+      }      
+    }
+    
+    setGoNext(nextStep);
+  }, [questionForm])  
 
   // const handleMarketingCard = (key, value) => {
   //   setFormData({
@@ -164,8 +188,7 @@ const AiQuestion = () => {
     let postdata = {
       answers,
     };
-    console.log("post data", postdata);
-
+    
     dispatch(showLoader());
     await submitMultipleQuestions(postdata)
       .then((res) => {
@@ -181,29 +204,135 @@ const AiQuestion = () => {
       });
   };
 
+  const navigatePage = (page)=>{
+    setupCompleted?navigate(`/user/${page}`):'';
+  }
+
   return (
-    <div className="h-full goal_background py-[40px] px-[140px]">
-      <div className="flex items-center justify-center my-[10px] sm:my-[16px] md:my-[20px] px-[16px]">
-        <div className="w-full flex justify-between items-center max-w-[900px] w-[60%] px-[20px] sm:px-[32px] md:px-[40px]">
-          <div className="flex">
-            AA
+    <div className="goal_background py-[40px] px-[24px] lg:px-[60px] lg:px-[140px]">
+      <div className="flex items-center justify-center">
+        <div className="w-full flex justify-between items-center max-w-[900px] px-[48px]">
+          <div className="hidden md:flex items-center gap-4">
+            <button type="button"
+              className="flex items-center gap-2 text-[#0A0A0A] text-sm font-normal"
+              onClick={(e)=>navigatePage('checkin')}
+            >
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.33337 1.3335V4.00016" stroke={`${setupCompleted?'#1F6CFD':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M10.6666 1.3335V4.00016" stroke={`${setupCompleted?'#1F6CFD':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12.6667 2.6665H3.33333C2.59695 2.6665 2 3.26346 2 3.99984V13.3332C2 14.0696 2.59695 14.6665 3.33333 14.6665H12.6667C13.403 14.6665 14 14.0696 14 13.3332V3.99984C14 3.26346 13.403 2.6665 12.6667 2.6665Z" stroke={`${setupCompleted?'#1F6CFD':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2 6.6665H14" stroke={`${setupCompleted?'#1F6CFD':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <p className="hidden md:block">Start daily check-in</p>
+            </button>
+            <button type="button"
+              className="flex items-center gap-2 text-[#0A0A0A] text-sm font-normal"
+              onClick={(e)=>navigatePage('insights')}
+            >
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clipPath="url(#clip0_3376_469)">
+              <g clipPath="url(#clip1_3376_469)">
+              <path d="M8.00004 14.6668C11.6819 14.6668 14.6667 11.6821 14.6667 8.00016C14.6667 4.31826 11.6819 1.3335 8.00004 1.3335C4.31814 1.3335 1.33337 4.31826 1.33337 8.00016C1.33337 11.6821 4.31814 14.6668 8.00004 14.6668Z" stroke={`${setupCompleted?'#9E21FB':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M8 12C10.2091 12 12 10.2091 12 8C12 5.79086 10.2091 4 8 4C5.79086 4 4 5.79086 4 8C4 10.2091 5.79086 12 8 12Z" stroke={`${setupCompleted?'#9E21FB':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M7.99996 9.33317C8.73634 9.33317 9.33329 8.73622 9.33329 7.99984C9.33329 7.26346 8.73634 6.6665 7.99996 6.6665C7.26358 6.6665 6.66663 7.26346 6.66663 7.99984C6.66663 8.73622 7.26358 9.33317 7.99996 9.33317Z" stroke={`${setupCompleted?'#9E21FB':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              </g>
+              </g>
+              <defs>
+              <clipPath id="clip0_3376_469">
+              <rect width="16" height="16" fill="white"/>
+              </clipPath>
+              <clipPath id="clip1_3376_469">
+              <rect width="16" height="16" fill="white"/>
+              </clipPath>
+              </defs>
+              </svg>
+              Review goals for this week
+            </button>
+            <button type="button"
+              className="flex items-center gap-2 text-[#0A0A0A] text-sm font-normal"
+              onClick={(e)=>navigatePage('goals')}
+            >
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clipPath="url(#clip0_3376_242)">
+              <path d="M10.6666 4.6665H14.6666V8.6665" stroke={`${setupCompleted?'#F98B1B':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M14.6667 4.6665L9.00004 10.3332L5.66671 6.99984L1.33337 11.3332" stroke={`${setupCompleted?'#F98B1B':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_3376_242">
+              <rect width="16" height="16" fill="white"/>
+              </clipPath>
+              </defs>
+              </svg>
+              Show progress insights
+            </button>            
+          </div>
+          <div className="flex md:hidden flex items-center gap-4">
+            <button type="button"
+              className="flex items-center gap-2 text-[#0A0A0A] text-sm font-normal"
+              onClick={(e)=>navigatePage('checkin')}
+            >
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.33337 1.3335V4.00016" stroke={`${setupCompleted?'#1F6CFD':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M10.6666 1.3335V4.00016" stroke={`${setupCompleted?'#1F6CFD':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12.6667 2.6665H3.33333C2.59695 2.6665 2 3.26346 2 3.99984V13.3332C2 14.0696 2.59695 14.6665 3.33333 14.6665H12.6667C13.403 14.6665 14 14.0696 14 13.3332V3.99984C14 3.26346 13.403 2.6665 12.6667 2.6665Z" stroke={`${setupCompleted?'#1F6CFD':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2 6.6665H14" stroke={`${setupCompleted?'#1F6CFD':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+            <button type="button"
+              className="flex items-center gap-2 text-[#0A0A0A] text-sm font-normal"
+              onClick={(e)=>navigatePage('insights')}
+            >
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clipPath="url(#clip0_3376_469)">
+              <g clipPath="url(#clip1_3376_469)">
+              <path d="M8.00004 14.6668C11.6819 14.6668 14.6667 11.6821 14.6667 8.00016C14.6667 4.31826 11.6819 1.3335 8.00004 1.3335C4.31814 1.3335 1.33337 4.31826 1.33337 8.00016C1.33337 11.6821 4.31814 14.6668 8.00004 14.6668Z" stroke={`${setupCompleted?'#9E21FB':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M8 12C10.2091 12 12 10.2091 12 8C12 5.79086 10.2091 4 8 4C5.79086 4 4 5.79086 4 8C4 10.2091 5.79086 12 8 12Z" stroke={`${setupCompleted?'#9E21FB':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M7.99996 9.33317C8.73634 9.33317 9.33329 8.73622 9.33329 7.99984C9.33329 7.26346 8.73634 6.6665 7.99996 6.6665C7.26358 6.6665 6.66663 7.26346 6.66663 7.99984C6.66663 8.73622 7.26358 9.33317 7.99996 9.33317Z" stroke={`${setupCompleted?'#9E21FB':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              </g>
+              </g>
+              <defs>
+              <clipPath id="clip0_3376_469">
+              <rect width="16" height="16" fill="white"/>
+              </clipPath>
+              <clipPath id="clip1_3376_469">
+              <rect width="16" height="16" fill="white"/>
+              </clipPath>
+              </defs>
+              </svg>
+            </button>
+            <button type="button"
+              className="flex items-center gap-2 text-[#0A0A0A] text-sm font-normal"
+              onClick={(e)=>navigatePage('goals')}
+            >
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clipPath="url(#clip0_3376_242)">
+              <path d="M10.6666 4.6665H14.6666V8.6665" stroke={`${setupCompleted?'#F98B1B':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M14.6667 4.6665L9.00004 10.3332L5.66671 6.99984L1.33337 11.3332" stroke={`${setupCompleted?'#F98B1B':'#4B5563'}`} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_3376_242">
+              <rect width="16" height="16" fill="white"/>
+              </clipPath>
+              </defs>
+              </svg>
+            </button>            
           </div>
           <div>
-            <button
-              className="flex items-center gap-2 text-xs font-medium text-[#1E3A8A] px-2 py-2 rounded-sm shadow-md hover:shadow-lg transition"
+            <p
+              className="flex items-center gap-2 text-xs font-medium text-[#1E3A8A] px-2 py-2 cursor-pointer"
               onClick={() => navigate("/goal/create")}
             >
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2.5 6H9.5" stroke="#1E3A8A" strokeLinecap="round" stroke-linejoin="round"/>
-              <path d="M6 2.5V9.5" stroke="#1E3A8A" strokeLinecap="round" stroke-linejoin="round"/>
+              <path d="M2.5 6H9.5" stroke="#1E3A8A" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M6 2.5V9.5" stroke="#1E3A8A" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               New Goal
-            </button>
+            </p>
           </div>
         </div>
       </div>      
-      <div className="flex items-center justify-center my-[10px] sm:my-[16px] md:my-[20px] px-[16px]">
-        <div className="ai-border-sty max-w-[900px] w-[60%] bg-white border border-[#ffffff]-200 rounded-[24px] shadow-sm p-[20px] sm:p-[32px] md:p-[40px]">
+      <div className="flex items-center justify-center my-[8px] px-[16px]">
+        <div className="ai-border-sty max-w-[900px] bg-white border border-[#ffffff]-200 rounded-2xl shadow-sm p-[20px] sm:p-[32px] md:p-[40px]">
           {/* Header */}
           <div className="flex justify-between text-[14px] font-medium text-[#4B5563] mb-[8px]">
             <span>Getting to know you</span>
@@ -250,7 +379,7 @@ const AiQuestion = () => {
             <h2 className="text-[12px] sm:text-[24px] font-[700] text-[#0A0A0A] mb-[4px]">
               Please answer the following questions.
             </h2>
-            <p className="text-[#4B5563] text-[12px] mb-[12px]">
+            <p className="text-[#848282] text-[12px] mb-[12px]">
               This helps us personalize your AI coaching experience from day
               one.
             </p>
@@ -261,8 +390,8 @@ const AiQuestion = () => {
             conversation?.last_primary_questions.length && (
               <div className="max-w-3xl mx-auto bg-white rounded-lg">
                 {conversation?.last_primary_questions.map((question, index) => (
-                  <div key={`qu-${index}`} className="w-full mb-[12px]">
-                    <label className="block text-[12px] font-[400] text-[#4B5563]">
+                  <div key={`qu-${index}`} className="w-full mb-[16px]">
+                    <label className="block text-[12px] font-[400] text-[#848282] mb-[2px]">
                       {question.question} *
                     </label>
                     {question.type === "text" && (
@@ -313,7 +442,8 @@ const AiQuestion = () => {
                         placeholder={question?.placeholder || "Select"}
                         value={questionForm[question.id]}
                         onChange={handleChange}
-                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] font-[500] text-[#181818] bg-white"
+                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] font-[500] text-[#181818] bg-white
+                        appearance-none bg-no-repeat bg-right-[12px] select-arrow cursor-pointer"
                       >
                         <option value="">Select</option>
                         {question.options.split(",").map((option, idx) => (
@@ -334,7 +464,7 @@ const AiQuestion = () => {
                             onClick={() =>
                               handleMultiOptions(question.id, option)
                             }
-                            className={`checkbox-card cursor-pointer border rounded-[8px] p-[16px] w-[250px] 
+                            className={`checkbox-card cursor-pointer border rounded-[8px] px-[16px] py-[10px] w-[250px] 
                       ${
                         questionForm[question.id].includes(option)
                           ? "border-[#E4E4E4] bg-[#EEF4FF]"
@@ -365,7 +495,7 @@ const AiQuestion = () => {
                 <div className="w-full flex items-center justify-between mt-10 gap-[5px]">
                   {/* Back Button */}
                   {conversation.last_primary_questions[0].set_number > 1 ? (
-                    <button className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#FFFFFF] text-[#1E3A8A] text-[14px] hover:bg-gray-50 transition">
+                    <button className="flex items-center gap-[8px] px-[12px] py-[8px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#FFFFFF] text-[#1E3A8A] text-[14px] hover:bg-gray-50 transition">
                       <FaArrowLeftLong />
                       Back
                     </button>
@@ -375,8 +505,9 @@ const AiQuestion = () => {
                   {/* Next Button */}
                   {conversation.last_primary_questions[0].set_number < 3 && (
                     <button
+                      disabled={goNext?false:true}
                       type="button"
-                      className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#868686] text-[#FFFFFF] text-[14px] hover:bg-[#1E3A8A] transition"
+                      className={`flex items-center gap-[8px] px-[12px] py-[8px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#868686] text-[#FFFFFF] text-[14px] transition ${goNext?'hover:bg-[#1E3A8A]':''}`}
                       onClick={nextQuestions}
                     >
                       Next
@@ -385,8 +516,9 @@ const AiQuestion = () => {
                   )}
                   {conversation.last_primary_questions[0].set_number === 3 && (
                     <button
+                      disabled={goNext?false:true}
                       type="button"
-                      className="flex items-center gap-[8px] p-[12px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#1E3A8A] text-[#FFFFFF] text-[14px] hover:bg-gray-50 transition"
+                      className="flex items-center gap-[8px] px-[12px] py-[8px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#1E3A8A] text-[#FFFFFF] text-[14px] hover:bg-gray-50 transition"
                       onClick={submitQuestions}
                     >
                       Submit

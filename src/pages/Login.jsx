@@ -84,19 +84,19 @@ function Login() {
 
               <ul className="text-sm space-y-3">
                 <li className="flex items-center gap-2 text-[#D1D5DC]">
-                  <div className="listicon">
+                  <div className="listicon flex items-center gap-4">
                     <img src={withbg} alt="Welcome Icon" />
                   </div>
                   Structured onboarding tailored to you
                 </li>
                 <li className="flex items-center gap-2 text-[#D1D5DC]">
-                  <div className="listicon">
+                  <div className="listicon flex items-center gap-4">
                     <img src={withbg} alt="Welcome Icon" />
                   </div>
                   Goal-driven daily insights
                 </li>
                 <li className="flex items-center gap-2 text-[#D1D5DC]">
-                  <div className="listicon">
+                  <div className="listicon flex items-center gap-4">
                     <img src={withbg} alt="Welcome Icon" />
                   </div>
                   Continuous learning and adaptation

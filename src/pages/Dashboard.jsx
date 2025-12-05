@@ -20,6 +20,7 @@ import { AiFillApi, AiOutlineApi } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import { hideLoader } from "../store/slices/loaderSlice";
+import { useNavigate } from "react-router-dom";
 
 const ProgressItem = ({ title, percent, color }) => {
   return (
@@ -82,6 +83,7 @@ const habitdata = [
 ];
 
 const Deshboard = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const progressRef = useRef(null);
   const [value, setValue] = useState(0);
@@ -125,11 +127,15 @@ const Deshboard = () => {
     return () => clearInterval(interval);
   }, [percent]);
 
+  const navigateChatbot = ()=>{
+    navigate('/goal/create');
+  }
+
   return (
-    <div className="w-full bg-[#F5F7FA] p-[40px]">
+    <div className="w-full bg-[#F5F7FA] px-[40px] pb-[60px] pt-[24px]">
       {/* Header */}
       <h1 className="text-[20px] md:text-[24px] font-[700] leading-[24px] md:leading-[28px] text-[#0A0A0A]">
-        {userData!==null && userData.fname}
+        {userData!==null && `Hi ${userData.fname}`}
       </h1>
       <p className="text-[#4B5563] font-[400] text-[14px] leading-[18px] mt-[10px] mb-[20px]">
         Here's your progress overview for today
@@ -138,7 +144,7 @@ const Deshboard = () => {
       {/* Top Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[20px] lg:gap-[40px] mt-[10px] md:mt-6">
         {/* Daily Score */}
-        <div className="daily-score bg-[#ffffff] p-[16px] rounded-[12px] shadow-sm border-[2px] border-[#E5F2FF] flex justify-between align-center  mt-[10px] md:mb-[40px] h-[84px]">
+        <div className="daily-score bg-[#ffffff] p-[16px] rounded-[12px] shadow-sm border-[2px] border-[#E5F2FF] flex justify-between align-center h-[84px]">
           {/* Top Section */}
           <div>
             <p className="text-[#4B5563] font-[400] text-[12px] leading-[16px]">
@@ -177,7 +183,7 @@ const Deshboard = () => {
           </div>
         </div>
 
-        <div className="daily-score bg-[#ffffff] p-[16px] rounded-[12px] shadow-sm border-[2px] border-[#E5F2FF] flex justify-between align-center  mt-[10px] md:mb-[40px] h-[84px]">
+        <div className="daily-score bg-[#ffffff] p-[16px] rounded-[12px] shadow-sm border-[2px] border-[#E5F2FF] flex justify-between align-center h-[84px]">
           {/* Center Section */}
           <div>
             <p className="text-[#4B5563] font-[400] text-[12px] leading-[16px]">
@@ -219,8 +225,7 @@ const Deshboard = () => {
             />
           </div>
         </div>
-        <div className="daily-score bg-[#ffffff] p-[16px] rounded-[12px] shadow-sm border-[2px] border-[#E5F2FF] flex justify-between align-center  mt-[10px]  md:mb-[40px] h-[84px]">
-          {/* Right Section */}
+        <div className="daily-score bg-[#ffffff] p-[16px] rounded-[12px] shadow-sm border-[2px] border-[#E5F2FF] flex justify-between align-center h-[84px]">
           <div>
             <p className="text-[#4B5563] font-[400] text-[12px] leading-[16px]">
               Tasks Done
@@ -302,15 +307,15 @@ const Deshboard = () => {
         {/* RIGHT 50% — Blue Score Card */}
         <div className="w-full lg:w-[35%] p-[16px] bg-[url('/src/assets/images/todayscore.png')] bg-no-repeat bg-[length:100%_100%] text-[#ffffff] flex justify-between items-top shadow-sm">
           {/* Text Section */}
-          <div className="left_part_score w-[60%] p-[16px]">
-            <div className="flex pt-[16px]">
+          <div className="left_part_score w-[60%] pr-[16px]">
+            <div className="flex">
               <img src={scorestar} alt="Star Icon" className="w-6 h-6" />
-              <p className="text-[14px] leading-[18px] font-[400] text-[#E6C26B] opacity-90 ml-[10px] mt-[3px]">
+              <p className="text-[14px] leading-[18px] font-[400] text-[#E6C26B] opacity-90 ml-[10px]">
                 Today's Score
               </p>
             </div>
             <p className="text-[12px] leading-[16px] font-[400] mt-[10px] opacity-80">
-              You’re performing better than 85% of users
+              You’re performing better than 87% of users
             </p>
           </div>
 
@@ -523,8 +528,10 @@ const Deshboard = () => {
         </div>
       </div>
       <button
+        type="button"
+        onClick={navigateChatbot}
         className="px-4 py-2 bg-[#1E3A8A] text-[#FFFFFF] rounded-[70px] shadow-sm flex items-center gap-[4px]
- p-[12px] text-[14px] leading-[16px] font-[500] border-[1px] border-[1E3A8A] fixed right-[65px] bottom-[122px]"
+ p-[12px] text-[14px] leading-[16px] font-[500] border-[1px] border-[1E3A8A] fixed right-[65px] bottom-[80px]"
       >
         <BiMessageRoundedDots />
         Ask AI
