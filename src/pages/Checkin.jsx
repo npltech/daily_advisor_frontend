@@ -9,7 +9,7 @@ const Checkin = () => {
       <p className="text-[#4B5563] font-[400] text-[14px] leading-[18px] mb-[20px]">
         Track and update your goals
       </p>
-      <div className='w-full flex justify-center items-center gap-[16px] mt-[24px]'>
+      <div className='w-full flex justify-center items-center items-stretch gap-[16px] mt-[24px]'>
         <div className='w-[40%] flex flex-col gap-[12px]'>
           <div className='p-4 bg-[#FFFFFF] rounded-md flex justify-between items-center'>
             <div>
@@ -62,7 +62,7 @@ const Checkin = () => {
           </div>
         </div>
         <div className='w-[60%] p-4 bg-[#FFFFFF] rounded-md'>
-          <div>
+          <div className='flex items-center gap-[8px]'>
             <div className='flex justify-center items-center bg-gradient-to-r from-[#1E3A8A] to-[#05102D] p-[8px] rounded-md'>
               <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <mask id="mask0_2936_1834" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
@@ -78,15 +78,55 @@ const Checkin = () => {
               </g>
               </svg>
             </div>
-            <div>AI Daily Recommendations</div>
+            <div className='text-[#0A0A0A] text-xl font-bold'>AI Daily Recommendations</div>
           </div>
-          <div>
+          <div className='text-[#4B5563] text-sm font-normal mt-[8px]'>
             <p>Focus on completing your customer feedback tasks early today. Your engagement metrics are trending up—maintain momentum by addressing the identified pain points. Consider allocating extra time to marketing activities this afternoon.</p>
           </div>
         </div>
       </div>
-      <div>
-
+      <div className='mt-[12px] bg-[#FFFFFF] rounded-md p-4'>
+        <p className='text-[#0A0A0A] text-sm font-medium'>Marketing & Visibility</p>
+        <p className='text-[#4B5563] text-xs font-normal mt-[4px]'>0 of 3 completed</p>
+        <div className='mt-[8px]'>
+          <div className="flex justify-between text-[#4B5563] font-[400] text-[14px] leading-[18px] mb-[10px]">
+            <span>Progress</span>
+            <span>0%</span>
+          </div>
+          <div className="w-full h-[8px] bg-[#F2F2F2] rounded-[16px] overflow-hidden mb-[20px]">
+            <div
+              className="h-full bg-[#E6C26B] rounded-[16px] transition-all duration-700"
+              style={{ width: "0%" }}
+            ></div>
+          </div>
+        </div>
+        <div className='bg-[#F8F9FF] p-[12px] flex items-center gap-[12px] rounded-md'>          
+          <span className="w-[12px] h-[12px] border border-[#E4E4E4] rounded-full flex items-center justify-center text-xs">
+            
+          </span>
+          <div>
+            <p className='text-sm font-medium text-[#0A0A0A]'>Review Yesterday's Best-Performing Channel</p>
+            <p className='text-xs font-normal text-[#4B5563] mt-[4px]'>Check which channel performed better: social, email, website, ads.</p>
+          </div>
+        </div>      
+        <div className='bg-[#F8F9FF] p-[12px] flex items-center gap-[12px] rounded-md mt-[12px]'>          
+          <span className="w-[12px] h-[12px] border border-[#E4E4E4] rounded-full flex items-center justify-center text-xs">
+            
+          </span>
+          <div>
+            <p className='text-sm font-medium text-[#0A0A0A]'>Create or Share One Value-Based Content Piece</p>
+            <p className='text-xs font-normal text-[#4B5563] mt-[4px]'>A post, email, story, tip, or short update.</p>
+          </div>
+        </div>      
+        <div className='bg-[#F8F9FF] p-[12px] flex items-center gap-[12px] rounded-md mt-[12px]'>          
+          <span className="w-[12px] h-[12px] border border-[#E4E4E4] rounded-full flex items-center justify-center text-xs">
+            
+          </span>
+          <div>
+            <p className='text-sm font-medium text-[#0A0A0A]'>Monitor Your Top Competitor's Activity</p>
+            <p className='text-xs font-normal text-[#4B5563] mt-[4px]'>See if they launched new offers, content, or pricing (AI Scan available).</p>
+          </div>
+        </div>      
       </div>
     </div>
   )

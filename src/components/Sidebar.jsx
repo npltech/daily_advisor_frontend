@@ -102,7 +102,7 @@ const Sidebar = (props) => {
   }
 
   return (
-    <div className="w-full flex flex-col justify-between h-auto xl:h-screen border-r bg-white gap-[20px] pt-2">
+    <div className="w-full flex flex-col justify-between h-full border-r bg-white gap-[20px] pt-2">
       <div>
         <h1 className="text-[20px] font-[600] text-[#1E3A8A] pt-[8px] mt-[30px] mb-[20px] flex justify-center align-center">
           {collapsed?
@@ -124,7 +124,7 @@ const Sidebar = (props) => {
               <path d="M1.75 5.83335C1.74996 5.66364 1.78694 5.49597 1.85838 5.34202C1.92981 5.18808 2.03397 5.05157 2.16358 4.94202L6.24692 1.44261C6.45749 1.26464 6.72429 1.16699 7 1.16699C7.27571 1.16699 7.54251 1.26464 7.75308 1.44261L11.8364 4.94202C11.966 5.05157 12.0702 5.18808 12.1416 5.34202C12.2131 5.49597 12.25 5.66364 12.25 5.83335V11.0834C12.25 11.3928 12.1271 11.6895 11.9083 11.9083C11.6895 12.1271 11.3928 12.25 11.0833 12.25H2.91667C2.60725 12.25 2.3105 12.1271 2.09171 11.9083C1.87292 11.6895 1.75 11.3928 1.75 11.0834V5.83335Z" stroke={`${location.pathname==='/user' || location.pathname==='/user/dashboard'?'#1E3A8A':'#4B5563'}`} strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
-            {collapsed?'':'Dashboard'}
+            {collapsed?'Dashboard':'Dashboard'}
           </li>
 
           <li className={`${location.pathname==='/user/checkin'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-xs font-[500] leading-[18px] cursor-pointer pl-[10px] py-[6px]`}
@@ -139,7 +139,7 @@ const Sidebar = (props) => {
               <path d="M1.5 5H10.5" stroke={`${location.pathname==='/user/checkin'?'#1E3A8A':'#4B5563'}`} strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
-            {collapsed?'':'Daily Check-in'}            
+            {collapsed?'Daily Check-in':'Daily Check-in'}            
           </li>
 
           <li className={`${location.pathname==='/user/goals'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-xs font-[500] leading-[18px] cursor-pointer pl-[10px] py-[6px]`}
@@ -160,7 +160,7 @@ const Sidebar = (props) => {
               </defs>
               </svg>
             </div>
-            {collapsed?'':'Goal Review'}
+            {collapsed?'Goal Review':'Goal Review'}
           </li>
 
           <li className={`${location.pathname==='/user/insights' || location.pathname==='/dashboard'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-xs font-[500] leading-[18px] cursor-pointer pl-[10px] py-[6px]`}
@@ -186,7 +186,7 @@ const Sidebar = (props) => {
               </defs>
               </svg>
             </div>
-            {collapsed?'':'Get Insights'}
+            {collapsed?'Get Insights':'Get Insights'}
           </li>
         </ul>
 

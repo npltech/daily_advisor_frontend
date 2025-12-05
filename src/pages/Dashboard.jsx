@@ -142,7 +142,7 @@ const Deshboard = () => {
       </p>
 
       {/* Top Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-[20px] lg:gap-[40px] mt-[10px] md:mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-[20px] mt-[10px] md:mt-6">
         {/* Daily Score */}
         <div className="daily-score bg-[#ffffff] p-[16px] rounded-[12px] shadow-sm border-[2px] border-[#E5F2FF] flex justify-between align-center h-[84px]">
           {/* Top Section */}

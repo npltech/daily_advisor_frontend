@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import chatbotmessage from "../assets/images/chatbotmessage.png";
 import user from "../assets/images/user.png";
 import { useDispatch } from "react-redux";
-import { hideLoader } from "../store/slices/loaderSlice";
+import { hideLoader, showLoader } from "../store/slices/loaderSlice";
 import sendGif from "../assets/gifs/send_gif.gif";
 import Swal from "sweetalert2";
 
@@ -21,7 +21,7 @@ const Chatbot = () => {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    dispatch(hideLoader());
+    dispatch(showLoader());
     const fecthChats = async () => {
       if (chatid) {
         await getMessages();
@@ -37,7 +37,7 @@ const Chatbot = () => {
     }
   }, [messages]);
 
-  const getMessages = async () => {
+  const getMessages = async () => {    
     await getMessagesByConversation(chatid)
       .then((res) => {
         console.log(res);
@@ -46,6 +46,7 @@ const Chatbot = () => {
       .catch((err) => {})
       .finally(() => {
         setFetched(true);
+        dispatch(hideLoader());
       });
   };
 
@@ -81,7 +82,7 @@ const Chatbot = () => {
   return (
     <>
       {fetched && (
-        <div className="bg-white pt-6 pb-2 px-4 h-full flex flex-col overflow-hidden">
+        <div className="bg-[#F5F7FA] pt-6 pb-2 px-4 h-full flex flex-col overflow-hidden">
           {messages.length === 0 && (
             <div className="chatbot w-full xl:w-[900px] bg-white text-center mx-auto">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-900 text-yellow-300 rounded-lg mb-4">
@@ -98,29 +99,29 @@ const Chatbot = () => {
             </div>
           )}
 
-          <div className="flex-1 overflow-y-auto hide_scrollbar px-4 mt-6">
+          <div className="flex justify-center overflow-y-auto hide_scrollbar px-4 mt-6">
             {messages.length > 0 && (
-              <div className="w-full space-y-8 max-w-[800px] mx-auto">
+              <div className="w-full space-y-8 max-w-[800px]">
                 {messages.map((val, i) => (
                   <div key={i}>
                     {val.message_type === "aireply" ? (
-                      <div className="flex w-full items-start gap-2">
+                      <div className="flex w-full items-start gap-2 max-w-[85%]">
                         <img
                           src={chatbotmessage}
                           alt="AI"
                           className="w-4 h-4"
                         />
 
-                        <div className="bg-white border border-[#E4E4E4] p-4 shadow-sm rounded-lg max-w-xl">
-                          <p className="text-[14px] text-[#0A0A0A]">
+                        <div className="bg-white p-4 shadow-sm rounded-lg">
+                          <p className="text-[14px] text-[#0A0A0A] break-words">
                             {val.message}
                           </p>
                         </div>
                       </div>
                     ) : (
                       <div className="flex justify-end items-start gap-2">
-                        <div className="bg-[#EAF2FF] p-3 rounded-lg">
-                          <p className="text-[14px] text-[#0A0A0A]">
+                        <div className="bg-[#EAF2FF] p-3 rounded-lg max-w-[85%]">
+                          <p className="text-[14px] text-[#0A0A0A] break-words">
                             {val.message}
                           </p>
                         </div>
@@ -133,15 +134,15 @@ const Chatbot = () => {
                     )}
                   </div>
                 ))}
+                <div ref={messagesEndRef}></div>
               </div>
-            )}
-            <div ref={messagesEndRef}></div>
+            )}            
           </div>
 
           {/* 🟦 INPUT BOX — FIXED AT BOTTOM */}
-          <div className="w-full shrink-0 bg-white pt-4 pb-8">
+          <div className="w-full shrink-0 pt-4 pb-8">
             <form className="w-full max-w-[800px] mx-auto" onSubmit={(e)=>sendQuery(e)}>
-              <div className="w-full flex items-center gap-3 border-2 border-[#E5F2FF] p-3 rounded-[16px] h-[56px]">
+              <div className="w-full flex items-center gap-3 border-2 bg-[#FFFFFF] border-[#E5F2FF] p-3 rounded-[16px] h-[56px]">
                 <input
                   type="text"
                   placeholder="What would you like to work on...?"
