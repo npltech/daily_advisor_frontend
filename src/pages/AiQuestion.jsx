@@ -6,15 +6,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { showLoader, hideLoader } from "../store/slices/loaderSlice";
 import { lastConversation } from "../apis/conversationApi";
 import {
+  getPreviousQuestions,
+  getQuestionsByGoal,
   submitMultipleQuestions,
   updateMultipleQuestions,
 } from "../apis/questionApi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { loginUser } from "../store/slices/authSlice";
 import Swal from "sweetalert2";
 import { jwtDecode } from "jwt-decode";
 
 const AiQuestion = () => {
+  const [searchParams] = useSearchParams();
+  const goalid = searchParams.get("goalid");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -34,10 +38,16 @@ const AiQuestion = () => {
   const [setupCompleted, setSetupCompleted] = useState(false);
   const userToken = useSelector((state) => state.auth.token);
 
+  console.log(goalid);
+
   useEffect(() => {
     dispatch(showLoader());
     const getQuestions = () => {
-      fetchLastConversation();
+      if(goalid){
+        fetchQuestionsByGoalId();
+      }else{
+        fetchLastConversation();
+      }      
     };
     getQuestions();
   }, []);
@@ -64,6 +74,21 @@ const AiQuestion = () => {
         dispatch(hideLoader());
       });
   };
+
+  const fetchQuestionsByGoalId = async() =>{
+    await getQuestionsByGoal(goalid)
+      .then((res) => {
+        createFormData(res.questions);
+        setConversation((prev) => ({
+          ...prev,
+          last_primary_questions: res.questions,
+        }));
+      })
+      .catch(() => {})
+      .finally(() => {
+        dispatch(hideLoader());
+      });
+  }
 
   const createFormData = (data) => {
     const form_data = {};
@@ -153,8 +178,7 @@ const AiQuestion = () => {
           last_primary_questions: res.newQuestions,
         }));
       })
-      .catch((err) => {
-        
+      .catch((err) => {        
         Swal.fire({
           icon: "error",
           title:
@@ -162,13 +186,52 @@ const AiQuestion = () => {
             err?.message ||
             "Something went wrong!!",
           text: "",
-          confirmButtonColor: "#3085d6",
+          // confirmButtonColor: "#3085d6",
+          timer: 4000,
+          timerProgressBar: true,
         });
       })
       .finally(() => {
         dispatch(hideLoader());
       });
   };
+
+  const previousStep = async ()=>{
+    console.log(conversation);
+    if(conversation?.last_primary_questions.length){
+      const setNumber = conversation?.last_primary_questions[0].set_number-1;
+      console.log(setNumber);
+      const data = {
+        goalId: conversation?.last_primary_questions[0].goal_id,
+        setNumber: setNumber
+      }
+      dispatch(showLoader());
+      await getPreviousQuestions(data)
+      .then(res=>{
+        console.log(res)
+        createFormData(res.questions);
+        setConversation((prev) => ({
+          ...prev,
+          last_primary_questions: res.questions,
+        }));
+      })
+      .catch(err=>{
+        Swal.fire({
+          icon: "error",
+          title:
+            err?.response?.data?.llmResponse?.details?.message || err?.response?.data?.llmResponse?.message ||
+            err?.message ||
+            "Something went wrong!!",
+          text: "",
+          timer: 4000,
+          timerProgressBar: true,
+        });
+      })
+      .finally(()=>{
+        dispatch(hideLoader());
+      })
+    }
+  }
 
   const submitQuestions = async () => {
     console.log("submit questions", questionForm);
@@ -211,7 +274,7 @@ const AiQuestion = () => {
   return (
     <div className="goal_background py-[40px] px-[24px] lg:px-[60px] lg:px-[140px]">
       <div className="flex items-center justify-center">
-        <div className="w-full flex justify-between items-center max-w-[900px] px-[48px]">
+        <div className="w-full flex justify-between items-center max-w-[900px] px-[42px] lg:px-[72px]">
           <div className="hidden md:flex items-center gap-4">
             <button type="button"
               className="flex items-center gap-2 text-[#0A0A0A] text-sm font-normal"
@@ -332,7 +395,7 @@ const AiQuestion = () => {
         </div>
       </div>      
       <div className="flex items-center justify-center my-[8px] px-[16px]">
-        <div className="ai-border-sty max-w-[900px] bg-white border border-[#ffffff]-200 rounded-2xl shadow-sm p-[20px] sm:p-[32px] md:p-[40px]">
+        <div className="ai-border-sty w-full max-w-3xl bg-white border border-[#ffffff]-200 rounded-2xl shadow-sm p-[20px] sm:p-[32px] md:p-[40px]">
           {/* Header */}
           <div className="flex justify-between text-[14px] font-medium text-[#4B5563] mb-[8px]">
             <span>Getting to know you</span>
@@ -495,7 +558,11 @@ const AiQuestion = () => {
                 <div className="w-full flex items-center justify-between mt-10 gap-[5px]">
                   {/* Back Button */}
                   {conversation.last_primary_questions[0].set_number > 1 ? (
-                    <button className="flex items-center gap-[8px] px-[12px] py-[8px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#FFFFFF] text-[#1E3A8A] text-[14px] hover:bg-gray-50 transition">
+                    <button 
+                      type="button"
+                      className="flex items-center gap-[8px] px-[12px] py-[8px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#FFFFFF] text-[#1E3A8A] text-[14px] hover:bg-gray-50 transition"
+                      onClick={previousStep}
+                    >
                       <FaArrowLeftLong />
                       Back
                     </button>
@@ -507,7 +574,7 @@ const AiQuestion = () => {
                     <button
                       disabled={goNext?false:true}
                       type="button"
-                      className={`flex items-center gap-[8px] px-[12px] py-[8px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#868686] text-[#FFFFFF] text-[14px] transition ${goNext?'hover:bg-[#1E3A8A]':''}`}
+                      className={`flex items-center gap-[8px] px-[12px] py-[8px] border-[1px] border-[#E4E4E4] rounded-[8px] text-[#FFFFFF] text-[14px] transition ${goNext?'bg-[#1E3A8A]':'bg-[#868686]'}`}
                       onClick={nextQuestions}
                     >
                       Next
@@ -518,7 +585,7 @@ const AiQuestion = () => {
                     <button
                       disabled={goNext?false:true}
                       type="button"
-                      className="flex items-center gap-[8px] px-[12px] py-[8px] border-[1px] border-[#E4E4E4] rounded-[8px] bg-[#1E3A8A] text-[#FFFFFF] text-[14px] hover:bg-gray-50 transition"
+                      className={`flex items-center gap-[8px] px-[12px] py-[8px] border-[1px] border-[#E4E4E4] rounded-[8px] text-[#FFFFFF] text-[14px] transition ${goNext?'bg-[#1E3A8A]':'bg-[#868686]'}`}
                       onClick={submitQuestions}
                     >
                       Submit

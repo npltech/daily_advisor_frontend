@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import "../styles/style.css";
 import { useNavigate } from "react-router-dom";
+import creategoal from "../assets/images/creategoal.png";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const {scrollToAbout, scrollToFeatures, scrollToWorks, scrollToPricing, scrollToContact} = props;
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
@@ -27,12 +29,15 @@ const Navbar = () => {
 
   return (
     <header className={`Navbar fixed top-0 w-full z-10 pt-3 ${scrolled?'bg-[#FFFFFF]':''}`}>
-      <div className="container">
+      <div className="container1 px-[60px]">
         <div className="flex items-center p-[20px] justify-between w-full">
-          <div className={`w-[20%] logo ${scrolled?'text-[#1E3A8A]':'text-[#FFFFFF]'}`}>DAILY ADVISOR AI</div>
+          <div className={`w-[20%] logo hidden md:block ${scrolled?'text-[#1E3A8A]':'text-[#FFFFFF]'}`}>DAILY ADVISOR AI</div>
+          <div className={`w-[20%] logo block md:hidden ${scrolled?'text-[#1E3A8A]':'text-[#FFFFFF]'}`}>
+            <img src={creategoal} alt="Create Icon" className="w-8 h-8" />
+          </div>
           {/* Mobile Toggle Button */}
           <button
-            className="lg:hidden block text-[24px] text-[#FFFFFF]"
+            className={`lg:hidden block text-[24px] ${scrolled?'text-[#000000]':'text-[#FFFFFF]'}`}
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? "✕" : "☰"}
@@ -40,11 +45,21 @@ const Navbar = () => {
 
           <div className="w-[60%] menu hidden lg:flex justify-center">
             <nav className="nav-links flex gap-[10px]">
-              <p className="text-[#0A0A0A] cursor-pointer">ABOUT</p>
-              <p className="text-[#0A0A0A] cursor-pointer">FEATURES</p>
-              <p className="text-[#0A0A0A] cursor-pointer">HOW IT WORKS</p>
-              <p className="text-[#0A0A0A] cursor-pointer">PRICING</p>
-              <p className="text-[#0A0A0A] cursor-pointer">CONTACT</p>
+              <p className="text-[#0A0A0A] text-xs font-bold cursor-pointer"
+                onClick={scrollToAbout}
+              >ABOUT</p>
+              <p className="text-[#0A0A0A] text-xs font-bold cursor-pointer"
+                onClick={scrollToFeatures}
+              >FEATURES</p>
+              <p className="text-[#0A0A0A] text-xs font-bold cursor-pointer"
+                onClick={scrollToWorks}
+              >HOW IT WORKS</p>
+              <p className="text-[#0A0A0A] text-xs font-bold cursor-pointer"
+                onClick={scrollToPricing}
+              >PRICING</p>
+              <p className="text-[#0A0A0A] text-xs font-bold cursor-pointer"
+                onClick={scrollToContact}
+              >CONTACT</p>
             </nav>
           </div>
 

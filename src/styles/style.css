@@ -2,9 +2,7 @@
 body {
     /* padding: 15px; */
 }
-section.How-it-works.py-20.bg-\[\#fff\] {
-    display: none;
-}
+
 * {
   margin: 0;
   padding: 0;
@@ -20,7 +18,6 @@ section.How-it-works.py-20.bg-\[\#fff\] {
 
 .container {
     width: 100%;
-    max-width: 1440px;
     margin: auto;
     display: flex;
     align-items: center;
@@ -914,4 +911,16 @@ h1.welcome-heading {
 .select-arrow{
     background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666666' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-position: right 20px center;
+}
+
+.bg_face_img{
+    background-image: url("../assets/images/banner.png");
+    background-size: 100% 100%;
+}
+
+@media screen and (max-width: 1000px) {
+  .bg_face_img{
+    background-image: url("../assets/images/facebg.png");
+    background-size: 100% 100%;
+  }
 }

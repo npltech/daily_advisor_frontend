@@ -101,17 +101,17 @@ const Signup = () => {
             </div>
 
             <div className="left-cont">
-              <h2 className="text-[16px] leading-[20px] font-[500] mb-[8px] text-[#0A0A0A]-500">
+              <h2 className="text-[16px] leading-[20px] font-bold mb-[8px] text-[#0A0A0A]-500">
                 Create your account
               </h2>
-              <p className="text-[12px] leading-[16px] font-[400] text-[#4B5563]-500 mb-[20px]">
+              <p className="text-[12px] leading-[16px] font-[400] text-[#848282]-500 mb-[20px]">
                 Start your personalized AI coaching journey
               </p>{" "}
             </div>
 
             <form onSubmit={handleSubmit} className="formsubmit space-y-3">
-              <div>
-                <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
+              <div className="mb-[16px]">
+                <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600 mb-[2px]">
                   <img src={form1} alt="Welcome Icon" />
                   Name
                 </label>
@@ -124,8 +124,8 @@ const Signup = () => {
                   required
                 />
               </div>
-              <div>
-                <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
+              <div className="mb-[16px]">
+                <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600 mb-[2px]">
                   <img src={form2} alt="Welcome Icon" />
                   Email
                 </label>
@@ -139,8 +139,8 @@ const Signup = () => {
                 />
               </div>
 
-              <div>
-                <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600">
+              <div className="mb-[16px]">
+                <label className="flex gap-[5px] text-[12px] leading-[16px] font-[400] text-[#4B5563]-600 mb-[2px]">
                   <img src={form3} alt="Welcome Icon" />
                   Password
                 </label>

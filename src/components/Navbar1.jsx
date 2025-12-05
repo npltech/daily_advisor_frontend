@@ -8,7 +8,7 @@ const Navbar1 = (props) => {
   const heading = useSelector((state) => state.nav.heading); 
 
   return (
-    <nav className="bg-white w-full p-4 flex items-center sticky top-0 z-50 shadow-sm">
+    <nav className="bg-white w-full p-4 flex items-center sticky top-0 z-8 shadow-sm">
       {/* Menu Icon */}
       <div className="toggle-icon mr-3 cursor-pointer text-gray-700"
         onClick={() => props.setCollapsed(!props.collapsed)}

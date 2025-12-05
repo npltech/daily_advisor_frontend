@@ -74,9 +74,16 @@ const Sidebar = (props) => {
           setConversation(res);
           if(location.pathname.startsWith('/user/chatbot')){
             if(!chatid){
-              loadChat(res[0]?.id);
+              console.log(4545454, res[0]?.id)
+              loadChat(res[0]);
             }else{
-              loadChat(chatid);
+              const con = res.length.filter(val=> val.id===chatid && UserGoal.goal_initiated);
+              if(con.length){
+                loadChat(con[0]);
+              }else{
+                const con1 = res.length.filter(val=> val.id===chatid);
+                loadChat(con[0]);
+              }              
             }
           }
         }
@@ -84,8 +91,13 @@ const Sidebar = (props) => {
       .catch((err) => {});
   };
 
-  const loadChat = (id) => {
-    navigate(`/user/chatbot?chatid=${id}`);    
+  const loadChat = (con) => {
+    console.log(con);
+    if(con.UserGoal.goal_initiated){
+      navigate(`/user/chatbot?chatid=${con.id}`);
+    }else{
+      navigate(`/goal/questions?goalid=${con.UserGoal.id}`);
+    }        
   };
 
   const loadPage = (path) => {
@@ -102,9 +114,9 @@ const Sidebar = (props) => {
   }
 
   return (
-    <div className="w-full flex flex-col justify-between h-full border-r bg-white gap-[20px] pt-2">
+    <div className="w-full flex flex-col justify-between h-full border-r bg-white gap-[20px]">
       <div>
-        <h1 className="text-[20px] font-[600] text-[#1E3A8A] pt-[8px] mt-[30px] mb-[20px] flex justify-center align-center">
+        <h1 className="text-[20px] font-[600] text-[#1E3A8A] mt-[20px] mb-[18px] flex justify-center align-center">
           {collapsed?
           (<img src={creategoal} alt="Create Icon" className="w-8 h-8" />):
           'Daily Advisor AI'}
@@ -205,7 +217,7 @@ const Sidebar = (props) => {
               <li
                 key={`conversation-${i}`}
                 className={`${con.id==chatid?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center pl-[10px] py-[6px] gap-[10px] text-xs leading-[20px] font-medium cursor-pointer`}
-                onClick={()=>loadChat(con.id)}
+                onClick={()=>loadChat(con)}
               >
                 <div>
                   <svg width="18" height="18" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
