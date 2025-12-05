@@ -19,40 +19,46 @@ const CreateGoal = () => {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(hideLoader());
-  }, [])
+  }, []);
 
-  const sendQuery = async ()=>{
+  const sendQuery = async (e) => {
+    e.preventDefault();
     setLoading(true);
     const postdata = {
-      query
-    }
+      query,
+    };
 
     await createConversation(postdata)
-    .then((res)=>{
-      console.log(res);
-      navigate("/goal/questions");
-    })
-    .catch((err)=>{
-      Swal.fire({
-        icon: "error",
-        title: err?.response?.data?.llmResponse?.details?.message || err?.response?.data?.llmResponse?.detail?.message || err?.response?.data?.llmResponse?.message || err?.message || "Something went wrong!!",
-        text: '',
-        confirmButtonColor: "#3085d6",
+      .then((res) => {
+        console.log(res);
+        navigate("/goal/questions");
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title:
+            err?.response?.data?.llmResponse?.details?.message ||
+            err?.response?.data?.llmResponse?.detail?.message ||
+            err?.response?.data?.llmResponse?.message ||
+            err?.message ||
+            "Something went wrong!!",
+          text: "",
+          confirmButtonColor: "#3085d6",
+        });
+      })
+      .finally(() => {
+        setLoading(false);
       });
-    }) 
-    .finally(()=>{
-      setLoading(false);
-    })
-  }
+  };
 
   return (
-    <div className="h-screen flex items-center justify-center py-[40px] goal_background">
+    <div className="h-screen flex items-center justify-center py-[40px] px-[20px] goal_background">
       <div className="w-full lg:w-[900px] shadow-sm px-[20px]">
         {/* Icon */}
         <div className="mt-10 mb-[10px] flex justify-center">
-          <img src={creategoal} alt="Create Icon" className="w-8 h-8" />
+          <img src={creategoal} alt="Create Icon" className="w-16 h-16" />
         </div>
 
         {/* Heading */}
@@ -71,28 +77,38 @@ const CreateGoal = () => {
         </p>
 
         {/* Chat Box */}
-        <div className="design-create w-full max-w-3xl mt-10 mx-auto mb-[20px]">
+        <div className="design-create w-full mt-10 mb-[20px]">
           <div className="bg-white px-[12px] py-[12px] lg:px-[12px] lg:py-[12px]">
             {/* Input */}
-            <div className="goal-button flex items-center justify-center iconwithtext pl-[16px] gap-[5px]">
-              <img
-                src={creategoal}
-                alt="Create Icon"
-                className="w-[5%] h-[5%] "
-              />
-              <textarea
-                placeholder="Ask AI a question or make a request:"
-                className="w-full outline-none resize-none text-[12px] lg:text-[16px] border-none mt-[20px]"
-                value={query}
-                onChange={(e)=> setQuery(e.target.value)}
-              ></textarea>
-              {!loading && <LuSend className="cursor-pointer w-8 h-8" onClick={sendQuery} />}
-              {loading && <img
-                src={sendGif}
-                alt="Send Gif"
-                className="w-8 h-8 object-contain"
-              />}
-            </div>
+            <form onSubmit={(e)=>sendQuery(e)}>
+              <div className="goal-button flex items-center justify-center iconwithtext pl-[16px] gap-[5px]">
+                <img
+                  src={creategoal}
+                  alt="Create Icon"
+                  className="w-[5%] h-[5%] "
+                />
+                <input
+                  type="text"
+                  placeholder="Ask AI a question or make a request:"
+                  className="w-full outline-none resize-none text-[12px] lg:text-[16px] border-none"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+                {!loading && (
+                  <LuSend
+                    className="cursor-pointer w-8 h-8"
+                    onClick={(e)=>sendQuery(e)}
+                  />
+                )}
+                {loading && (
+                  <img
+                    src={sendGif}
+                    alt="Send Gif"
+                    className="w-8 h-8 object-contain"
+                  />
+                )}
+              </div>
+            </form>
           </div>
         </div>
 
