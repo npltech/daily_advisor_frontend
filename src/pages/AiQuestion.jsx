@@ -38,8 +38,6 @@ const AiQuestion = () => {
   const [setupCompleted, setSetupCompleted] = useState(false);
   const userToken = useSelector((state) => state.auth.token);
 
-  console.log(goalid);
-
   useEffect(() => {
     dispatch(showLoader());
     const getQuestions = () => {
@@ -197,7 +195,6 @@ const AiQuestion = () => {
   };
 
   const previousStep = async ()=>{
-    console.log(conversation);
     if(conversation?.last_primary_questions.length){
       const setNumber = conversation?.last_primary_questions[0].set_number-1;
       console.log(setNumber);
@@ -234,7 +231,6 @@ const AiQuestion = () => {
   }
 
   const submitQuestions = async () => {
-    console.log("submit questions", questionForm);
     let answers = [];
 
     for (const key in questionForm) {
@@ -412,7 +408,10 @@ const AiQuestion = () => {
             conversation?.last_primary_questions.length && (
               <div className="w-full h-[12px] bg-[#E4E4E4] rounded-full mb-[8px]">
                 <div
-                  className={`w-${conversation?.last_primary_questions[0].set_number}/3 h-full bg-[#1E3A8A] rounded-full`}
+                  className={`h-full bg-[#1E3A8A] rounded-full`}
+                  style={{
+                    width: `${(conversation?.last_primary_questions?.[0]?.set_number / 3) * 100}%`
+                  }}
                 ></div>
               </div>
             )}
