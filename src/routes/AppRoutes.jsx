@@ -18,6 +18,8 @@ import { jwtDecode } from "jwt-decode";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../store/slices/authSlice.js';
 import { lastConversation } from '../apis/conversationApi.js';
+import Checkin from '../pages/Checkin.jsx';
+import Insight from '../pages/Insight.jsx';
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -88,8 +90,8 @@ const AppRoutes = () => {
         </ProtectedRoute>}>
         <Route path="" element={<Dashboard />} />
         <Route path="dashboard" element={<Dashboard />} />
-        {/* <Route path="welcome" element={<Welcome />} /> */}
-        <Route path="onboarding" element={<Onboarding />} />                
+        <Route path="checkin" element={<Checkin />} />
+        <Route path="insights" element={<Insight />} />               
         <Route path="chatbot" element={<Chatbot />} />                
         <Route path="goals" element={<Goals />} />        
       </Route>

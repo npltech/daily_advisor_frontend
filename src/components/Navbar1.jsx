@@ -3,14 +3,16 @@ import { BsList } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const Navbar1 = () => {
+const Navbar1 = (props) => {
   const navigate = useNavigate();
   const heading = useSelector((state) => state.nav.heading); 
 
   return (
     <nav className="bg-white w-full p-4 flex items-center sticky top-0 z-50 shadow-sm">
       {/* Menu Icon */}
-      <div className="toggle-icon mr-3 cursor-pointer text-gray-700">
+      <div className="toggle-icon mr-3 cursor-pointer text-gray-700"
+        onClick={() => props.setCollapsed(!props.collapsed)}
+      >
         <BsList />
       </div>
 
