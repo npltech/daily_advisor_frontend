@@ -114,20 +114,24 @@ const Sidebar = (props) => {
   }
 
   return (
-    <div className="w-full flex flex-col justify-between h-full border-r bg-white gap-[20px]">
+    <div className="w-full flex flex-col justify-between h-screen border-r bg-white gap-[20px]">
       <div>
-        <h1 className="text-[20px] font-[600] text-[#1E3A8A] mt-[20px] mb-[18px] flex justify-center align-center">
-          {collapsed?
+        <h1 className="w-full hidden sm:block text-[20px] font-[600] text-[#1E3A8A] mt-[20px] mb-[18px] text-center flex justify-center align-center px-[10px] pt-[28px]">
+          {/* {collapsed?
           (<img src={creategoal} alt="Create Icon" className="w-8 h-8" />):
-          'Daily Advisor AI'}
+          'Daily Advisor AI'} */}
+          Daily Advisor AI
+        </h1>
+        <h1 className="block sm:hidden text-[20px] font-[600] text-[#1E3A8A] mt-[20px] mb-[18px] flex justify-center align-center pt-[28px]">
+            <img src={creategoal} alt="Create Icon" className="w-8 h-8" />
         </h1>
 
-        <h2 className="text-xs font-normal text-[#4B5563] leading-[20px] mb-[10px] pl-[16px] border-t pt-[16px]">
+        <h2 className="text-xs font-normal text-[#4B5563] leading-[20px] mb-[10px] pl-[8px] sm:pl-[16px] border-t pt-[16px]">
           Quick Actions
         </h2>
 
-        <ul className="sidebar-style space-y-1 ml-[15px]">
-          <li className={`${location.pathname==='/user' || location.pathname==='/dashboard'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-xs font-[500] leading-[18px] cursor-pointer pl-[10px] py-[6px]`}
+        <ul className="sidebar-style space-y-1 ml-[15px] pr-[5px]">
+          <li className={`${location.pathname==='/user' || location.pathname==='/dashboard'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-xs font-[500] leading-[18px] cursor-pointer pl-[0px] sm:pl-[10px] py-[6px]`}
             onClick={()=>loadPage('/user')}
           >
             <div>
@@ -139,7 +143,7 @@ const Sidebar = (props) => {
             {collapsed?'Dashboard':'Dashboard'}
           </li>
 
-          <li className={`${location.pathname==='/user/checkin'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-xs font-[500] leading-[18px] cursor-pointer pl-[10px] py-[6px]`}
+          <li className={`${location.pathname==='/user/checkin'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-xs font-[500] leading-[18px] cursor-pointer pl-[0px] sm:pl-[10px] py-[6px]`}
             onClick={()=>loadPage('/user/checkin')}
           >
             <div>
@@ -154,7 +158,7 @@ const Sidebar = (props) => {
             {collapsed?'Daily Check-in':'Daily Check-in'}            
           </li>
 
-          <li className={`${location.pathname==='/user/goals'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-xs font-[500] leading-[18px] cursor-pointer pl-[10px] py-[6px]`}
+          <li className={`${location.pathname==='/user/goals'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-xs font-[500] leading-[18px] cursor-pointer pl-[0px] sm:pl-[10px] py-[6px]`}
             onClick={()=>loadPage('/user/goals')}
           >
             <div>
@@ -175,7 +179,7 @@ const Sidebar = (props) => {
             {collapsed?'Goal Review':'Goal Review'}
           </li>
 
-          <li className={`${location.pathname==='/user/insights' || location.pathname==='/dashboard'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-xs font-[500] leading-[18px] cursor-pointer pl-[10px] py-[6px]`}
+          <li className={`${location.pathname==='/user/insights' || location.pathname==='/dashboard'?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center gap-[10px] text-xs font-[500] leading-[18px] cursor-pointer pl-[0px] sm:pl-[10px] py-[6px]`}
             onClick={()=> loadPage('/user/insights')}
           >
             <div>
@@ -204,19 +208,19 @@ const Sidebar = (props) => {
 
         <div className="sidebar-border border-t pt-[16px] mt-[16px]" />
 
-        <div className="flex justify-between items-center mb-[10px] ml-[10px]">
-          <h2 className="text-xs font-normal text-[#4B5563] leading-[20px] ml-[10px]">
+        <div className="flex justify-between items-center mb-[10px] pl-[8px] sm:pl-[16px]">
+          <h2 className="text-xs font-normal text-[#4B5563] leading-[20px]">
             AI CONVERSATION
           </h2>
           <i className="fa-solid fa-chevron-up text-gray-500 text-[12px]"></i>
         </div>
 
-        <ul className="sidebar-style space-y-1 ml-[15px]">
+        <ul className="sidebar-style space-y-1 ml-[15px] pr-[5px]">
           {conversation.length > 0 &&
             conversation.map((con, i) => (
               <li
                 key={`conversation-${i}`}
-                className={`${con.id==chatid?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center pl-[10px] py-[6px] gap-[10px] text-xs leading-[20px] font-medium cursor-pointer`}
+                className={`${con.id==chatid?'text-[#1E3A8A] font-semibold':'text-[#252F40] font-medium hover:text-[#1E3A8A]'} flex items-center pl-[0px] sm:pl-[10px] py-[6px] gap-[10px] text-xs leading-[20px] font-medium cursor-pointer`}
                 onClick={()=>loadChat(con)}
               >
                 <div>

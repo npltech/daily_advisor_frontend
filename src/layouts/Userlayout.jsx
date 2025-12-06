@@ -7,18 +7,18 @@ const Userlayout = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div className='flex w-full h-screen overflow-hidden'>
+    <div className='flex items-stretch w-full h-screen overflow-hidden'>
         <div
           className={`h-screen overflow-y-auto transition-all duration-300 
-            ${collapsed ? "w-[150px]" : "w-[40%] sm:w-[35%] lg:w-[20%]"}`}
+            ${collapsed ? "w-[0px]" : "w-[40%] md:w-[35%] lg:w-[20%]"}`}
         >
             <Sidebar collapsed={collapsed} />
         </div>        
         <div className={`transition-all duration-300 
-            ${collapsed ? "w-[calc(100%-150px)]" : "w-[100%] sm:w-[65%] lg:w-[80%]"}`}
+            ${collapsed ? "w-[calc(100%-0%)]" : "w-[60%] md:w-[65%] lg:w-[80%]"}`}
         >
             <Navbar1 collapsed={collapsed} setCollapsed={setCollapsed} />
-            <div className="overflow-y-auto h-[calc(100vh-40px)]">
+            <div className="overflow-y-auto h-[calc(100vh-40px)] bg-[#F5F7FA] pt-[24px]">
               <Outlet />
             </div>            
         </div>

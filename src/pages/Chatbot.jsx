@@ -82,7 +82,7 @@ const Chatbot = () => {
   return (
     <>
       {fetched && (
-        <div className="bg-[#F5F7FA] pt-6 pb-2 px-4 h-full flex flex-col overflow-hidden">
+        <div className="h-full pt-6 pb-2 px-4 h-full flex flex-col overflow-hidden">
           {messages.length === 0 && (
             <div className="chatbot w-full xl:w-[900px] bg-white text-center mx-auto">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-900 text-yellow-300 rounded-lg mb-4">
@@ -99,29 +99,29 @@ const Chatbot = () => {
             </div>
           )}
 
-          <div className="flex justify-center overflow-y-auto hide_scrollbar px-4 mt-6">
+          <div className="flex justify-center overflow-y-auto hide_scrollbar px-4 mt-6 w-full overflow-x-hidden">
             {messages.length > 0 && (
-              <div className="w-full space-y-8 max-w-[800px]">
+              <div className="w-full space-y-8 max-w-[800px] overflow-x-hidden hide_scrollbar">
                 {messages.map((val, i) => (
                   <div key={i}>
                     {val.message_type === "aireply" ? (
-                      <div className="flex w-full items-start gap-2 max-w-[85%]">
+                      <div className="flex w-full items-start gap-2 max-w-[85%] break-words break-all overflow-hidden hide_scrollbar">
                         <img
                           src={chatbotmessage}
                           alt="AI"
-                          className="w-4 h-4"
+                          className="w-[30px] h-[30px]"
                         />
 
                         <div className="bg-white p-4 shadow-sm rounded-lg">
-                          <p className="text-[14px] text-[#0A0A0A] break-words">
+                          <p className="text-[14px] text-[#0A0A0A] break-words break-all">
                             {val.message}
                           </p>
                         </div>
                       </div>
                     ) : (
-                      <div className="flex justify-end items-start gap-2">
+                      <div className="flex justify-end items-start gap-2 break-words break-all overflow-hidden hide_scrollbar">
                         <div className="bg-[#EAF2FF] p-3 rounded-lg max-w-[85%]">
-                          <p className="text-[14px] text-[#0A0A0A] break-words">
+                          <p className="text-[14px] text-[#0A0A0A] break-words break-all">
                             {val.message}
                           </p>
                         </div>
@@ -137,10 +137,36 @@ const Chatbot = () => {
                 <div ref={messagesEndRef}></div>
               </div>
             )}            
+            
+            {/* {messages.length > 0 && (
+              <div className="w-full space-y-8 max-w-full md:max-w-[800px]">
+                {messages.map((val, i) => ( <div key={i}> {val.message_type === "aireply" ? ( <div className="flex w-full items-start gap-2 max-w-[85%]">
+                  <img src={chatbotmessage} alt="AI" className="w-[30px] h-[30px]" />
+                  <div className="bg-white p-4 shadow-sm rounded-lg">
+                    <p className="text-[14px] text-[#0A0A0A] break-words">
+                      {val.message}
+                    </p>
+                    </div>
+                    </div>
+                    ) : (
+                      <div className="flex justify-end items-start gap-2">
+                        <div className="bg-[#EAF2FF] p-3 rounded-lg max-w-[85%]">
+                          <p className="text-[14px] text-[#0A0A0A] break-words">
+                            {val.message}
+                          </p>
+                          </div>
+                          <img src={user} alt="You" className="w-[30px] h-[30px]" />
+                          </div>
+                          )}
+                          </div>
+                          ))}
+                          <div ref={messagesEndRef}></div>
+              </div>
+            )} */}
           </div>
 
           {/* 🟦 INPUT BOX — FIXED AT BOTTOM */}
-          <div className="w-full shrink-0 pt-4 pb-8">
+          <div className="w-full shrink-0 pt-4 pb-[28px]">
             <form className="w-full max-w-[800px] mx-auto" onSubmit={(e)=>sendQuery(e)}>
               <div className="w-full flex items-center gap-3 border-2 bg-[#FFFFFF] border-[#E5F2FF] p-3 rounded-[16px] h-[56px]">
                 <input
