@@ -76,12 +76,22 @@ const Navbar = (props) => {
         {/* Mobile Dropdown Menu */}
         {menuOpen && (
           <div className="lg:hidden w-full bg-white px-6 pb-4">
-            <nav className="flex flex-col gap-4 text-[16px]">
-              <a href="#">ABOUT</a>
-              <a href="#">FEATURES</a>
-              <a href="#">HOW IT WORKS</a>
-              <a href="#">PRICING</a>
-              <a href="#">CONTACT</a>
+            <nav className="flex flex-col gap-4 text-[16px] pt-[16px]">
+              <p className="text-[#0A0A0A] text-xs font-bold cursor-pointer"
+                onClick={scrollToAbout}
+              >ABOUT</p>
+              <p className="text-[#0A0A0A] text-xs font-bold cursor-pointer"
+                onClick={scrollToFeatures}
+              >FEATURES</p>
+              <p className="text-[#0A0A0A] text-xs font-bold cursor-pointer"
+                onClick={scrollToWorks}
+              >HOW IT WORKS</p>
+              <p className="text-[#0A0A0A] text-xs font-bold cursor-pointer"
+                onClick={scrollToPricing}
+              >PRICING</p>
+              <p className="text-[#0A0A0A] text-xs font-bold cursor-pointer"
+                onClick={scrollToContact}
+              >CONTACT</p>
 
               <button
                 type="button"
