@@ -164,12 +164,10 @@ const AiQuestion = () => {
     let postdata = {
       answers,
     };
-    console.log("post data", postdata);
-
+    
     dispatch(showLoader());
     await updateMultipleQuestions(postdata)
       .then((res) => {
-        console.log("res", res);
         createFormData(res.newQuestions);
         setConversation((prev) => ({
           ...prev,
@@ -508,27 +506,27 @@ const AiQuestion = () => {
                         appearance-none bg-no-repeat bg-right-[12px] select-arrow cursor-pointer"
                       >
                         <option value="">Select</option>
-                        {question.options.split(",").map((option, idx) => (
+                        {question.options.split("aioption: ").filter(x => x.trim() !== "").map((option, idx) => (
                           <option
                             key={`opt-${idx}-${question.id}`}
-                            value={option}
+                            value={option.trim()}
                           >
-                            {option}
+                            {option.trim()}
                           </option>
                         ))}
                       </select>
                     )}
                     {question.type === "multiselect" && (
                       <div className="flex gap-[15px] flex-wrap">
-                        {question.options.split(",").map((option, idx) => (
+                        {question.options.split("aioption: ").filter(x => x.trim() !== "").map((option, idx) => (
                           <div
                             key={`multi-${idx}-${question.id}`}
                             onClick={() =>
-                              handleMultiOptions(question.id, option)
+                              handleMultiOptions(question.id, option.trim())
                             }
                             className={`checkbox-card cursor-pointer border rounded-[8px] px-[16px] py-[10px] w-[250px] 
                       ${
-                        questionForm[question.id].includes(option)
+                        questionForm[question.id].includes(option.trim())
                           ? "border-[#E4E4E4] bg-[#EEF4FF]"
                           : "border-[#DBDBDB]"
                       }
@@ -538,13 +536,13 @@ const AiQuestion = () => {
                               <input
                                 type="checkbox"
                                 checked={questionForm[question.id].includes(
-                                  option
+                                  option.trim()
                                 )}
                                 readOnly
                               />
                               <div>
                                 <h4 className="text-[12px] font-[500] text-[#0A0A0A]">
-                                  {option}
+                                  {option.trim()}
                                 </h4>
                               </div>
                             </div>
