@@ -390,25 +390,25 @@ const Home = () => {
           <div className="w-[80%] md:w-[48%] lg:w-[31%] py-0 lg:py-6">
             <div className="w-full bg-[#FFFFFF] rounded-2xl shadow-lg p-8">
               <div className="flex justify-end">
-                <button className="mt-[-32px] mr-[-32px] bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-tr-[15px] rounded-bl-[15px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
+                {/* <button className="mt-[-32px] mr-[-32px] bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-tr-[15px] rounded-bl-[15px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
                   Start Pro Trial
-                </button>
+                </button> */}
               </div>
 
-              <h3 className="text-[24px] font-[700] text-[#FFFFFF]">Pro</h3>
+              <h3 className="text-[24px] font-[700] text-[#0A0A0A]">Free</h3>
               <p className="text-[14px] text-[#D1D5DC] mt-1">
-                For serious personal growth
+                Perfect for trying out Daily Advisor AI
               </p>
 
               <div className="mt-[20px]">
                 <span className="text-[58px] font-bold text-[#E6C26B]">
-                  $29
+                  $0
                 </span>
-                <span className="text-[14px] text-[#D1D5DC]"> /per month</span>
+                <span className="text-[14px] text-[#D1D5DC]"> /forever</span>
               </div>
 
               <button className="w-full mt-[20px] bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-[8px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
-                Start Pro Trial
+                Start Free
               </button>
 
               <div className="w-full h-[1px] bg-[#E4E4E4] my-6"></div>
@@ -416,32 +416,24 @@ const Home = () => {
               <ul className="space-y-3">
                 <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
                   <RiCheckboxCircleLine />
-                  Unlimited AI conversations
+                  7-day trial of all features
                 </li>
                 <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
                   <RiCheckboxCircleLine />
-                  Advanced daily check-ins
+                  Basic daily check-ins
                 </li>
                 <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
                   <RiCheckboxCircleLine />
-                  Custom goal frameworks
+                  Limited AI conversations
                 </li>
                 <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
                   <RiCheckboxCircleLine />
-                  Priority AI coaching
+                  Progress tracking
                 </li>
                 <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
                   <RiCheckboxCircleLine />
-                  Weekly strategy sessions
-                </li>
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
-                  <RiCheckboxCircleLine />
-                  Insights & productivity tools
-                </li>
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
-                  <RiCheckboxCircleLine />
-                  Weekly support
-                </li>
+                  Email support
+                </li>                
               </ul>
             </div>
           </div>
@@ -502,25 +494,25 @@ const Home = () => {
           <div className="w-[80%] md:w-[48%] lg:w-[31%] py-0 lg:py-6">
             <div className="w-full bg-[#FFFFFF] rounded-2xl shadow-lg p-8">
               <div className="flex justify-end">
-                <button className="mt-[-32px] mr-[-32px] bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-tr-[15px] rounded-bl-[15px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
+                {/* <button className="mt-[-32px] mr-[-32px] bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-tr-[15px] rounded-bl-[15px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
                   Start Pro Trial
-                </button>
+                </button> */}
               </div>
 
-              <h3 className="text-[24px] font-[700] text-[#FFFFFF]">Pro</h3>
+              <h3 className="text-[24px] font-[700] text-[#0A0A0A]">Business</h3>
               <p className="text-[14px] text-[#D1D5DC] mt-1">
-                For serious personal growth
+                For teams and organizations
               </p>
 
               <div className="mt-[20px]">
-                <span className="text-[58px] font-bold text-[#E6C26B]">
-                  $29
+                <span className="text-[58px] font-bold text-[#0A0A0A]">
+                  $99
                 </span>
                 <span className="text-[14px] text-[#D1D5DC]"> /per month</span>
               </div>
 
               <button className="w-full mt-[20px] bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-[8px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
-                Start Pro Trial
+                Contact Sales
               </button>
 
               <div className="w-full h-[1px] bg-[#E4E4E4] my-6"></div>
@@ -528,32 +520,36 @@ const Home = () => {
               <ul className="space-y-3">
                 <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
                   <RiCheckboxCircleLine />
-                  Unlimited AI conversations
+                  Everything in Professional
                 </li>
                 <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
                   <RiCheckboxCircleLine />
-                  Advanced daily check-ins
+                  Dedicated AI advisor model
                 </li>
                 <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
                   <RiCheckboxCircleLine />
-                  Custom goal frameworks
+                  Business & team insights
                 </li>
                 <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
                   <RiCheckboxCircleLine />
-                  Priority AI coaching
+                  Unlimited strategy sessions
                 </li>
                 <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
                   <RiCheckboxCircleLine />
-                  Weekly strategy sessions
+                  Custom integrations
                 </li>
                 <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
                   <RiCheckboxCircleLine />
-                  Insights & productivity tools
+                  API access
                 </li>
                 <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
                   <RiCheckboxCircleLine />
-                  Weekly support
+                  White-glove support
                 </li>
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                  <RiCheckboxCircleLine />
+                  1-on-1 onboarding call
+                </li>                
               </ul>
             </div>
           </div>

@@ -897,6 +897,18 @@ h1.welcome-heading {
     min-height: 100vh;
 }
 
+.goal_background1 {
+    background-image: url('../assets/images/background1.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.goal_background2 {
+    background-image: url('../assets/images/background.png');
+    background-size: cover;
+    background-position: center;
+}
+
 .hide_scrollbar{
     scrollbar-width: none;
 }
@@ -931,4 +943,8 @@ h1.welcome-heading {
 .hide_scrollbar {
   -ms-overflow-style: none; 
   scrollbar-width: none; 
+}
+
+.auto_phrase{
+    word-break: auto-phrase;
 }

@@ -79,10 +79,25 @@ const Chatbot = () => {
       });
   };
 
+  const copyInnerHTML = (divId)=> {
+    const element = document.getElementById(divId);
+    if (!element) return;
+
+    const htmlContent = element.innerHTML;
+
+    navigator.clipboard.writeText(htmlContent)
+      .then(() => {
+        console.log("Copied successfully!");
+      })
+      .catch(err => {
+        console.error("Failed to copy:", err);
+      });
+  }
+
   return (
     <>      
       {fetched && (
-        <div className="h-full pt-6 pb-2 px-4 h-full flex flex-col overflow-hidden relative">
+        <div className="h-full pt-6 pb-2 px-4 h-full flex flex-col overflow-hidden relative goal_background1">
           {messages.length === 0 && (
             <div className="chatbot w-full xl:w-[900px] bg-white text-center mx-auto">
               {/* <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-900 text-yellow-300 rounded-lg mb-4">
@@ -99,7 +114,7 @@ const Chatbot = () => {
             </div>            
           )}
 
-          <div className="flex justify-center overflow-y-auto hide_scrollbar px-4 mt-6 w-full overflow-x-hidden"> 
+          <div className="flex justify-center overflow-y-auto hide_scrollbar px-4 mt-6 w-full overflow-x-hidden pb-[56px]"> 
             {messages.length > 0 && (
               <div className="w-full space-y-8 max-w-[800px] overflow-x-hidden hide_scrollbar">
                 {messages.map((val, i) => (
@@ -112,8 +127,8 @@ const Chatbot = () => {
                           className="w-[30px] h-[30px]"
                         />
 
-                        <div className="bg-white p-4 shadow-sm rounded-lg">
-                          <p className="text-[14px] text-[#0A0A0A] break-words break-all"
+                        <div className="bg-white p-4 shadow-sm w-full rounded-lg">
+                          <p className="text-[14px] text-[#0A0A0A] auto_phrase w-[95%]"
                             dangerouslySetInnerHTML={{ __html: val.message }}
                           >
                             {/* {val.message} */}
@@ -121,9 +136,9 @@ const Chatbot = () => {
                         </div>
                       </div>
                     ) : (
-                      <div className="flex justify-end items-start gap-2 break-words break-all overflow-hidden hide_scrollbar">
+                      <div className="flex justify-end items-start w-full gap-2 break-words break-all overflow-hidden hide_scrollbar">
                         <div className="bg-[#EAF2FF] p-3 rounded-lg max-w-[85%]">
-                          <p className="text-[14px] text-[#0A0A0A] break-words break-all"
+                          <p className="text-[14px] text-[#0A0A0A] auto_phrase"
                             dangerouslySetInnerHTML={{ __html: val.message }}
                           >
                             {/* {val.message} */}
@@ -171,7 +186,7 @@ const Chatbot = () => {
 
           {/* 🟦 INPUT BOX — FIXED AT BOTTOM */}
           {/* <div className="w-full shrink-0 pt-4 pb-[28px]"> */}
-          <div className="w-full absolute bottom-[0px] left-0 right-0 px-4 pb-[28px] z-50 bg-[#F5F7FA]">
+          <div className="w-full absolute bottom-[0px] left-0 right-0 px-4 pb-[28px] z-40 bg-[#F5F7FA] goal_background1">
             <form className="w-full max-w-[800px] mx-auto" onSubmit={(e)=>sendQuery(e)}>
               <div className="w-full flex items-center gap-3 border-2 bg-[#FFFFFF] border-[#E5F2FF] p-3 rounded-[16px] h-[56px]">
                 <input
