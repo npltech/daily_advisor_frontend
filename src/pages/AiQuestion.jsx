@@ -451,7 +451,7 @@ const AiQuestion = () => {
               <div className="max-w-3xl mx-auto bg-white rounded-lg">
                 {conversation?.last_primary_questions.map((question, index) => (
                   <div key={`qu-${index}`} className="w-full mb-[16px]">
-                    <label className="block text-[12px] font-[400] text-[#848282] mb-[2px]">
+                    <label className="block text-[12px] font-[400] text-[#4B5563]-600 mb-[2px]">
                       {question.question} *
                     </label>
                     {question.type === "text" && (
@@ -463,7 +463,7 @@ const AiQuestion = () => {
                         name={question.id}
                         value={questionForm[question.id]}
                         onChange={handleChange}
-                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
+                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px]"
                       />
                     )}
                     {question.type === "number" && (
@@ -475,7 +475,7 @@ const AiQuestion = () => {
                         name={question.id}
                         value={questionForm[question.id]}
                         onChange={handleChange}
-                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
+                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px]"
                       />
                     )}
                     {question.type === "date" && (
@@ -484,7 +484,7 @@ const AiQuestion = () => {
                         name={question.id}
                         value={questionForm[question.id]}
                         onChange={handleChange}
-                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
+                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px]"
                       />
                     )}
                     {question.type === "time" && (
@@ -493,7 +493,7 @@ const AiQuestion = () => {
                         name={question.id}
                         value={questionForm[question.id]}
                         onChange={handleChange}
-                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px] placeholder-[#181818] placeholder:font-[500]"
+                        className="mt-[4px] w-full border border-[#DBDBDB] rounded-[8px] h-[40px] px-[16px] text-[12px]"
                       />
                     )}
                     {question.type === "option" && (
