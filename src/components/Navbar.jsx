@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import creategoal from "../assets/images/creategoal.png";
 
 const Navbar = (props) => {
-  const {scrollToAbout, scrollToFeatures, scrollToWorks, scrollToPricing, scrollToContact} = props;
+  const {scrollToAbout, scrollToFeatures, scrollToWorks, scrollToPricing, scrollToContact, toggleLoginForm} = props;
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
@@ -24,7 +24,8 @@ const Navbar = (props) => {
   }, []);
 
   const navigateLogin = () => {
-    navigate("/login");
+    // navigate("/login");
+    toggleLoginForm(true);
   };
 
   return (
