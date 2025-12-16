@@ -185,14 +185,14 @@ const Home = () => {
       />
 
       <section className="bg-[#FFFFFF] p-4">
-        <div className="banner z-1 h-[800px] bg-contain bg-no-repeat bg-top-center bg_face_img">
+        <div className="banner z-1 h-[480px] lg:h-[600px] bg-contain bg-no-repeat bg-top-center bg_face_img">
           <div className="banner-top-content w-full lg:pt-[140px] pt-[140px]">
             <div className="subheading-top bg-[#1E3A8A66] rounded-sm">
               <img src={bannertop} alt="Banner Top" />
               <h3 className="">Personalized AI Coach</h3>
             </div>
           </div>
-          <div className="banner-content">
+          <div className="banner-content px-[20px] lg-[40px]">
             <h2 className="">Your Daily AI Advisor for Life & Business</h2>
             <p className="text-[#D1D5DC]">
               Beyond generic AI. Get structured onboarding, personalized
@@ -216,21 +216,21 @@ const Home = () => {
               </button>
             </div>
           </div>
-          <div className="banner-image">
+          {/* <div className="banner-image">
             <img src={dashboard} alt="Banner Image" />
-          </div>
+          </div> */}
         </div>
       </section>
 
       <section
-        className="about-us px-[20px] sm:px-[60px] pt-[220px] lg:pt-[520px]"
+        className="about-us px-[20px] sm:px-[60px] pt-[30px] lg:pt-[80px]"
         ref={aboutRef}
       >
         <div className="container">
           <div className="flex w-full flex-wrap lg:flex-nowrap ">
             <div className="about-us-content flex flex-col w-full lg:w-1/2 mb-[20px] md:mb-0">
               <h3 className="text-2xl font-semibold mb-[10px]">ABOUT US</h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 font-[14px] pb-[10px]">
                 Daily Advisor AI is built to understand your goals, track your
                 progress, and offer daily insights that keep you moving forward.
               </p>
@@ -247,7 +247,7 @@ const Home = () => {
                     <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#F8FAFC]">
                       <FaCheck className="text-[#097153] text-[10px] translate-y-[0.5px] mx-auto block" />
                     </span>
-                    <span className="text-[#334155] text-[15px] leading-relaxed">
+                    <span className="text-[#334155] text-[12px] leading-relaxed">
                       {text}
                     </span>
                   </li>
@@ -296,8 +296,8 @@ const Home = () => {
               </div>
 
               <div className="daily-check flex flex-wrap md:flex-nowrap w-full gap-[20px] mb-[20px]">
-                <div className="w-full bg-[url('/src/assets/images/daily.png')] bg-no-repeat bg-cover bg-top flex text-white py-6 pl-6 rounded-2xl relative">
-                  <div className="w-[50%] flex flex-col justify-center px-4 py-4">
+                <div className="w-full bg-[url('/src/assets/images/daily.png')] bg-no-repeat bg-cover bg-top flex flex-col lg:flex-row text-white py-6 pl-6 rounded-2xl relative">
+                  <div className="w-[100%] lg:w-1/2 flex flex-col justify-center px-4 py-4">
                     <h3 className="text-[32px] text-[#FFFFFF] font-bold">
                       Daily Check-ins
                     </h3>
@@ -307,7 +307,7 @@ const Home = () => {
                       morning and evening routines.
                     </p>
                   </div>
-                  <div className="w-[50%] py-4 pr-[1.5px]">
+                  <div className="w-[100%] lg:w-1/2 py-4 pr-[1.5px]">
                     <img
                       src={browser}
                       alt="Features Image"
@@ -424,10 +424,10 @@ const Home = () => {
                 </div>
               </div>
               <div className="scroll-animate">
-                <h3 className="text-[lg] font-[semibold] text-[gray]-900">
+                <h3 className="text-[lg] text-[gray]-900 text-[#0A0A0A]">
                   Onboard
                 </h3>
-                <p className="text-[sm] text-[gray]-600 mt-[2] leading-relaxed">
+                <p className="text-[14px] text-[#4B5563] mt-[2] leading-relaxed">
                   Begin with a quick, guided setup where you share your goals,
                   challenges, and priorities. DailyAdvisor learns what matters
                   most to you, creating a strong foundation for tailored
@@ -443,10 +443,10 @@ const Home = () => {
                 </div>
               </div>
               <div className="scroll-animate">
-                <h3 className="text-[lg] font-[semibold] text-[gray]-900">
+                <h3 className="text-[lg] font-[semibold] text-[gray]-900 [#0A0A0A]">
                   Get Personalized Plan
                 </h3>
-                <p className="text-[sm] text-[gray]-600 mt-[2] leading-relaxed">
+                <p className="text-[14px] text-[#4B5563] mt-[2] leading-relaxed">
                   Based on your inputs, your AI advisor builds a custom growth
                   plan – blending productivity, mindset, and strategy. You’ll
                   receive focused goals, progress checkpoints, and actionable
@@ -462,10 +462,10 @@ const Home = () => {
                 </div>
               </div>
               <div className="scroll-animate">
-                <h3 className="text-[lg] font-[semibold] text-[gray]-900">
+                <h3 className="text-[lg] font-[semibold] text-[gray]-900 [#0A0A0A]">
                   Receive Daily Guidance
                 </h3>
-                <p className="text-[sm] text-[gray]-600 mt-[2] leading-relaxed">
+                <p className="text-[14px] text-[#4B5563] mt-[2] leading-relaxed">
                   Each day, get personalized reminders, motivation, and nudges
                   that keep you on track. Track progress and celebrate small
                   wins that lead to lasting success.
@@ -497,13 +497,13 @@ const Home = () => {
               </div>
 
               <h3 className="text-[24px] font-[700] text-[#0A0A0A]">Free</h3>
-              <p className="text-[14px] text-[#D1D5DC] mt-1">
+              <p className="text-[14px] text-[#4b5563] mt-1">
                 Perfect for trying out Daily Advisor AI
               </p>
 
               <div className="mt-[20px]">
-                <span className="text-[58px] font-bold text-[#E6C26B]">$0</span>
-                <span className="text-[14px] text-[#D1D5DC]"> /forever</span>
+                <span className="text-[58px] font-bold text-[#e6c26b]">$0</span>
+                <span className="text-[14px] text-[#4b5563]"> /forever</span>
               </div>
 
               <button className="w-full mt-[20px] bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-[8px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
@@ -513,23 +513,23 @@ const Home = () => {
               <div className="w-full h-[1px] bg-[#E4E4E4] my-6"></div>
 
               <ul className="space-y-3">
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   7-day trial of all features
                 </li>
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   Basic daily check-ins
                 </li>
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   Limited AI conversations
                 </li>
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   Progress tracking
                 </li>
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   Email support
                 </li>
@@ -601,15 +601,15 @@ const Home = () => {
               <h3 className="text-[24px] font-[700] text-[#0A0A0A]">
                 Business
               </h3>
-              <p className="text-[14px] text-[#D1D5DC] mt-1">
+              <p className="text-[14px] text-[#4b5563] mt-1">
                 For teams and organizations
               </p>
 
               <div className="mt-[20px]">
-                <span className="text-[58px] font-bold text-[#0A0A0A]">
+                <span className="text-[58px] font-bold text-[#e6c26b]">
                   $99
                 </span>
-                <span className="text-[14px] text-[#D1D5DC]"> /per month</span>
+                <span className="text-[14px] text-[#4b5563]"> /per month</span>
               </div>
 
               <button className="w-full mt-[20px] bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-[8px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
@@ -619,35 +619,35 @@ const Home = () => {
               <div className="w-full h-[1px] bg-[#E4E4E4] my-6"></div>
 
               <ul className="space-y-3">
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   Everything in Professional
                 </li>
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   Dedicated AI advisor model
                 </li>
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   Business & team insights
                 </li>
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   Unlimited strategy sessions
                 </li>
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   Custom integrations
                 </li>
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   API access
                 </li>
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   White-glove support
                 </li>
-                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#D1D5DC]">
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   1-on-1 onboarding call
                 </li>

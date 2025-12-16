@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import "../styles/style.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import creategoal from "../assets/images/creategoal.png";
+
 
 const Navbar = (props) => {
   const {scrollToAbout, scrollToFeatures, scrollToWorks, scrollToPricing, scrollToContact, toggleLoginForm} = props;
@@ -30,11 +31,14 @@ const Navbar = (props) => {
 
   return (
     <header className={`Navbar fixed top-0 w-full z-10 pt-3 ${scrolled?'bg-[#FFFFFF]':''}`}>
-      <div className="container1 px-[60px]">
+      <div className="container1 px-[20px] lg:px-[60px]">
         <div className="flex items-center p-[20px] justify-between w-full">
-          <div className={`w-[20%] logo hidden md:block ${scrolled?'text-[#1E3A8A]':'text-[#FFFFFF]'}`}>DAILY ADVISOR AI</div>
-          <div className={`w-[20%] logo block md:hidden ${scrolled?'text-[#1E3A8A]':'text-[#FFFFFF]'}`}>
-            <img src={creategoal} alt="Create Icon" className="w-8 h-8" />
+          <Link href="Home"className={`w-[20%] logo hidden md:block ${scrolled ? 'text-[#1E3A8A]' : 'text-[#FFFFFF]'}`}>
+  DAILY ADVISOR AI
+</Link>
+          <div className={`w-[100%] logo block md:hidden ${scrolled?'text-[#1E3A8A]':'text-[#FFFFFF]'}`}>
+            {/* <img src={creategoal} alt="Create Icon" className="w-8 h-8" /> */}
+            DAILY ADVISOR AI
           </div>
           {/* Mobile Toggle Button */}
           <button

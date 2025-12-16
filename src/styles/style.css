@@ -457,6 +457,9 @@ section.How-it-works {
 .How-it-works p {
     max-width: 385px;
 }
+.scroll-animate h3 {
+    font-family: 'Poppins', sans-serif !important;
+}
 /* End Section How It Works Styling */
 
 
@@ -928,6 +931,11 @@ h1.welcome-heading {
 .bg_face_img{
     background-image: url("../assets/images/banner.png");
     background-size: 100% 100%;
+}
+section.How-it-works {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px 20px;
 }
 
 @media screen and (max-width: 1000px) {

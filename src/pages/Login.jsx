@@ -122,7 +122,7 @@ function Login() {
               </div>
 
               <div className="w-full md:w-1/2 p-[20px] md:p-[40px] login_right bg-[#fff]">
-                <div className="flex mb-8 space-x-2 px-[36px] pb-2 mt-[30px]">
+                <div className="flex mb-0 lg:mb-8 space-x-2 px-[36px] pb-0 lg:pb-2 mt-[0px] lg:mt-[30px]">
                   <button className="btnone bg-[#DEE6FF] text-[#1E3A8A] text-xs font-bold rounded-md shadow-[0px_0px_8px_0px_rgba(18,18,18,0.1)]">
                     Login
                   </button>
@@ -171,7 +171,7 @@ function Login() {
                     />
                     <a
                       href="#"
-                      className="text-[12px] leading-[16px] font-[400] text-[#E70303] no-underline mt-1 block text-left mt-[2px]"
+                      className="text-[12px] leading-[16px] font-[400] text-[#E70303] no-underline block text-left mt-[5px]"
                     >
                       Forgot password?
                     </a>
