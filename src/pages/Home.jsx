@@ -506,7 +506,7 @@ const Home = () => {
                 <span className="text-[14px] text-[#4b5563]"> /forever</span>
               </div>
 
-              <button className="w-full mt-[20px] bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-[8px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
+              <button className="w-full mt-[20px] bg-[#F8FAFC] text-[#1E3A8A] py-[8px] px-[16px] rounded-[8px] font-[400] hover:bg-[#F8FAFC] transition text-[14px]">
                 Start Free
               </button>
 
@@ -532,6 +532,12 @@ const Home = () => {
                 <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">
                   <RiCheckboxCircleLine />
                   Email support
+                </li>
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">                  
+                </li>
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">                  
+                </li>
+                <li className="flex items-center gap-2 text-[12px] font-[400] text-[#4b5563]">                  
                 </li>
               </ul>
             </div>
@@ -612,7 +618,7 @@ const Home = () => {
                 <span className="text-[14px] text-[#4b5563]"> /per month</span>
               </div>
 
-              <button className="w-full mt-[20px] bg-[#1E3A8A] text-white py-[8px] px-[16px] rounded-[8px] font-[400] hover:bg-[#1E3A8A] transition text-[14px]">
+              <button className="w-full mt-[20px] bg-[#F8FAFC] text-[#1E3A8A] py-[8px] px-[16px] rounded-[8px] font-[400] hover:bg-[#F8FAFC] transition text-[14px]">
                 Contact Sales
               </button>
 
